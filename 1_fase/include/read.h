@@ -1,6 +1,13 @@
 #ifndef __READ_H__
 #define __READ_H__
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+
 /**
  * Função que valida um id de um produto
  * @param string a validar
@@ -41,6 +48,6 @@ int load_clientes(Clientes c, char* path);
  * @param path para o ficheiro que se pretende ler, estrutura de produtos existentes, estrutura de clientes existentes
  * @param número de linhas válidas
  */
-int loadstruct_Vendas(char* path, Produtos p, Clientes c);
+int load_vendas(char* path, Produtos p, Clientes c);
 
 #endif

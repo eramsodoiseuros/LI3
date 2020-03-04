@@ -7,6 +7,16 @@
 //
 
 
+//Função strdup criada para evitar warnings
+char* sdup(const char *s){
+	size_t tamanho = strlen (s) + 1;
+	void *novo = malloc(tamanho);
+	if(novo == NULL)
+		return NULL;
+	return (char *) memcpy (novo, s, tamanho);
+}
+
+
 
 // função que devolve o i e preenche o array tokens
 int toktok(char * linha, char** tokens){
@@ -129,7 +139,7 @@ int load_clientes(Clientes c, char* path){
 }
 
 // Função que lê de um ficheiro de vendas
-int loadstruct_Vendas(char* path, Produtos p, Clientes c){
+int load_vendas(char* path, Produtos p, Clientes c){
 	char linha[33], *original = malloc(sizeof(char)*33);
 	int i = 0;
 	FILE* file = fopen(path , "r");

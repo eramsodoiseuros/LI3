@@ -2,7 +2,7 @@ INC = ../include/
 OBJ = ../src/
 
 
-objects = $(OBJ)main.o $(OBJ)catalogo_vendas.o $(OBJ)catalogo_produtos.o $(OBJ)catalogo_clientes.o $(OBJ)AVL.o# $(OBJ)IO.o $(OBJ)faturacao.o $(OBJ)filial.o
+objects = $(OBJ)main.o $(OBJ)IO.o $(OBJ)queries.o $(OBJ)catalogo_vendas.o $(OBJ)catalogo_produtos.o $(OBJ)catalogo_clientes.o $(OBJ)AVL.o # $(OBJ)faturacao.o $(OBJ)filial.o
 CFLAGS = -g -Wall -ansi -std=c99 -pedantic -O2 
 CC = gcc
 
@@ -12,7 +12,8 @@ SGV : $(objects)
 
 
 main.o : $(INC)main.h $(INC)catalogo_vendas.h # $(INC)IO.o
-#IO.o : $(INC)IO.h $(INC)catalogo_produtos.h $(INC)catalogo_clientes.h $(INC)vendas.h $(INC)faturacao.h $(INC)filial.h 
+IO.o : $(INC)IO.h $(INC)catalogo_produtos.h $(INC)catalogo_clientes.h $(INC)catalogo_vendas.h #$(INC)faturacao.h $(INC)filial.h
+queries.o : $(INC)queries.h $(INC)catalogo_vendas.h $(INC)catalogo_produtos.h $(INC)catalogo_clientes.h
 catalogo_vendas.o : $(INC)catalogo_vendas.h $(INC)catalogo_produtos.h $(INC)catalogo_clientes.h $(INC)AVL.h
 catalogo_produtos.o : $(INC)catalogo_produtos.h $(INC)AVL.h 
 catalogo_clientes.o : $(INC)catalogo_clientes.h $(INC)AVL.h

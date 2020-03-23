@@ -15,7 +15,7 @@ double total_faturado(Faturacao f1){
 double faturado_mes(Faturacao f1, int mes){
 	double r = -1;
 	
-	if(filial<=12 && filial>=0) r = f1.tabela_faturacao[mes][4];
+	if(mes<=12 && mes>=0) r = f1.tabela_faturacao[mes][4];
 
 	return r;
 }

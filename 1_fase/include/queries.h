@@ -12,13 +12,10 @@
  	Opcionalmente, assumidos por omissão (sendo neste caso os ficheiros anteriormente referidos).
  	O resultado desta leitura deverá ser a apresentação imediata ao utilizador do nome do ficheiro lido e que vai ser usado, o número total de linhas lidas e validadas.
  	Note-se que qualquer nova leitura destes ficheiros deverá de imediato reiniciar e refazer as estruturas de dados em memória como se de uma reinicialização so tratasse.
- 	
+
  * @param estrutura clientes a preencher, estrutura produtos a preencher, array de valores a preencher, inteiro que verifica as ações a tomar
  */
-void query_1(Clientes c, Produtos p, int num[6], int r);
-
-
-
+void query_1(Clientes c, Produtos p, /*, Filial f1, Faturacao f2,*/ int num[6], int r);
 
 /**
  * 	Determinar a lista e o nº total de produtos cujo código se inicia por uma dada letra (maiúscula);

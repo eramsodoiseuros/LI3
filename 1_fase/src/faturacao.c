@@ -31,7 +31,7 @@ double faturado_in(Faturacao f1, int mes, int filial){
 
 // Função que dado os parametros de uma venda dá update na estrutura faturação
 void update_faturacao(Faturacao f1, int filial, int mes, double preco, int unidades){
-	f1.tabela_faturacao[mes][4]+=preco*unidades;
-	f1.tabela_faturacao[mes][filial]+=preco*unidades;
-	f1.total_faturado+=preco*unidades;
+	f1.tabela_faturacao[mes][4] += preco*unidades;
+	f1.tabela_faturacao[mes][filial] += preco*unidades;
+	f1.total_faturado += preco*unidades;
 }

@@ -24,7 +24,9 @@ double faturado_mes(Faturacao f1, int mes){
 double faturado_in(Faturacao f1, int mes, int filial){
 	double r = -1;
 	
-	if(filial<=3 && filial>=0) r = f1.tabela_faturacao[mes][filial];
+	if(mes<=12 && mes>=0)
+		if(filial<=3 && filial>=0)
+			r = f1.tabela_faturacao[mes][filial];
 
 	return r;
 }

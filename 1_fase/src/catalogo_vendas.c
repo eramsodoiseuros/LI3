@@ -50,16 +50,18 @@ int validaVenda(char* linha, Produtos p, Clientes c){
 				if( tokens[3][0] == 'N' || tokens[3][0] == 'P')
 					if( atoi(tokens[5]) <= 12 && atoi(tokens[5]) >= 1 )	
 						if( atoi(tokens[6]) <= 3 && atoi(tokens[6]) >= 1 )
-							if( 1 /*função de tratamento*/ ) // clientes
-								if( 1 /*função de tratamento*/ ) // produtos
+							if( search_C(c, tokens[4]) ) // clientes
+								if( search_P(p, tokens[0]) ) // produtos
 									r = 1;
 	return r;
 }
 
 // Função que lê de um ficheiro de vendas
-int load_vendas(char* path, Produtos p, Clientes c /*, Filial f1, Faturacao f2*/){
+int load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2){
 	char linha[33], *original = malloc(sizeof(char)*33);
 	int i = 0;
+	char* tokens[7];
+
 	FILE* file = fopen(path , "r");
 
 	if(file == NULL){
@@ -71,19 +73,24 @@ int load_vendas(char* path, Produtos p, Clientes c /*, Filial f1, Faturacao f2*/
 	while( fgets(linha, 32, file) ){
 		strcpy(original, linha);
 		if(validaVenda(linha, p, c)){
-			// função de tratamento
+			toktok(linha, tokens);
+
+			update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
+			// update_filial(f1,...);
+
 			i++;
 		}
 	}
 	
+	free(linha);
 	free(original);
 	fclose(file);	
 	return i;
 }
 
 // Função que inicializa as estruturas, escreve na posição 4 e 5 do array
-void init_Vendas(int* num, Produtos p, Clientes c /*, Filial f1, Faturacao f2*/){
+void init_Vendas(int num[6], Produtos p, Clientes c , Filial f1, Faturacao f2){
 
-	// num[4] = load_vendas("../Vendas_1M.txt", p, c);
+	// num[4] = load_vendas("../Vendas_1M.txt", p, c, f1, f2);
 	// num[5] = wrFileV(v->vendas, "../VendasValidas.txt");
 }

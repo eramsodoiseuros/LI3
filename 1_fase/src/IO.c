@@ -24,11 +24,11 @@ int escolhe_file(){
 
 	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], todos [4]\n\t->  ");
 	if(scanf("%d", &r)){
-		if(r > 4 || r < 1) printf("\n\tO programa falhou na leitura de um número. [1...3]\n");
+		if(r > 4 || r < 1) printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
 		escolhe_file();
 	}
 	else {
-		printf("\n\tO programa falhou na leitura de um número. [1...3]\n");
+		printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
 		escolhe_file();
 	}
 	return (r == 0)? escolhe_file() : r;
@@ -42,6 +42,8 @@ void escolhe_query(){
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
 	Clientes c = NULL;
 	Produtos p = NULL;
+	Filial f1 = NULL;
+	Faturacao f2 = NULL;
 
 	printf("Escolha o numero da query que pretende executar [1...12]\n\tTerminar o programa: [0]   ");
 	if(scanf("%d", &tarefa)){
@@ -55,19 +57,19 @@ void escolhe_query(){
 			case 1:
 				r = escolhe_file();
 				if(r == 1){
-					query_1(c, p, num, 1);
+					query_1(c, p, f1, f2, num, 1);
 					printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes lidos__%s%d\n\t%sClientes escritos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 				}
 				if(r == 2){
-					query_1(c, p, num, 2);
+					query_1(c, p, f1, f2, num, 2);
 					printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos lidos__%s%d\n\t%sProdutos escritos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 				}
 				if (r == 3){
-					query_1(c, p, num, 3);
+					query_1(c, p, f1, f2, num, 3);
 					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas lidas__%s%d\n\t%sVendas escritas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 				}
 				if(r == 4){
-					query_1(c, p, num, 4);
+					query_1(c, p, f1, f2, num, 4);
 					printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes lidos__%s%d\n\t%sClientes escritos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 					printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos lidos__%s%d\n\t%sProdutos escritos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas lidas__%s%d\n\t%sVendas escritas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);

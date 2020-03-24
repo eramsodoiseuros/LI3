@@ -1,9 +1,11 @@
 #include "../include/catalogo_produtos.h"
 #include "../include/AVL.h"
 
+int LETRAS = 26;
+int HASHNUMBER = 151;
 
 struct produtos{
-	AVL tabela_produtos[26][26][151];
+	AVL tabela_produtos[LETRAS][LETRAS][HASHNUMBER];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -13,7 +15,7 @@ void hF_produtos(int index[3], char value[]){
 		s = value[i]; c+=s; c*=s;
 	}
 
-	c = abs(c % 151);
+	c = abs(c % HASHNUMBER);
 
 	index[0] = value[0] - 65;
 	index[1] = value[1] - 65;
@@ -108,9 +110,9 @@ int wrFileP (Produtos p, char* path){
 		_exit(0);
 	}
 
-	for(int l1 = 0; l1 < 26; l1++)
-		for(int l2 = 0; l2 < 26; l2++)
-			for(int h = 0; h < 151; h++)
+	for(int l1 = 0; l1 < LETRAS; l1++)
+		for(int l2 = 0; l2 < LETRAS; l2++)
+			for(int h = 0; h < HASHNUMBER; h++)
 				r += fprint_produtos(fp,l1,l2,p->tabela_produtos[l1][l2][h]);
 
 	fclose(fp);
@@ -121,9 +123,9 @@ int wrFileP (Produtos p, char* path){
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
 void init_Produtos(int* num, Produtos p){
 
-	for (int i = 0; i < 26; i++)
-		for (int j = 0; j < 26; j++)
-			for(int k = 0; k < 151; k++)
+	for (int i = 0; i < LETRAS; i++)
+		for (int j = 0; j < LETRAS; j++)
+			for(int k = 0; k < HASHNUMBER; k++)
 				p->tabela_produtos[i][j][k] = create_nodo(1);
 	
 	num[2] = load_produtos(p,"../Produtos.txt");

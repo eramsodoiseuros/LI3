@@ -11,35 +11,35 @@ typedef struct clientes* Clientes;
 
 
 /**
- * Função que verifica se um id existe na estrutura
- * @param estrutura clientes e o id a verificar
- * @param 1 caso exista, 0 caso não exista
+ *	Função que verifica se um id existe na estrutura
+ *	@param estrutura clientes e o id a verificar
+ *	@param 1 caso exista, 0 caso não exista
  */
 int search_C(Clientes c, char id[]);
 
 /**
- * Função que valida um id de um cliente
- * @param string a validar
- * @param 1 caso seja valida, 0 caso seja inválida
+ *	Função que valida um id de um cliente
+ *	@param string a validar
+ *	@param 1 caso seja valida, 0 caso seja inválida
  */
 int valida_cliente(char * id);
 
 /**
- * Função que lê de um ficheiro de clientes
- * @param estrutura de clientes a preencher, e o path para o ficheiro que se pretende ler
- * @param número de clientes válidos
+ *	Função que lê de um ficheiro de clientes
+ *	@param estrutura de clientes a preencher, e o path para o ficheiro que se pretende ler
+ *	@param número de clientes válidos
  */
 int load_clientes(Clientes c, char* path);
 
 /**
- * Função que inicializa as estruturas, escreve na posição 0 e 1 do array
- * @param o array para escrever e a estrutura clientes
+ *	Função que inicializa as estruturas, escreve na posição 0 e 1 do array
+ *	@param o array para escrever e a estrutura clientes
  */
 void init_clientes(int* num, Clientes c);
 
 /**
- * Função que liberta o espaço alocado para a estrutura
- * @param a estrutura a libertar
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param a estrutura a libertar
  */
 void free_clientes(Clientes c);
 

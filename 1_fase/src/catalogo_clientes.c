@@ -10,9 +10,11 @@ F2916 / W1219 / F4999
 
 */
 
+int LETRAS = 26;
+int HASHNUMBER = 599;
 
 struct clientes{
-	AVL tabela_clientes[26][599];
+	AVL tabela_clientes[26][HASHNUMBER];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -22,7 +24,7 @@ void hF_clientes(int index[2], char value[]){
 		s = value[i]; c+=s; c*=s;
 	}
 
-	c = abs(c % 599);
+	c = abs(c % HASHNUMBER);
 
 	index[0] = value[0] - 65;
 	//printf("\tHASH__%c%d\n", value[0], c );
@@ -124,8 +126,8 @@ int  wrFileC (Clientes c, char* path){
 		_exit(0);
 	}
 	
-	for(int letra = 0; letra < 26; letra++)
-		for(int h = 0; h < 599; h++)
+	for(int letra = 0; letra < LETRAS; letra++)
+		for(int h = 0; h < HASHNUMBER; h++)
 			r += fprint_clientes(fp,letra,c->tabela_clientes[letra][h]);
 
 	fclose(fp);	
@@ -136,8 +138,8 @@ int  wrFileC (Clientes c, char* path){
 // Função que inicializa as estruturas, escreve na posição 0 e 1 do array
 void init_Clientes(int* num, Clientes c){
 
-	for (int i = 0; i < 26; i++)
-		for (int j = 0; j < 599; j++)
+	for (int i = 0; i < LETRAS; i++)
+		for (int j = 0; j < HASHNUMBER; j++)
 			c->tabela_clientes[i][j] = create_nodo(1);
 
 	num[0] = load_clientes(c,"../Clientes.txt");

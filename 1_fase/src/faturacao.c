@@ -1,10 +1,17 @@
 #include "../include/faturacao.h"
 
 struct faturacao{
-	double tabela_faturacao[12][4];
+	double tabela_faturacao[12][4]; 
+	int tabela_vendas[12];
 	double total_faturado;
+	// ... unidades_vendidas[3] = {Produto A = 300x , Produto B =  250x ...}
+	// ... numero_clientes[3] = {Produto A = 50 , Produto B =  30 ...}
 };
 
+// Função que devolve o numero de vendas num mês
+int numero_vendas(Faturacao f1, int mes){
+	return f1.tabela_vendas[mes-1];
+}
 
 // Função que devolve o total faturado
 double total_faturado(Faturacao f1){
@@ -33,7 +40,17 @@ double faturado_in(Faturacao f1, int mes, int filial){
 
 // Função que dado os parametros de uma venda dá update na estrutura faturação
 void update_faturacao(Faturacao f1, int filial, int mes, double preco, int unidades){
-	f1.tabela_faturacao[mes][4] += preco*unidades;
-	f1.tabela_faturacao[mes][filial] += preco*unidades;
+	f1.tabela_faturacao[mes-1][3] += preco*unidades;
+	f1.tabela_faturacao[mes-1][filial-1] += preco*unidades;
 	f1.total_faturado += preco*unidades;
+}
+
+// Função que inicia a estrutura faturação com os respetivos valores a zero
+void iniciar_faturacao(Faturacao f1){
+	for(int m = 0; m < 12; m++)
+		for(int f = 0; f < 4; )
+			f1.tabela_faturacao[m][f] = 0.0;
+	for(int m = 0; m < 12; m++)
+		f1.tabela_vendas[m] = 0;
+	f1.total_faturado = 0.0;
 }

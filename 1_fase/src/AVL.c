@@ -46,14 +46,14 @@ int altura(AVL a){
 
 // Função que cria um Nodo novo da arvore, ou até mesmo uma arvore nova, com um dado valor
 AVL create_nodo(int valor){
-    AVL nodo = (AVL) malloc(sizeof(struct arvore));
+    AVL new = malloc(sizeof(struct arvore));
 
-    nodo->valor = valor;
-    nodo->esq = NULL;
-    nodo->dir = NULL;
-    nodo->altura = 1;
-    
-    return nodo;
+    new->valor = valor;
+    new->esq = NULL;
+    new->dir = NULL;
+    new->altura = 1;
+
+    return(new);
 }
 
 // Função que balança a arvore para a direita
@@ -92,12 +92,10 @@ int difBalance(AVL a){
 // Função que recursivamente insere um valor numa AVL
 AVL insert_tree(AVL a, int val){
 	int balance;
-    if(a == NULL)
-    	return(create_nodo(val));
 
-    if(a->valor == 1){
-        a->valor = val;
-        return a;
+    if(a == NULL){
+        AVL new = create_nodo(val);
+    	return(new);
     }
 
     if(val < a->valor) a->esq = insert_tree(a->esq, val);

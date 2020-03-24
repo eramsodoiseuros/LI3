@@ -20,18 +20,19 @@ void print_menu(){
 }
 
 int escolhe_file(){
-	int r = 0;
+	int r;
 
 	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], todos [4]\n\t->  ");
+	
 	if(scanf("%d", &r)){
-		if(r > 4 || r < 1) printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
-		escolhe_file();
+		r=r;
 	}
 	else {
 		printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
 		escolhe_file();
 	}
-	return (r == 0)? escolhe_file() : r;
+
+	return r;
 }
 
 // Função que escolhe a query a realizar
@@ -40,10 +41,10 @@ void escolhe_query(){
 	int r;
 	int num[6];
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
-	Clientes c = NULL;
-	Produtos p = NULL;
-	Filial f1 = NULL;
-	Faturacao f2 = NULL;
+	Clientes c 		= NULL;
+	Produtos p 		= NULL;
+	Filial f1 		= NULL;
+	Faturacao f2 	= NULL;
 
 	printf("Escolha o numero da query que pretende executar [1...12]\n\tTerminar o programa: [0]   ");
 	if(scanf("%d", &tarefa)){

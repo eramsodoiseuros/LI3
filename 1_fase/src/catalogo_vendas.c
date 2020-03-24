@@ -75,14 +75,13 @@ int load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2){
 		if(validaVenda(linha, p, c)){
 			toktok(linha, tokens);
 
-			update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
+			// update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
 			// update_filial(f1,...);
 
 			i++;
 		}
 	}
 	
-	free(linha);
 	free(original);
 	fclose(file);	
 	return i;
@@ -91,6 +90,6 @@ int load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2){
 // Função que inicializa as estruturas, escreve na posição 4 e 5 do array
 void init_Vendas(int num[6], Produtos p, Clientes c , Filial f1, Faturacao f2){
 
-	// num[4] = load_vendas("../Vendas_1M.txt", p, c, f1, f2);
+	num[4] = load_vendas("../Vendas_1M.txt", p, c, f1, f2);
 	// num[5] = wrFileV(v->vendas, "../VendasValidas.txt");
 }

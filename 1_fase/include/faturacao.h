@@ -4,7 +4,7 @@
 typedef struct faturacao* Faturacao;
 
 
-// #include
+#include <stdlib.h>
 
 /**
  *	unção que devolve o numero de vendas num mês
@@ -44,6 +44,6 @@ void update_faturacao(Faturacao f1, int filial, int mes, double preco, int unida
  *	Função que inicia a estrutura faturação com os respetivos valores a zero
  *	@param a estrutura faturação a iniciar
 */
-void iniciar_faturacao(Faturacao f1);
+Faturacao iniciar_faturacao();
 
 #endif

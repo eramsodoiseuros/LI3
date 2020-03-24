@@ -18,4 +18,7 @@
 #include "queries.h"
 
 
+// to print or not to print
+void menu();
+
 #endif

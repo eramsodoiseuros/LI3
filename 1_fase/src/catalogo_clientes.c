@@ -10,11 +10,11 @@ F2916 / W1219 / F4999
 
 */
 
-int LETRAS = 26;
-int HASHNUMBER = 599;
+#define LETRAS 26
+#define HASHNUMBER 599
 
 struct clientes{
-	AVL tabela_clientes[26][HASHNUMBER];
+	AVL tabela_clientes[LETRAS][HASHNUMBER];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -38,7 +38,7 @@ void insert_cliente(Clientes c, char id[]){
 
 	hF_clientes(index, id);
 
-	insert_tree(c->tabela_clientes[index[0]][index[1]] , nID);
+	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]] , nID);
 }
 
 // Função que verifica se um id existe na estrutura
@@ -136,14 +136,17 @@ int  wrFileC (Clientes c, char* path){
 }
 
 // Função que inicializa as estruturas, escreve na posição 0 e 1 do array
-void init_Clientes(int* num, Clientes c){
+Clientes iniciar_clientes(int* num){
+	Clientes c = malloc(sizeof(struct clientes));
 
 	for (int i = 0; i < LETRAS; i++)
-		for (int j = 0; j < HASHNUMBER; j++)
-			c->tabela_clientes[i][j] = create_nodo(1);
+		for(int j = 0; j < HASHNUMBER; j++)
+			c->tabela_clientes[i][j] = NULL;
 
 	num[0] = load_clientes(c,"../Clientes.txt");
 	num[1] = wrFileC(c,"../ClientesVálidos.txt");
+
+	return c;
 }
 
 // Função que liberta o espaço alocado para a estrutura

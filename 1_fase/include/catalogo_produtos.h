@@ -26,17 +26,10 @@ int search_P(Produtos p, char id[]);
 int valida_produto(char * id);
 
 /**
- *	Função que lê de um ficheiro de produtos
- *	@param estrutura de produtos a preencher, e o path para o ficheiro que se pretende ler
- *	@param número de produtos válidos
- */
-int load_produtos(Produtos p, char* path);
-
-/**
  *	Função que inicializa as estruturas, escreve na posição 2 e 3 do array
  *	@param o array para escrever e a estrutura produtos
  */
-void init_produtos(int* num, Produtos p);
+Produtos iniciar_produtos(int* num);
 
 /**
  *	Função que liberta o espaço alocado para a estrutura

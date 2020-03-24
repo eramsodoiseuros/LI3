@@ -1,8 +1,8 @@
 #include "../include/catalogo_produtos.h"
 #include "../include/AVL.h"
 
-int LETRAS = 26;
-int HASHNUMBER = 151;
+#define LETRAS 26
+#define HASHNUMBER 151
 
 struct produtos{
 	AVL tabela_produtos[LETRAS][LETRAS][HASHNUMBER];
@@ -29,7 +29,7 @@ void insert_produto(Produtos p, char id[]){
 	int nID = num_(id,2);
 	hF_produtos(index, id);
 
-	insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID);
+	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID);
 }
 
 // Função que, aplicando a Hash Funtion, verifica se uma posição da Treetable existe
@@ -121,15 +121,18 @@ int wrFileP (Produtos p, char* path){
 }
 
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
-void init_Produtos(int* num, Produtos p){
+Produtos iniciar_produtos(int* num){
+	Produtos p = malloc(sizeof(struct produtos));
 
 	for (int i = 0; i < LETRAS; i++)
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
-				p->tabela_produtos[i][j][k] = create_nodo(1);
+				p->tabela_produtos[i][j][k] = NULL;
 	
 	num[2] = load_produtos(p,"../Produtos.txt");
 	num[3] = wrFileP(p,"../ProdutosVálidos.txt");
+
+	return p;
 }
 
 

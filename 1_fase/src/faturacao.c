@@ -42,6 +42,7 @@ double faturado_in(Faturacao f1, int mes, int filial){
 void update_faturacao(Faturacao f1, int filial, int mes, double preco, int unidades){
 	f1->tabela_faturacao[mes-1][3] += preco*unidades;
 	f1->tabela_faturacao[mes-1][filial-1] += preco*unidades;
+	f1->tabela_vendas[mes-1]++;
 	f1->total_faturado += preco*unidades;
 }
 
@@ -50,11 +51,25 @@ Faturacao iniciar_faturacao(){
 	Faturacao f1 = malloc(sizeof(struct faturacao));
 
 	for(int m = 0; m < 12; m++)
-		for(int f = 0; f < 4; )
+		for(int f = 0; f < 4; f++)
 			f1->tabela_faturacao[m][f] = 0.0;
+	
 	for(int m = 0; m < 12; m++)
 		f1->tabela_vendas[m] = 0;
+
 	f1->total_faturado = 0.0;
 
 	return f1;
+}
+
+void print_fat(Faturacao f1){
+
+	for(int m = 0; m < 12; m++)
+		for(int f = 0; f < 4; f++)
+			printf("\nfaturado em %d e %d: _%f_", m, f, f1->tabela_faturacao[m][f]);
+	
+	for(int m = 0; m < 12; m++)
+		printf("\nvendas em %d: _%d_", m, f1->tabela_vendas[m]);
+
+	printf("\n\ttotal: _%f_\n", f1->total_faturado);
 }

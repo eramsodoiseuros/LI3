@@ -57,9 +57,9 @@ int validaVenda(char* linha, Produtos p, Clientes c){
 }
 
 // Função que lê de um ficheiro de vendas
-int load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2){
+void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, int num[2]){
 	char linha[33], *original = malloc(sizeof(char)*33);
-	int i = 0;
+	int i1 = 0, i2 = 0;
 	char* tokens[7];
 
 	FILE* file = fopen(path , "r");
@@ -73,23 +73,27 @@ int load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2){
 	while( fgets(linha, 32, file) ){
 		strcpy(original, linha);
 		if(validaVenda(linha, p, c)){
-			toktok(linha, tokens);
+			toktok(original, tokens);
 
-			// update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
+			update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
 			// update_filial(f1,...);
 
-			i++;
+			i1++;
 		}
+		i2++;
 	}
-	
+
+	num[0] = i1;
+	num[1] = i2;
 	free(original);
-	fclose(file);	
-	return i;
+	fclose(file);
 }
 
 // Função que inicializa as estruturas, escreve na posição 4 e 5 do array
 void init_Vendas(int num[6], Produtos p, Clientes c , Filial f1, Faturacao f2){
+	int valores[2];
+	load_vendas("../Vendas_1M.txt", p, c, f1, f2, valores);
 
-	num[4] = load_vendas("../Vendas_1M.txt", p, c, f1, f2);
-	// num[5] = wrFileV(v->vendas, "../VendasValidas.txt");
+	num[4] = valores[0];
+	num[5] = valores[1];
 }

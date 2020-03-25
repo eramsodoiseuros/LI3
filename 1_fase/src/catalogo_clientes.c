@@ -76,9 +76,9 @@ int valida_cliente(char * id){
 }
 
 // Função que lê de um ficheiro de clientes
-int load_clientes(Clientes c, char* path){
+void load_clientes(Clientes c, char* path, int num[2]){
 	char linha[6];
-	int i = 0;
+	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
 	
 	if(file == NULL){
@@ -90,12 +90,14 @@ int load_clientes(Clientes c, char* path){
 	while( fgets(linha, 6, file) ){
 		if(valida_cliente(linha)){
 			insert_cliente(c,linha);
-			i++;
+			i1++;
 		}
+		i2++;
 	}
 
+	num[0] = i1;
+	num[1] = i2;
 	fclose(file);
-	return i;
 }
 
 // Função que imprime uma arvore num ficheiro por ordem dos elementos
@@ -138,14 +140,16 @@ int  wrFileC (Clientes c, char* path){
 // Função que inicializa as estruturas, escreve na posição 0 e 1 do array
 Clientes iniciar_clientes(int* num){
 	Clientes c = malloc(sizeof(struct clientes));
+	int valores[2];
 
 	for (int i = 0; i < LETRAS; i++)
 		for(int j = 0; j < HASHNUMBER; j++)
 			c->tabela_clientes[i][j] = NULL;
 
-	num[0] = load_clientes(c,"../Clientes.txt");
-	num[1] = wrFileC(c,"../ClientesVálidos.txt");
+	load_clientes(c,"../Clientes.txt", valores);
 
+	num[0] = valores[0];
+	num[1] = valores[1];
 	return c;
 }
 

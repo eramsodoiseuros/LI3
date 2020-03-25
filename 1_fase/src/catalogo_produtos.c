@@ -60,9 +60,9 @@ int valida_produto(char * id){
 }
 
 // Função que lê de um ficheiro de produtos
-int load_produtos(Produtos p, char* path){
+void load_produtos(Produtos p, char* path, int num[2]){
 	char linha[7];
-	int i = 0;
+	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
 	
 	if(file == NULL){
@@ -74,12 +74,14 @@ int load_produtos(Produtos p, char* path){
 	while( fgets(linha, 7, file) ){
 		if(valida_produto(linha)){
 			insert_produto(p,linha);
-			i++;
+			i1++;
 		}
+		i2++;
 	}
 
+	num[0] = i1;
+	num[1] = i2; 
 	fclose(file);
-	return i;
 }
 
 // Função que imprime uma arvore por ordem dos elementos
@@ -123,14 +125,17 @@ int wrFileP (Produtos p, char* path){
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
 Produtos iniciar_produtos(int* num){
 	Produtos p = malloc(sizeof(struct produtos));
+	int valores[2];
 
 	for (int i = 0; i < LETRAS; i++)
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
 				p->tabela_produtos[i][j][k] = NULL;
 	
-	num[2] = load_produtos(p,"../Produtos.txt");
-	num[3] = wrFileP(p,"../ProdutosVálidos.txt");
+	load_produtos(p,"../Produtos.txt",valores);
+
+	num[2] = valores[0];
+	num[3] = valores[1];
 
 	return p;
 }

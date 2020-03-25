@@ -59,15 +59,15 @@ void escolhe_query(){
 				r = escolhe_file();
 				if(r == 1){
 					query_1(c, p, f1, f2, num, 1);
-					printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes lidos__%s%d\n\t%sClientes escritos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+					printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 				}
 				if(r == 2){
 					query_1(c, p, f1, f2, num, 2);
-					printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos lidos__%s%d\n\t%sProdutos escritos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+					printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 				}
 				if (r == 3){
 					query_1(c, p, f1, f2, num, 3);
-					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas lidas__%s%d\n\t%sVendas escritas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 				}
 				if(r == 4){
 					query_1(c, p, f1, f2, num, 4);

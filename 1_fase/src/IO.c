@@ -76,10 +76,13 @@ void escolhe_query(){
 					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas lidas__%s%d\n\t%sVendas escritas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 				}
 				break;
-		/*
+
 			case 2:
-				query_2();
+				char letra = 'A';
+				query_2(p, letra);
 				break;
+
+		/*
 			case 3:
 				query_3();
 				break;

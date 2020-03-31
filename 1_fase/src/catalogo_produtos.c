@@ -92,7 +92,7 @@ int fprint_produtos(FILE* fp, int l1, int l2, AVL a){
 	if(a){
 		num += fprint_produtos(fp,l1,l2,esq(a));
 		if(valor(a) > 1){
-			fprintf(fp,"%c%c%d\r\n", pL, sL,valor(a));
+			fprintf(fp, "%c%c%d\r\n", pL, sL, valor(a));
 			num++;
 		}
 		num += fprint_produtos(fp,l1,l2,dir(a));
@@ -140,6 +140,21 @@ Produtos iniciar_produtos(int* num){
 	return p;
 }
 
+/*
+//
+char** print_simples(Produtos p, char l1, char l2){
+
+}
+
+//
+char** lista_produtos(Produtos p, char letra){
+	char** lista = malloc(sizeof(char**));
+	for (int i = 0; i < LETRAS; i++)
+		for(int h = 0; h < HASHNUMBER; h++)
+			(lista, arvore_produtos(p->tabela_produtos[letra][i][h], letra, i));
+}
+
+*/
 
 // Função que liberta o espaço alocado para a estrutura
 void free_produtos(Produtos p){

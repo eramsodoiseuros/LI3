@@ -1,3 +1,6 @@
+#ifndef __NAVEGADOR_H__
+#define __NAVEGADOR_H__
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,14 +19,14 @@
 #define KCYN  "\x1B[36m"
 #define KWHT  "\x1B[37m"
 
-typedef struct Strings
-{
-	char** string;
-	char* file;
-	int nr;
-
-}Strings;
+typedef struct *Strings;
 
 
-
+/**
+ *	Função que navega numa struck string
+ *	@param estrutura string a ler
+ */
 void navegador(Strings s);
+
+
+#endif

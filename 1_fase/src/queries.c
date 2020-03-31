@@ -36,3 +36,8 @@ void query_1(Clientes c, Produtos p, Filial f1, Faturacao f2, int num[6], int r)
 }
 
 ///////////////////////////////////////////////////////////
+// QUERY 2
+
+void query_2(Produtos p, char letra){
+
+}

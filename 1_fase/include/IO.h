@@ -19,6 +19,6 @@
 
 
 // to print or not to print
-void menu();
+void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2);
 
 #endif

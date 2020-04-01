@@ -8,6 +8,10 @@
 #include <ctype.h>
 
 
+#include "string.h"
+
+
+
 typedef struct produtos* Produtos;
 
 
@@ -30,6 +34,20 @@ int valida_produto(char * id);
  *	@param o array para escrever e a estrutura produtos
  */
 Produtos iniciar_produtos(int* num);
+
+/**
+ *	Função que cria uma lista de produtos validos
+ *	@param estrutura com os produtos, e letra dos produtos pretendidos
+ *	@param a lista de produtos começados por uma letra
+ */
+void lista_produtos(Produtos p, char letra, String* lista);
+
+/**
+ *	Função que devolve o numero de produtos com uma determinada letra
+ *	@param estrutura com os produtos, e letra dos produtos pretendidos
+ *	@param o número de produtos começados por uma letra
+ */
+int get_size(Produtos p, char letra);
 
 /**
  *	Função que liberta o espaço alocado para a estrutura

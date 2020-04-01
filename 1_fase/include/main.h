@@ -4,7 +4,7 @@
 #include <time.h>
 
 #include "IO.h"
-#include "catalogo_vendas.h"
+#include "queries.h"
 
 
 #endif

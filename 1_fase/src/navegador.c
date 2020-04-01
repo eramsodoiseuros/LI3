@@ -6,6 +6,11 @@ struct Strings {
     int nr;
 };
 
+
+Strings iniciar_string(){
+    
+}
+
 void navegador(Strings s){
     int ind=Pagsize;
     int val=1;

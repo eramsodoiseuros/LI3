@@ -1,11 +1,13 @@
 #include "../include/catalogo_produtos.h"
 #include "../include/AVL.h"
 
+
 #define LETRAS 26
 #define HASHNUMBER 151
 
 struct produtos{
 	AVL tabela_produtos[LETRAS][LETRAS][HASHNUMBER];
+	int size[LETRAS];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -24,12 +26,13 @@ void hF_produtos(int index[3], char value[]){
 }
 
 // Função que insere um index, de tipologia Produto, numa estrutura de dados
-void insert_produto(Produtos p, char id[]){
+int insert_produto(Produtos p, char id[]){
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	int nID = num_(id,2);
 	hF_produtos(index, id);
 
 	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID);
+	return index[0];
 }
 
 // Função que, aplicando a Hash Funtion, verifica se uma posição da Treetable existe
@@ -62,7 +65,7 @@ int valida_produto(char * id){
 // Função que lê de um ficheiro de produtos
 void load_produtos(Produtos p, char* path, int num[2]){
 	char linha[7];
-	int i1 = 0, i2 = 0;
+	int l1 = 0, i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
 	
 	if(file == NULL){
@@ -73,7 +76,8 @@ void load_produtos(Produtos p, char* path, int num[2]){
 
 	while( fgets(linha, 7, file) ){
 		if(valida_produto(linha)){
-			insert_produto(p,linha);
+			l1 = insert_produto(p,linha);
+			p->size[l1]++;
 			i1++;
 		}
 		i2++;
@@ -127,34 +131,53 @@ Produtos iniciar_produtos(int* num){
 	Produtos p = malloc(sizeof(struct produtos));
 	int valores[2];
 
-	for (int i = 0; i < LETRAS; i++)
+	for (int i = 0; i < LETRAS; i++){
+		p->size[i] = 0;
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
 				p->tabela_produtos[i][j][k] = NULL;
+	}
 	
 	load_produtos(p,"../Produtos.txt",valores);
 
 	num[2] = valores[0];
 	num[3] = valores[1];
-
 	return p;
 }
 
-/*
 //
-char** print_simples(Produtos p, char l1, char l2){
-
+int get_size(Produtos p, char letra){
+	return p->size[letra-'A'];
 }
 
 //
-char** lista_produtos(Produtos p, char letra){
-	char** lista = malloc(sizeof(char**));
-	for (int i = 0; i < LETRAS; i++)
+int print_simples(String* lista, char l1, int l2, AVL a, int pos){
+	int num = 0;
+	if(a){
+		num += print_simples(lista,l1,l2,esq(a),pos+num);
+		if(valor(a)){
+			
+				printf("\n__%d__", pos+num);
+				printf("vou tentar _%c_%c_%d_\n", l1+'A', l2+'A', valor(a));
+				lista[pos+num] = iniciar_string(valor(a), l1, l2);
+			
+			num++;
+		}
+		num += print_simples(lista,l1,l2,dir(a),pos+num);
+	}
+
+	return num;
+}
+
+//
+void lista_produtos(Produtos p, char letra, String* lista){
+	int r = 0;
+	int l1 = letra - 'A';
+
+	for(int l2 = 0; l2 < LETRAS; l2++)
 		for(int h = 0; h < HASHNUMBER; h++)
-			(lista, arvore_produtos(p->tabela_produtos[letra][i][h], letra, i));
+			r += print_simples(lista,l1,l2,p->tabela_produtos[l1][l2][h],r);
 }
-
-*/
 
 // Função que liberta o espaço alocado para a estrutura
 void free_produtos(Produtos p){

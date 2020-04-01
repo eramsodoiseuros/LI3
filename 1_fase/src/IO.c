@@ -36,25 +36,23 @@ int escolhe_file(){
 }
 
 // Função que escolhe a query a realizar
-void escolhe_query(){
+void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa;
 	int r;
 	int num[6];
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
-	Clientes c 		= NULL;
-	Produtos p 		= NULL;
-	Filial f1 		= NULL;
-	Faturacao f2 	= NULL;
 
 	printf("Escolha o numero da query que pretende executar [1...12]\n\tTerminar o programa: [0]   ");
 	if(scanf("%d", &tarefa)){
 
 		if(tarefa > 12 || tarefa < 0){
 			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [1...12]\n\n\tPara terminar o programa insira o número 0.\n\n");
-			escolhe_query();
+			escolhe_query(c,p,f1,f2);
 		}
 
 		switch(tarefa){
+			case 0:
+				_exit(0);
 			case 1:
 				r = escolhe_file();
 				if(r == 1){
@@ -78,8 +76,7 @@ void escolhe_query(){
 				break;
 
 			case 2:
-				char letra = 'A';
-				query_2(p, letra);
+				query_2(p, 'A');
 				break;
 
 		/*
@@ -87,52 +84,57 @@ void escolhe_query(){
 				query_3();
 				break;
 			case 4:
-				query_4();
-				break;
-			case 5:
-				query_5();
-				break;
-			case 8:
-				query_8();
-				break;
-			case 9:
-				query_9();
-				break;
-			case 10:
-				query_10();
-				break;
-			case 11:
-				query_10();
-				break;
-			case 12:
-				query_10();
-				break;
-		*/
+					query_4();
+					break;
+				case 5:
+					query_5();
+					break;
+				case 8:
+					query_8();
+					break;
+				case 9:
+					query_9();
+					break;
+				case 10:
+					query_10();
+					break;
+				case 11:
+					query_10();
+					break;
+				case 12:
+					query_10();
+					break;
+			*/
 		}
+
 	}
 	else{
 		printf("\n\tO programa falhou na leitura de um número.\n");
-		escolhe_query();
+		escolhe_query(c, p, f1, f2);
 	}
 }
 
 // to print or not to print
-void menu(){
+void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	char* r = malloc(sizeof(char*));
 	printf("Pretende dar print ao menu? Yes: [y] No: [n]\n");
 	if(scanf("%c", r)){
 		if(r[0] == 'y' || r[0] == 'Y'){
 			print_menu();
-			escolhe_query();
+			while(1){
+				escolhe_query(c,p,f1,f2);
+			}
 		}
 
 		if(r[0] == 'n' || r[0] == 'N'){
-			escolhe_query();
+			while(1){
+				escolhe_query(c,p,f1,f2);
+			}
 		}
 	}
 
 	else {
 		printf("\n\tO programa falhou na leitura da resposta. Yes: [y/Y] No: [n/N]\n");
-		menu();
+		menu(c,p,f1,f2);
 	}
 }

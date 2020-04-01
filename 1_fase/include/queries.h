@@ -15,14 +15,14 @@
 
  *	@param estrutura clientes a preencher, estrutura produtos a preencher, array de valores a preencher, inteiro que verifica as ações a tomar
  */
-void query_1(Clientes c, Produtos p, Filial f1, Faturacao f2, int num[6], int r);
+void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], int r);
 
 /**
  * 	Determinar a lista e o nº total de produtos cujo código se inicia por uma dada letra (maiúscula);
 
  *	@param os Produtos existentes e a Letra pretendida
 */
-void query_2(Produtos p, char letra);
+void query_2(Produtos* p, char letra);
 
 /**
  *	Dado um mês e um código de produto, ambos válidos, determinar e apresentar o número total de vendas (nº de registos de venda)

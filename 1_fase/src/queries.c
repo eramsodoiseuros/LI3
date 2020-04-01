@@ -1,6 +1,5 @@
 #include "../include/queries.h"
-#include "../include/string.h"
-
+#include "../include/AVL.h"
 
 ///////////////////////////////////////////////////////////
 // QUERY 1

@@ -1,5 +1,4 @@
 #include "../include/catalogo_produtos.h"
-#include "../include/AVL.h"
 
 
 #define LETRAS 26
@@ -31,7 +30,7 @@ int insert_produto(Produtos p, char id[]){
 	int nID = num_(id,2);
 	hF_produtos(index, id);
 
-	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID);
+	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID, id);
 	return index[0];
 }
 
@@ -89,17 +88,16 @@ void load_produtos(Produtos p, char* path, int num[2]){
 }
 
 // Função que imprime uma arvore por ordem dos elementos
-int fprint_produtos(FILE* fp, int l1, int l2, AVL a){
-	char pL = l1+'A', sL = l2+'A'; 
+int fprint_produtos(FILE* fp, AVL a){
 	int num = 0;
 
 	if(a){
-		num += fprint_produtos(fp,l1,l2,esq(a));
+		num += fprint_produtos(fp,esq(a));
 		if(valor(a) > 1){
-			fprintf(fp, "%c%c%d\r\n", pL, sL, valor(a));
+			fprintf(fp, "%s\r\n", codigo(a));
 			num++;
 		}
-		num += fprint_produtos(fp,l1,l2,dir(a));
+		num += fprint_produtos(fp,dir(a));
 	}
 
 	return num; // retorna o num de elementos que printou
@@ -119,7 +117,7 @@ int wrFileP (Produtos p, char* path){
 	for(int l1 = 0; l1 < LETRAS; l1++)
 		for(int l2 = 0; l2 < LETRAS; l2++)
 			for(int h = 0; h < HASHNUMBER; h++)
-				r += fprint_produtos(fp,l1,l2,p->tabela_produtos[l1][l2][h]);
+				r += fprint_produtos(fp,p->tabela_produtos[l1][l2][h]);
 
 	fclose(fp);
 
@@ -151,19 +149,15 @@ int get_size(Produtos p, char letra){
 }
 
 //
-int print_simples(String* lista, char l1, int l2, AVL a, int pos){
+int print_simples(String* lista, AVL a, int pos){
 	int num = 0;
 	if(a){
-		num += print_simples(lista,l1,l2,esq(a),pos+num);
+		num += print_simples(lista,esq(a),pos+num);
 		if(valor(a)){
-			
-				printf("\n__%d__", pos+num);
-				printf("vou tentar _%c_%c_%d_\n", l1+'A', l2+'A', valor(a));
-				lista[pos+num] = iniciar_string(valor(a), l1, l2);
-			
+			lista[pos+num] = iniciar_string(codigo(a));
 			num++;
 		}
-		num += print_simples(lista,l1,l2,dir(a),pos+num);
+		num += print_simples(lista,dir(a),pos+num);
 	}
 
 	return num;
@@ -176,7 +170,7 @@ void lista_produtos(Produtos p, char letra, String* lista){
 
 	for(int l2 = 0; l2 < LETRAS; l2++)
 		for(int h = 0; h < HASHNUMBER; h++)
-			r += print_simples(lista,l1,l2,p->tabela_produtos[l1][l2][h],r);
+			r += print_simples(lista,p->tabela_produtos[l1][l2][h],r);
 }
 
 // Função que liberta o espaço alocado para a estrutura

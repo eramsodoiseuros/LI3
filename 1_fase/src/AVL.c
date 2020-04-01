@@ -1,18 +1,40 @@
 #include "../include/AVL.h"
 
 struct arvore{
-	int valor; 
+	int valor;
+    char* codigo;
 	struct arvore *esq, *dir;
 	int altura;
 };
 
+struct string{
+    char* id_produto;
+};
+
+//Função strdup criada para evitar warnings
+char* sdup(const char *s){
+    size_t tamanho = strlen (s) + 1;
+    void *novo = malloc(tamanho);
+    if(novo == NULL)
+        return NULL;
+    return (char *) memcpy (novo, s, tamanho);
+}
+
+// 
+String iniciar_string(char* id){
+    String s = malloc(sizeof(String));
+
+    s->id_produto = sdup(id);
+    
+    return s;
+}
 
 // Função que imprime uma arvore por ordem dos elementos
 int print_AVL(AVL arvore){
 	int num = 0;
 	if(arvore){
 		num += print_AVL(arvore->esq);
-		printf("%d\n", arvore->valor); num++;
+		printf("%s\n", arvore->codigo); num++;
 		num += print_AVL(arvore->dir);
 	}
 
@@ -34,6 +56,11 @@ int valor(AVL t){
     return t->valor;
 }
 
+//Função que devolve a string de uma arvore
+char* codigo(AVL t){
+    return t->codigo;
+}
+
 // Função que indica o maior de dois números
 int max(int a, int b){ 
     return (a > b)? a : b;
@@ -45,10 +72,11 @@ int altura(AVL a){
 }
 
 // Função que cria um Nodo novo da arvore, ou até mesmo uma arvore nova, com um dado valor
-AVL create_nodo(int valor){
+AVL create_nodo(int valor, char* id){
     AVL new = malloc(sizeof(struct arvore));
 
     new->valor = valor;
+    new->codigo = sdup(id);
     new->esq = NULL;
     new->dir = NULL;
     new->altura = 1;
@@ -90,16 +118,16 @@ int difBalance(AVL a){
 }
 
 // Função que recursivamente insere um valor numa AVL
-AVL insert_tree(AVL a, int val){
+AVL insert_tree(AVL a, int val, char* id){
 	int balance;
 
     if(a == NULL){
-        AVL new = create_nodo(val);
+        AVL new = create_nodo(val,id);
     	return(new);
     }
 
-    if(val < a->valor) a->esq = insert_tree(a->esq, val);
-    else if(val > a->valor) a->dir = insert_tree(a->dir, val);
+    if(val < a->valor) a->esq = insert_tree(a->esq, val,id);
+    else if(val > a->valor) a->dir = insert_tree(a->dir, val,id);
     else return a;
         
     a->altura = 1 + max(altura(a->esq),altura(a->dir));

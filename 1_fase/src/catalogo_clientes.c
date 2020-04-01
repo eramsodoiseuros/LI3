@@ -38,7 +38,7 @@ void insert_cliente(Clientes c, char id[]){
 
 	hF_clientes(index, id);
 
-	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]] , nID);
+	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]] , nID, id);
 }
 
 // Função que verifica se um id existe na estrutura
@@ -101,17 +101,16 @@ void load_clientes(Clientes c, char* path, int num[2]){
 }
 
 // Função que imprime uma arvore num ficheiro por ordem dos elementos
-int fprint_clientes(FILE* fp, int l1, AVL a){
-	char pL = l1+'A';
+int fprint_clientes(FILE* fp, AVL a){
 	int num = 0;
 
 	if(a){
-		num += fprint_clientes(fp,l1,esq(a));
+		num += fprint_clientes(fp,esq(a));
 		if(valor(a) > 1){
-			fprintf(fp,"%c%d\r\n", pL,valor(a));
+			fprintf(fp,"%s\r\n",codigo(a));
 			num++;
 		}
-		num += fprint_clientes(fp,l1,dir(a));
+		num += fprint_clientes(fp,dir(a));
 	}
 
 	return num;  // retorna o num de elementos que printou
@@ -130,7 +129,7 @@ int  wrFileC (Clientes c, char* path){
 	
 	for(int letra = 0; letra < LETRAS; letra++)
 		for(int h = 0; h < HASHNUMBER; h++)
-			r += fprint_clientes(fp,letra,c->tabela_clientes[letra][h]);
+			r += fprint_clientes(fp,c->tabela_clientes[letra][h]);
 
 	fclose(fp);	
 

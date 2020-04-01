@@ -13,15 +13,6 @@ JP1982 343.2 168 N T1805 10 2 / IZ1636 923.72 193 P T2220 4 2 / AA1636 923.72 19
 */
 
 
-//Função strdup criada para evitar warnings
-char* sdup(const char *s){
-	size_t tamanho = strlen (s) + 1;
-	void *novo = malloc(tamanho);
-	if(novo == NULL)
-		return NULL;
-	return (char *) memcpy (novo, s, tamanho);
-}
-
 // função que devolve o i e preenche o array tokens
 int toktok(char * linha, char** tokens){
 	char* tok = NULL;

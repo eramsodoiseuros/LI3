@@ -8,9 +8,7 @@
 #include <ctype.h>
 
 
-#include "string.h"
-
-
+#include "AVL.h"
 
 typedef struct produtos* Produtos;
 

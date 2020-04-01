@@ -114,6 +114,13 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	}
 }
 
+//
+void navegador(String* lista, int tamanho){
+
+    for(int i = 0; i < 10; i++)
+        printf("%s\n", lista[i]->id_produto);
+}
+
 // to print or not to print
 void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	char* r = malloc(sizeof(char*));

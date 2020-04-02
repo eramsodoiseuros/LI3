@@ -1,4 +1,6 @@
 #include "../include/IO.h"
+#include "../include/AVL.h"
+
 
 
 // Print do menu, com a informação das queries
@@ -40,6 +42,8 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa;
 	int r;
 	int num[6];
+	int tamanho;
+	//String lista;
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
 
 	printf("Escolha o numero da query que pretende executar [1...12]\n\tTerminar o programa: [0]   ");
@@ -76,7 +80,13 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 
 			case 2:
-				query_2(p, 'A');
+				tamanho = get_size(*p,'A');
+				String lista[tamanho];
+				for(int i = 0; i < tamanho; i++){
+					lista[i] = NULL;
+				}
+				query_2(p, 'A', lista);
+				navegador(lista, tamanho);
 				break;
 
 		/*
@@ -117,8 +127,63 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 //
 void navegador(String* lista, int tamanho){
 
-    for(int i = 0; i < 10; i++)
-        printf("%s\n", lista[i]->id_produto);
+    int val=1;
+    int exit=0;
+    char* scanS=malloc(sizeof(char)*buffsize);
+    int validstr=1;
+    int scanout=1;
+    int pag = 1;
+    int i =0;
+    int count=0;
+    
+
+    while(exit!=1){
+
+        if(scanout==0 || pag>(tamanho/10) || pag<0 || val==0 || lista==NULL){
+            val=1;
+            printf("Página inválida ou não existente\n");
+        }
+
+        else{
+            if(lista != NULL || pag<(tamanho/10))
+            printf("%s************ Página %d ************%s\n",KBLU,(pag), RST);
+            printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
+
+
+           
+            	             
+            for(i=(pag*10)-Pagsize; count<Pagsize; i++)
+            	{
+            		
+            	printf("%s \n",getString(lista[i]));
+            	count++;
+                
+            }
+            count = 0;
+      
+
+            	            
+        }
+
+        printf("\n");
+        printf("%s(D para Proxima página) \n",KBLU);
+        printf("%s(A para Página Anterior) \n",KBLU);
+        printf("%s(E para sair)%s \n",KBLU,RST);
+        printf("Inserir número página: \n");
+        scanout=read(0,scanS,buffsize);
+        scanS=strtok(scanS," \n");
+
+        validstr=atoi(scanS);
+        printf("\n");
+
+        if(strcmp(scanS,"e") == 0) {exit = 1;}
+        else if(strcmp(scanS,"d") == 0 && pag<((tamanho/10)+1)) pag++;
+        else if(strcmp(scanS,"a") == 0 && pag>1) pag--;
+        else if(validstr==0) val = 0;
+        else if(validstr!=0) pag = validstr;
+    }
+
+    free(scanS);
 }
 
 // to print or not to print

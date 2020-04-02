@@ -11,6 +11,10 @@ struct string{
     char* id_produto;
 };
 
+char* getString (String s){
+    return s->id_produto;
+}
+
 //Função strdup criada para evitar warnings
 char* sdup(const char *s){
     size_t tamanho = strlen (s) + 1;

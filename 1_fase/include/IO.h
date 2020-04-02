@@ -14,11 +14,18 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "queries.h"
+#include "AVL.h"
+
+
+#define Pagsize 10
+#define buffsize 200
 
 
 // to print or not to print
 void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2);
+void navegador(String* lista, int tamanho);
 
 #endif

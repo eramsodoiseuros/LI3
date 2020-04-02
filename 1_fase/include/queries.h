@@ -22,7 +22,7 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 
  *	@param os Produtos existentes e a Letra pretendida
 */
-void query_2(Produtos* p, char letra);
+void query_2(Produtos* p, char letra, String* s);
 
 /**
  *	Dado um mês e um código de produto, ambos válidos, determinar e apresentar o número total de vendas (nº de registos de venda)

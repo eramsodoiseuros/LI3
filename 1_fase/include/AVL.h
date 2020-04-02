@@ -11,6 +11,7 @@ typedef struct arvore* AVL;
 
 typedef struct string* String;
 
+char* getString (String s);
 
 //Função strdup criada para evitar warnings
 char* sdup(const char *s);

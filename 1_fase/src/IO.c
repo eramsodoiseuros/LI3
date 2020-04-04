@@ -79,7 +79,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				}
 				break;
 
-			case 2:
+			/*case 2:
 				tamanho = get_size(*p,'A');
 				String lista[tamanho];
 				for(int i = 0; i < tamanho; i++){
@@ -88,11 +88,12 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				query_2(p, 'A', lista);
 				navegador(lista, tamanho);
 				break;
-
-		/*
+*/
 			case 3:
-				query_3();
+				query_3(f2);
+				//print_fat(f2);
 				break;
+			/*
 			case 4:
 					query_4();
 					break;

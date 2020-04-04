@@ -41,3 +41,7 @@ void query_2(Produtos* p, char letra, String* lista){
 			
 	lista_produtos(*p, letra, lista);
 }
+
+void query_3(Faturacao* f){
+	print_fat(f);
+}

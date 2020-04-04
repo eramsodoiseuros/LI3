@@ -51,23 +51,24 @@ void query_3 (Faturacao* f){
 
     int escolha;
     int mes;
-    int mesf;
-    int mes2;
     int filial;
-    int filial2;
-
+    
     while(exit!=1){
 
-	    printf("1.Total faturado\n");
-	    printf("2.Total faturado por mês\n");
-	    printf("3.Faturacao por filial por mês\n");
-	    printf("4.Total faturado por filial\n");
-	    printf("5.Total de vendas\n");
-	    printf("6.Total de vendas por mês\n");
-	    printf("0.Sair\n");
+	    printf("1. Total faturado\n");
+	    printf("2. Total faturado por mês\n");
+	    printf("3. Faturacao por filial por mês\n");
+	    printf("4. Total faturado por filial\n");
+	    printf("5. Total de vendas\n");
+	    printf("6. Total de vendas por mês\n");
+	    //printf("7. Total de vendas por filial\n");
+	    //printf("8. Total de vendas em promoção\n");
+	    //printf("9. Total de vendas em promoção por filial\n");
+	    //printf("10. Faturação de produtos em promoção\n");
+	    printf("0. Sair\n");
 
 
-	    scanf("%d",&escolha);
+	    if(scanf("%d",&escolha))
 	    if (escolha<0 || escolha>6)
 	        printf("Opção invalida\n");
 
@@ -78,40 +79,46 @@ void query_3 (Faturacao* f){
 
 	        case 1:
 	            printf("Total faturado: %f\n",total_faturado(*f) );
+	            printf("\n");
 	            break;
 
 	        case 2:
-	            printf("Insira um mês (1..12) :\n");
-	            scanf("%d",&mes);
+	            printf("Insira um mês [1..12]:\n");
+	            if(scanf("%d",&mes))
 	            printf("Total de faturado nesse mês: %f\n",faturado_mes(*f,mes));
+	        	printf("\n");
 	            break;
 
 	        case 3:
 	            printf("Insira filial:\n");
-	            scanf("%d",&filial);
-	            printf("Insira um mês (1..12) :\n");
-	            scanf("%d",&mesf);
-	            printf("O total faturado nessa filial nesse mês: %f\n",faturado_in(*f,mesf,filial));
+	            if(scanf("%d",&filial))
+	            printf("Insira um mês [1..12]:\n");
+	            if(scanf("%d",&mes))
+	            printf("O total faturado nessa filial nesse mês: %f\n",faturado_in(*f,mes,filial));
+	        	printf("\n");
 	            break;
 
 	        case 4:
 	            printf("Insira filial:\n");
-	            scanf("%d",&filial2);
+	            if(scanf("%d",&filial))
 	            for (int i = 0; i < 12; ++i)
-	                fat_fil += faturado_in(*f,i,filial2);
+	                fat_fil += faturado_in(*f,i,filial);
 	            printf("O total faturado nessa filial: %f\n",fat_fil);
+	            printf("\n");
 	            break;
 
 	        case 5:
 	            for (int i = 0; i < 12; ++i)
 	                vendas += numero_vendas(*f,i);
 	            printf("Total de vendas: %d\n",vendas);
+	            printf("\n");
 	            break;
 
 	        case 6:
-	            printf("Insira um mês (1..12) :\n");
-	            scanf("%d",&mes2);
-	            printf("O total vendido nesse mês: %d\n", numero_vendas(*f,mes2));
+	            printf("Insira um mês [1..12]:\n");
+	            if(scanf("%d",&mes))
+	            printf("O total vendido nesse mês: %d\n", numero_vendas(*f,mes));
+	        	printf("\n");
 	            break;
     	}
 	}

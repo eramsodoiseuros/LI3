@@ -80,6 +80,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 		}
 		switch(tarefa){
 			case 2:
+
 				for(int i = 0; i < tamanho; i++){
 					lista[i] = NULL;
 				}

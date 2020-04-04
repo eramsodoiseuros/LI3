@@ -92,6 +92,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				query_3(f2);
 				break;
 		/*
+
 			case 4:
 					query_4();
 					break;

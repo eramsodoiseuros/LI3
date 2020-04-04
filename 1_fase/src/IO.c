@@ -27,7 +27,10 @@ int escolhe_file(){
 	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], todos [4]\n\t->  ");
 	
 	if(scanf("%d", &r)){
-		r=r;
+		if(r!= 1 && r!= 2 && r!= 3 && r!= 4){	
+			printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
+			escolhe_file();
+		}
 	}
 	else {
 		printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
@@ -43,9 +46,31 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int r;
 	int num[6];
 	int tamanho;
-	//String lista;
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
 
+	r = escolhe_file();
+	if(r == 1){
+		query_1(c, p, f1, f2, num, 1);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+	}
+	if(r == 2){
+		query_1(c, p, f1, f2, num, 2);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+	}
+	if (r == 3){
+		query_1(c, p, f1, f2, num, 3);
+		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+	}
+	if(r == 4){
+		query_1(c, p, f1, f2, num, 4);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+	}
+
+	tamanho = get_size(*p,'A');
+	String lista[tamanho];
+	
 	printf("Escolha o numero da query que pretende executar [1...12]\n\tTerminar o programa: [0]   ");
 	if(scanf("%d", &tarefa)){
 
@@ -53,35 +78,8 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [1...12]\n\n\tPara terminar o programa insira o número 0.\n\n");
 			escolhe_query(c,p,f1,f2);
 		}
-
 		switch(tarefa){
-			case 0:
-				_exit(0);
-			case 1:
-				r = escolhe_file();
-				if(r == 1){
-					query_1(c, p, f1, f2, num, 1);
-					printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-				}
-				if(r == 2){
-					query_1(c, p, f1, f2, num, 2);
-					printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-				}
-				if (r == 3){
-					query_1(c, p, f1, f2, num, 3);
-					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
-				}
-				if(r == 4){
-					query_1(c, p, f1, f2, num, 4);
-					printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes lidos__%s%d\n\t%sClientes escritos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-					printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos lidos__%s%d\n\t%sProdutos escritos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-					printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas lidas__%s%d\n\t%sVendas escritas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
-				}
-				break;
-
 			case 2:
-				tamanho = get_size(*p,'A');
-				String lista[tamanho];
 				for(int i = 0; i < tamanho; i++){
 					lista[i] = NULL;
 				}
@@ -116,7 +114,6 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 					break;
 			*/
 		}
-
 	}
 	else{
 		printf("\n\tO programa falhou na leitura de um número.\n");

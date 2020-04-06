@@ -24,7 +24,7 @@ void print_menu(){
 int escolhe_file(){
 	int r;
 
-	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], todos [4]\n\t->  ");
+	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], Todos [4]\n\t->  ");
 	
 	if(scanf("%d", &r)){
 		if(r!= 1 && r!= 2 && r!= 3 && r!= 4){	
@@ -71,16 +71,19 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	tamanho = get_size(*p,'A');
 	String lista[tamanho];
 	
-	printf("Escolha o numero da query que pretende executar [1...12]\n\tTerminar o programa: [0]   ");
+	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [0]   ");
 	if(scanf("%d", &tarefa)){
 
 		if(tarefa > 12 || tarefa < 0){
-			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [1...12]\n\n\tPara terminar o programa insira o número 0.\n\n");
+			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 0.\n\n");
 			escolhe_query(c,p,f1,f2);
 		}
 		switch(tarefa){
-			case 2:
+			case 0:
+				exit(1);
+				break;
 
+			case 2:
 				for(int i = 0; i < tamanho; i++){
 					lista[i] = NULL;
 				}

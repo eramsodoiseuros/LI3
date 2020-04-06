@@ -123,3 +123,81 @@ void query_3 (Faturacao* f){
     	}
 	}
 }
+
+
+
+
+void query_7 (){
+	char produto[6];
+	int filial = 1;
+	int vendas = 50;
+
+	printf("%sInsira o produto: %s\n",KBLU,RST);
+	if(scanf("%s",&produto));
+		else printf("%sProduto Invalido%s\n",KRED,RST);
+
+
+
+
+	printf("%s#############################################################\n",KBLU);
+	printf("%s##                                                         ##\n",KBLU);
+	printf("%s##%s                           %s                        %s##\n",KBLU,RST,produto,KBLU);
+	printf("%s##                                                         ##\n",KBLU);
+	printf("%s#############################################################\n",KBLU);
+	printf("%s##                     ##                ##                ##\n",KBLU);
+	printf("%s##%s       Filial        %s##%s       Mês      %s##%s     Vendas     %s##\n",KBLU,RST,KBLU,RST,KBLU,RST,KBLU);
+	printf("%s##                     ##                ##                ##\n",KBLU);
+	printf("%s#############################################################\n",KBLU);
+
+	for(filial = 1; filial<4; filial++){
+		for (int mes = 1; mes < 13; ++mes)
+		{
+		printf("%s##                     ##                ##                ##\n",KBLU);
+		printf("%s##%s        %d            %s##%s        %d       %s##%s      %d        %s##\n",KBLU,RST,filial,KBLU,RST,mes,KBLU,RST,vendas,KBLU);
+		printf("%s#############################################################%s\n",KBLU,RST);
+		}
+	}
+
+
+
+}
+
+void query_8 (Faturacao* f){
+	int mes1;
+	int mes2;
+	int vendas =0;
+	double faturado = 0;
+
+	printf("%sInsira os meses que deseja consultar [1..12]: %s\n",KBLU,RST);
+	if(scanf("%d",&mes1));
+	if(mes1>11 || mes1<1){
+		printf("Mês invalido. Tente novamente\n");
+		if(scanf("%d",&mes1));
+		}
+	else{ 
+		printf("%sAté: %s\n",KBLU,RST);
+		if(scanf("%d",&mes2));
+		if(mes2>12 || mes2<mes1){
+			printf("Mês invalido. Tente novamente\n");
+			if(scanf("%d",&mes2));
+								}
+		}
+	for(int i = mes1; i<=mes2; i++){
+
+		vendas+=numero_vendas(*f,i);
+	}
+
+	printf("%sTotal de vendas nesse intervalo é:%s %d\n",KBLU,RST,vendas);
+
+	for(int i = mes1; i<=mes2; i++){
+
+		faturado+=faturado_mes(*f,i);
+	}
+
+	printf("%sE o total faturado nesse intervalo é:%s %f\n",KBLU,RST,faturado);
+
+
+
+}
+
+

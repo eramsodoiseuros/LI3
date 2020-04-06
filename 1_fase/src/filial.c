@@ -1,27 +1,27 @@
 #include "../include/filial.h"
-#include "../include/registos.h"
+//#include "../include/registos.h"
 
 #define LETRAS 26
 #define HASHNUMBER_C 599
 #define HASHNUMBER_P 151
 
 struct filial{
-	RC r_cliente[LETRAS];
-	RP r_produto[LETRAS][LETRAS];
+	//RC r_cliente[LETRAS];
+	//RP r_produto[LETRAS][LETRAS];
 
-	int n_clientes[4];
-	int n_PNC; // número de produtos não comprados
+	//int n_clientes[4];
+	//int n_PNC; // número de produtos não comprados
 
 };
 
-
+/*
 // Função que dado os parametros de uma venda dá update na estrutura filial
 void update_filial(Filial f1, int filial, int mes, double preco, int unidades, char* produto, char* cliente){
 
 }
 
 // Função que inicia a estrutura filial com os respetivos valores a zero
-Filial iniciar_faturacao(){
+Filial iniciar_filial(){
 	Filial f = malloc(sizeof(struct filial));
 
 	for(int i = 0; i< LETRAS; i++)
@@ -72,3 +72,4 @@ int search_C(Clientes c, char id[]){
 	r = search_tree(c->tabela_clientes[index[0]][index[1]], nID);
 	return r;
 }
+*/

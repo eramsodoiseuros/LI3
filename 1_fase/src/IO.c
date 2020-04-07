@@ -43,6 +43,7 @@ int escolhe_file(){
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa;
+	char* inpt =malloc(sizeof(char)*buffsize);
 	//int r;
 	//int num[6];
 	int tamanho;
@@ -74,15 +75,15 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	tamanho = get_size(*p,'A');
 	String lista[tamanho];
 	
-	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [0]   ");
-	if(scanf("%d", &tarefa)){
-
-		if(tarefa > 12 || tarefa < 0){
-			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 0.\n\n");
+	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
+	if(scanf("%s", inpt)){
+		tarefa = atoi(inpt);
+		if(tarefa > 12 || tarefa < 1){
+			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 1.\n\n");
 			escolhe_query(c,p,f1,f2);
 		}
 		switch(tarefa){
-			case 0:
+			case 1:
 				exit(1);
 				break;
 

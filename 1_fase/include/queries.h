@@ -17,6 +17,9 @@
 #include "catalogo_produtos.h"
 
 
+#define buffsize 200
+
+
 /**
  * 	Lê e inicializa os valores das estruturas através dos ficheiros
  	Opcionalmente, assumidos por omissão (sendo neste caso os ficheiros anteriormente referidos).

@@ -43,9 +43,11 @@ int escolhe_file(){
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa;
-	int r;
-	int num[6];
+	char* inpt =malloc(sizeof(char)*buffsize);
+	//int r;
+	//int num[6];
 	int tamanho;
+/*	
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
 
 	r = escolhe_file();
@@ -68,18 +70,20 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 	}
 
+*/
+
 	tamanho = get_size(*p,'A');
 	String lista[tamanho];
 	
-	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [0]   ");
-	if(scanf("%d", &tarefa)){
-
-		if(tarefa > 12 || tarefa < 0){
-			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 0.\n\n");
+	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
+	if(scanf("%s", inpt)){
+		tarefa = atoi(inpt);
+		if(tarefa > 12 || tarefa < 1){
+			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 1.\n\n");
 			escolhe_query(c,p,f1,f2);
 		}
 		switch(tarefa){
-			case 0:
+			case 1:
 				exit(1);
 				break;
 
@@ -94,17 +98,17 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			case 3:
 				query_3(f2);
 				break;
-		/*
-			case 4:
-					query_4();
+		
+			case 7:
+					query_7();
 					break;
-				case 5:
+		/*		case 5:
 					query_5();
-					break;
+					break;*/
 				case 8:
-					query_8();
+					query_8(f2);
 					break;
-				case 9:
+			/*	case 9:
 					query_9();
 					break;
 				case 10:
@@ -124,6 +128,48 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 		escolhe_query(c, p, f1, f2);
 	}
 }
+
+
+
+
+
+
+void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
+	int r;
+	int num[6];
+	
+	
+	for(int i = 0; i <= 5; i++) num[i] = 0; 
+
+	r = escolhe_file();
+	if(r == 1){
+		query_1(c, p, f1, f2, num, 1);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+	}
+	if(r == 2){
+		query_1(c, p, f1, f2, num, 2);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+	}
+	if (r == 3){
+		query_1(c, p, f1, f2, num, 3);
+		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+	}
+	if(r == 4){
+		query_1(c, p, f1, f2, num, 4);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+	}
+
+}
+
+
+
+
+
+
+
+
 
 //
 void navegador(String* lista, int tamanho){
@@ -194,12 +240,14 @@ void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	if(scanf("%c", r)){
 		if(r[0] == 'y' || r[0] == 'Y'){
 			print_menu();
+			load_query1(c,p,f1,f2);
 			while(1){
 				escolhe_query(c,p,f1,f2);
 			}
 		}
 
 		if(r[0] == 'n' || r[0] == 'N'){
+			load_query1(c,p,f1,f2);
 			while(1){
 				escolhe_query(c,p,f1,f2);
 			}

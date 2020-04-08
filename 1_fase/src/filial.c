@@ -5,12 +5,9 @@
 #define HASHNUMBER_P 151
 
 struct filial{
-
 	int n_clientes[4];
 	int n_PC; // número de produtos comprados
-
 };
-
 
 // Função que dado os parametros de uma venda dá update na estrutura filial
 void update_filial(Filial f1, int filial, int mes, double preco, int unidades, char NP, char* produto, char* cliente){

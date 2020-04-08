@@ -25,17 +25,17 @@ String iniciar_string(char* id);
 
 /**
  *	Função que cria um Nodo novo da arvore, ou até mesmo uma arvore nova, com um dado valor
- *	@param valor a inserir na arvore
+ *	@param valor a inserir na arvore, tipo da arvore
  *	@param apontador para a estrutura
  */
-AVL create_nodo(int valor, char* id);
+AVL create_nodo(int valor, char* id, char tipo);
 
 /**
  *	Função que recursivamente insere um valor numa AVL
- *	@param a arvore e um valor a adicionar na arvore
+ *	@param a arvore e um valor a adicionar na arvore, tipo da arvore
  *	@param apontador para a estrutura
  */
-AVL insert_tree(AVL a, int val, char* id);
+AVL insert_tree(AVL a, int val, char* id, char tipo);
 
 /**
  *	Função que procura um elemento numa arvore binaria
@@ -78,5 +78,7 @@ int valor(AVL a);
  *	@param a string da raiz da arvore
  */
 char* codigo(AVL a);
+
+void* search_update(AVL a, int id);
 
 #endif

@@ -11,7 +11,14 @@
 #include "AVL.h"
 
 typedef struct produtos* Produtos;
+typedef struct produto* Produto;
 
+
+/**
+ *	Função que inicializa um registo produto
+ *	@param o produto
+ */
+Produto iniciar_produto();
 
 /**
  *	Função que verifica se um id existe na estrutura

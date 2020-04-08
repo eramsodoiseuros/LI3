@@ -17,6 +17,13 @@ struct clientes{
 	AVL tabela_clientes[LETRAS][HASHNUMBER];
 };
 
+struct cliente{
+    int comprou_in[5];
+    int size_comprados;
+    // void* lista_comprados[12]; 
+};
+
+
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
 void hF_clientes(int index[2], char value[]){
 	int s = 0, c = 0;
@@ -27,7 +34,6 @@ void hF_clientes(int index[2], char value[]){
 	c = abs(c % HASHNUMBER);
 
 	index[0] = value[0] - 65;
-	//printf("\tHASH__%c%d\n", value[0], c );
 	index[1] = c;
 }
 
@@ -38,7 +44,7 @@ void insert_cliente(Clientes c, char id[]){
 
 	hF_clientes(index, id);
 
-	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]] , nID, id);
+	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]] , nID, id, 'c');
 }
 
 // Função que verifica se um id existe na estrutura
@@ -100,42 +106,6 @@ void load_clientes(Clientes c, char* path, int num[2]){
 	fclose(file);
 }
 
-// Função que imprime uma arvore num ficheiro por ordem dos elementos
-int fprint_clientes(FILE* fp, AVL a){
-	int num = 0;
-
-	if(a){
-		num += fprint_clientes(fp,esq(a));
-		if(valor(a) > 1){
-			fprintf(fp,"%s\r\n",codigo(a));
-			num++;
-		}
-		num += fprint_clientes(fp,dir(a));
-	}
-
-	return num;  // retorna o num de elementos que printou
-}
-
-// Função que imprime num ficheiro a estrutura de clientes
-int  wrFileC (Clientes c, char* path){
-	int r = 0;
-	FILE* fp = fopen(path, "w+");
-	
-	if(fp == NULL){
-		printf("Error! Couldn't find file point to write Clientes");
-		fclose(fp); 
-		_exit(0);
-	}
-	
-	for(int letra = 0; letra < LETRAS; letra++)
-		for(int h = 0; h < HASHNUMBER; h++)
-			r += fprint_clientes(fp,c->tabela_clientes[letra][h]);
-
-	fclose(fp);	
-
-	return r;
-}
-
 // Função que inicializa as estruturas, escreve na posição 0 e 1 do array
 Clientes iniciar_clientes(int* num){
 	Clientes c = malloc(sizeof(struct clientes));
@@ -155,4 +125,39 @@ Clientes iniciar_clientes(int* num){
 // Função que liberta o espaço alocado para a estrutura
 void free_clientes(Clientes c){
 	free(c);
+}
+
+
+//
+Cliente iniciar_cliente(){
+	Cliente c = malloc(sizeof(struct cliente));
+
+	for(int i = 0; i < 5; i++)
+		c->comprou_in[i] = 0;
+	c->size_comprados = 0;
+
+	return c;
+}
+
+//
+void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP){
+	c->comprou_in[0]++;
+	c->comprou_in[filial]++;
+
+	if(c->comprou_in[1] && c->comprou_in[2] && c->comprou_in[3])
+		c->comprou_in[4] = 1;
+    
+    //if(new_produto(c, cp))
+    c->size_comprados++;
+
+}
+
+//
+void update_cliente(Clientes c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP){
+	int nID = num_(cliente,1);
+	int index[2]; index[0] = 0, index[1] = 0;
+
+	hF_clientes(index,cliente);
+
+	//search_update(c->tabela_clientes[index[0]][index[1]], nID, update_registo(c2, int filial, int mes, double preco, int unidades, produto, NP));
 }

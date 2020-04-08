@@ -8,7 +8,13 @@
 #include <ctype.h>
 
 typedef struct clientes* Clientes;
+typedef struct cliente* Cliente;
 
+/**
+ *	Função que inicializa um registo cliente
+ *	@param o cliente
+ */
+Cliente iniciar_cliente();
 
 /**
  *	Função que verifica se um id existe na estrutura

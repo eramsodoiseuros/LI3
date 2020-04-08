@@ -1,11 +1,15 @@
 #include "../include/AVL.h"
+#include "../include/catalogo_clientes.h"
+#include "../include/catalogo_produtos.h"
 
 struct arvore{
-	int valor;
-    char* codigo;
+	int valor;             // valor para se poder gerir
+    void* info;            // info que realmente se guarda
+    char* codigo;          // dá para ser produto ou cliente
 	struct arvore *esq, *dir;
 	int altura;
 };
+
 
 struct string{
     char* id_produto;
@@ -14,6 +18,7 @@ struct string{
 char* getString (String s){
     return s->id_produto;
 }
+
 
 //Função strdup criada para evitar warnings
 char* sdup(const char *s){
@@ -31,18 +36,6 @@ String iniciar_string(char* id){
     s->id_produto = sdup(id);
     
     return s;
-}
-
-// Função que imprime uma arvore por ordem dos elementos
-int print_AVL(AVL arvore){
-	int num = 0;
-	if(arvore){
-		num += print_AVL(arvore->esq);
-		printf("%s\n", arvore->codigo); num++;
-		num += print_AVL(arvore->dir);
-	}
-
-	return num;
 }
 
 //Função que devolve o lado esquerdo de uma arvore
@@ -76,11 +69,21 @@ int altura(AVL a){
 }
 
 // Função que cria um Nodo novo da arvore, ou até mesmo uma arvore nova, com um dado valor
-AVL create_nodo(int valor, char* id){
+// 0 para clientes, 1 para produtos
+AVL create_nodo(int valor, char* id, char tipo){
     AVL new = malloc(sizeof(struct arvore));
 
     new->valor = valor;
     new->codigo = sdup(id);
+
+    if(tipo == 'c'){
+        new->info = iniciar_cliente();
+    }
+
+    if(tipo == 'p'){
+        new->info = iniciar_produto();
+    }
+
     new->esq = NULL;
     new->dir = NULL;
     new->altura = 1;
@@ -122,16 +125,16 @@ int difBalance(AVL a){
 }
 
 // Função que recursivamente insere um valor numa AVL
-AVL insert_tree(AVL a, int val, char* id){
+AVL insert_tree(AVL a, int val, char* id, char tipo){
 	int balance;
 
     if(a == NULL){
-        AVL new = create_nodo(val,id);
+        AVL new = create_nodo(val, id, tipo);
     	return(new);
     }
 
-    if(val < a->valor) a->esq = insert_tree(a->esq, val,id);
-    else if(val > a->valor) a->dir = insert_tree(a->dir, val,id);
+    if(val < a->valor) a->esq = insert_tree(a->esq, val, id, tipo);
+    else if(val > a->valor) a->dir = insert_tree(a->dir, val, id, tipo);
     else return a;
         
     a->altura = 1 + max(altura(a->esq),altura(a->dir));
@@ -169,6 +172,23 @@ int search_tree(AVL a, int id){
 	}
 
 	return r;
+}
+
+// Função que procura um elemento numa arvore binaria
+void* search_update(AVL a, int id){
+    void* r;
+    if(a == NULL) r = 0;
+    else{
+        if(id == a->valor){
+            r = a->info;
+        }
+        else{
+            if(id < a->valor) r = search_update(a->esq, id);
+            else r = search_update(a->dir, id);
+        }
+    }
+
+    return r;
 }
 
 // Função que transforma uma substring num numero

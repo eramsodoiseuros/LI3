@@ -9,6 +9,15 @@ struct produtos{
 	int size[LETRAS];
 };
 
+struct produto{
+    int vendido_in[5];
+    int vezes_comprado[12][3];
+    int vezes_N;
+    int vezes_P;
+    // void* lista_comprado[12]; 
+};
+
+
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
 void hF_produtos(int index[3], char value[]){
 	int s = 0, c = 0;
@@ -20,7 +29,6 @@ void hF_produtos(int index[3], char value[]){
 
 	index[0] = value[0] - 65;
 	index[1] = value[1] - 65;
-	//printf("\tHASH__%c%c%d\n", value[0], value[1], c );
 	index[2] = c;
 }
 
@@ -30,7 +38,7 @@ int insert_produto(Produtos p, char id[]){
 	int nID = num_(id,2);
 	hF_produtos(index, id);
 
-	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID, id);
+	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID, id, 'p');
 	return index[0];
 }
 
@@ -75,7 +83,8 @@ void load_produtos(Produtos p, char* path, int num[2]){
 
 	while( fgets(linha, 7, file) ){
 		if(valida_produto(linha)){
-			l1 = insert_produto(p,linha);
+
+			l1 = insert_produto(p, linha);
 			p->size[l1]++;
 			i1++;
 		}
@@ -85,43 +94,6 @@ void load_produtos(Produtos p, char* path, int num[2]){
 	num[0] = i1;
 	num[1] = i2; 
 	fclose(file);
-}
-
-// Função que imprime uma arvore por ordem dos elementos
-int fprint_produtos(FILE* fp, AVL a){
-	int num = 0;
-
-	if(a){
-		num += fprint_produtos(fp,esq(a));
-		if(valor(a) > 1){
-			fprintf(fp, "%s\r\n", codigo(a));
-			num++;
-		}
-		num += fprint_produtos(fp,dir(a));
-	}
-
-	return num; // retorna o num de elementos que printou
-}
-
-//Função que escreve um cubo de Trees num ficheiro
-int wrFileP (Produtos p, char* path){
-	int r = 0;
-	FILE* fp = fopen(path, "w+");
-	
-	if(fp == NULL){
-		printf("Error! Couldn't find file point to write Produtos");
-		fclose(fp); 
-		_exit(0);
-	}
-
-	for(int l1 = 0; l1 < LETRAS; l1++)
-		for(int l2 = 0; l2 < LETRAS; l2++)
-			for(int h = 0; h < HASHNUMBER; h++)
-				r += fprint_produtos(fp,p->tabela_produtos[l1][l2][h]);
-
-	fclose(fp);
-
-	return r;
 }
 
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
@@ -177,3 +149,48 @@ void lista_produtos(Produtos p, char letra, String* lista){
 void free_produtos(Produtos p){
 	free(p);
 }
+
+
+//
+Produto iniciar_produto(){
+	Produto p = malloc(sizeof(struct produto));
+
+	for(int i = 0; i < 5; i++)
+		p->vendido_in[i] = 0;
+
+	for(int m = 0; m < 12; m++)
+		for(int i = 0; i < 3; i++)
+			p->vezes_comprado[m][i] = 0;
+
+	p->vezes_N = 0;
+	p->vezes_P = 0;
+
+	return p;
+}
+
+//
+void update_registo_p(Produto p, int filial, int mes, double preco, int unidades, char* cliente, char NP){
+	p->vendido_in[0]++;
+	p->vendido_in[filial]++;
+
+	if(p->vendido_in[1] && p->vendido_in[2] && p->vendido_in[3])
+		p->vendido_in[4] = 1;
+	p->vezes_comprado[mes-1][filial-1]++;
+
+	if(NP == 'N')
+		p->vezes_N++;
+	if (NP == 'P')
+		p->vezes_P++;
+
+}
+
+//
+void update_produto(Produtos p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP){
+	int nID = num_(produto,2);
+	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
+	hF_produtos(index,produto);
+
+	//search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID, update_registo(p2, filial, mes, preco, unidades, cliente, NP));
+}
+
+

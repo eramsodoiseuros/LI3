@@ -38,17 +38,17 @@ void hF_clientes(int index[2], char value[]){
 }
 
 // Função que insere um index, de tipologia Cliente, numa estrutura de dados
-void insert_cliente(Clientes c, char id[]){
+void insert_cliente(Clientes c, char* id){
 	int index[2]; index[0] = 0, index[1] = 0;
 	int nID = num_(id,1);
 
 	hF_clientes(index, id);
 
-	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]] , nID, id, 'c');
+	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]], nID, id, 'c');
 }
 
 // Função que verifica se um id existe na estrutura
-int search_C(Clientes c, char id[]){
+int search_C(Clientes c, char* id){
 	int r = 0, nID = num_(id,1);
 	int index[2]; index[0] = 0, index[1] = 0;
 
@@ -143,7 +143,7 @@ Cliente iniciar_cliente(){
 void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP){
 	c->comprou_in[0]++;
 	c->comprou_in[filial]++;
-
+	
 	if(c->comprou_in[1] && c->comprou_in[2] && c->comprou_in[3])
 		c->comprou_in[4] = 1;
     

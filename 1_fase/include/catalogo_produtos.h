@@ -25,7 +25,7 @@ Produto iniciar_produto();
  *	@param estrutura produtos e o id a verificar
  *	@param 1 caso exista, 0 caso não exista
  */
-int search_P(Produtos p, char id[]);
+int search_P(Produtos p, char* id);
 
 /**
  *	Função que valida um id de um produto

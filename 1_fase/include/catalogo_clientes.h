@@ -21,14 +21,14 @@ Cliente iniciar_cliente();
  *	@param estrutura clientes e o id a verificar
  *	@param 1 caso exista, 0 caso não exista
  */
-int search_C(Clientes c, char id[]);
+int search_C(Clientes c, char* id);
 
 /**
  *	Função que valida um id de um cliente
  *	@param string a validar
  *	@param 1 caso seja valida, 0 caso seja inválida
  */
-int valida_cliente(char * id);
+int valida_cliente(char* id);
 
 /**
  *	Função que inicializa as estruturas, escreve na posição 0 e 1 do array

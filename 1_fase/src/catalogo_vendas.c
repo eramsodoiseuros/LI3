@@ -77,10 +77,10 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 			*/
 
 			update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
-			update_cliente(c, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
-			update_produto(p, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
 
-			printf("\t_%c_\n", tokens[3][0]);
+			update_cliente(c, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
+			update_produto(p, tokens[0], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[4], tokens[3][0]);
+
 			// update_filial(f1,...);
 
 			i1++;

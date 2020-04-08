@@ -44,33 +44,7 @@ int escolhe_file(){
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa;
 	char* inpt =malloc(sizeof(char)*buffsize);
-	//int r;
-	//int num[6];
 	int tamanho;
-/*	
-	for(int i = 0; i <= 5; i++) num[i] = 0; 
-
-	r = escolhe_file();
-	if(r == 1){
-		query_1(c, p, f1, f2, num, 1);
-		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-	}
-	if(r == 2){
-		query_1(c, p, f1, f2, num, 2);
-		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-	}
-	if (r == 3){
-		query_1(c, p, f1, f2, num, 3);
-		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
-	}
-	if(r == 4){
-		query_1(c, p, f1, f2, num, 4);
-		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
-	}
-
-*/
 
 	tamanho = get_size(*p,'A');
 	String lista[tamanho];
@@ -130,10 +104,6 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 }
 
 
-
-
-
-
 void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int r;
 	int num[6];
@@ -145,10 +115,12 @@ void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	if(r == 1){
 		query_1(c, p, f1, f2, num, 1);
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		query_1(c, p, f1, f2, num, 5);
 	}
 	if(r == 2){
 		query_1(c, p, f1, f2, num, 2);
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		query_1(c, p, f1, f2, num, 6);
 	}
 	if (r == 3){
 		query_1(c, p, f1, f2, num, 3);
@@ -160,16 +132,7 @@ void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 	}
-
 }
-
-
-
-
-
-
-
-
 
 //
 void navegador(String* lista, int tamanho){

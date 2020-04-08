@@ -33,7 +33,7 @@ void hF_produtos(int index[3], char value[]){
 }
 
 // Função que insere um index, de tipologia Produto, numa estrutura de dados
-int insert_produto(Produtos p, char id[]){
+int insert_produto(Produtos p, char* id){
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	int nID = num_(id,2);
 	hF_produtos(index, id);
@@ -43,7 +43,7 @@ int insert_produto(Produtos p, char id[]){
 }
 
 // Função que, aplicando a Hash Funtion, verifica se uma posição da Treetable existe
-int search_P(Produtos p, char id[]){
+int search_P(Produtos p, char* id){
 	int r = 0, nID = num_(id,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_produtos(index,id);
@@ -54,7 +54,7 @@ int search_P(Produtos p, char id[]){
 }
 
 // Função que valida um id de um produto
-int valida_produto(char * id){
+int valida_produto(char* id){
 	int r = 0;
 
 	if(strlen(id) != 6) return 0;
@@ -83,7 +83,6 @@ void load_produtos(Produtos p, char* path, int num[2]){
 
 	while( fgets(linha, 7, file) ){
 		if(valida_produto(linha)){
-
 			l1 = insert_produto(p, linha);
 			p->size[l1]++;
 			i1++;
@@ -170,11 +169,13 @@ Produto iniciar_produto(){
 
 //
 void update_registo_p(Produto p, int filial, int mes, double preco, int unidades, char* cliente, char NP){
+
 	p->vendido_in[0]++;
 	p->vendido_in[filial]++;
 
 	if(p->vendido_in[1] && p->vendido_in[2] && p->vendido_in[3])
 		p->vendido_in[4] = 1;
+
 	p->vezes_comprado[mes-1][filial-1]++;
 
 	if(NP == 'N')

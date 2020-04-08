@@ -67,15 +67,51 @@ void query_2(Produtos* p, char letra, String* lista){
 
 void query_3 (Faturacao* f){
 
-    int vendas = 0;
-    double fat_fil = 0;
-    int exit = 0;
+    //int vendas = 0;
+    //double fat_fil = 0;
+    //int exit = 0;
 
     char* inpt =malloc(sizeof(char)*buffsize);
-    int escolha;
-    int mes;
-    int filial;
+    int mes=1;
+    int filial=1;
+    char produto[7];
+    printf("%sInsira um produto: %s\n",KBLU,RST);
+    if(scanf("%s",produto));
+
+    while(valida_produto(produto)==0){
+    	printf("%sProduto Invalido%s\n",KRED,RST);
+    	if(scanf("%s",produto));
+    }
     
+    printf("%sInsira um mes: %s\n",KBLU,RST);
+
+    if(scanf("%s",inpt));
+	mes=atoi(inpt);
+
+	while(mes<=0 || mes>12){
+		printf("%sMês Invalido%s\n",KRED,RST);
+		if(scanf("%s",inpt));
+		mes=atoi(inpt);
+	}
+
+	printf("%sInsira uma filial [1..3] ou [4] para valores globais: %s\n",KBLU,RST);
+	if(scanf("%s",inpt))
+	filial=atoi(inpt);
+
+	while(filial<=0 || filial>4){
+		printf("%sOpção Invalida%s\n",KRED,RST);
+		if(scanf("%s",inpt));
+		filial=atoi(inpt);
+	}
+/*
+	if(filial == 4){
+
+	}
+
+
+
+
+
     while(exit!=1){
 
 	    printf("1. Total faturado\n");
@@ -145,7 +181,7 @@ void query_3 (Faturacao* f){
 	        	printf("\n");
 	            break;
     	}
-	}
+	}*/
 }
 
 
@@ -154,16 +190,15 @@ void query_3 (Faturacao* f){
 void query_7 (){
 	char* cliente=malloc(sizeof(char)*buffsize);
 	int filial = 1;
-	int vendas = 50;
+	int vendas = 0;
 	int validstr = 0;
 	printf("%sInsira um cliente: %s\n",KBLU,RST);
 	if(scanf("%s",cliente));
-	validstr = atoi(cliente);
-	while (validstr =! 0) {
-		printf("%sProduto Invalido%s\n",KRED,RST);
+	
+	while (valida_cliente(cliente)==0) {
+		printf("%sCliente Invalido%s\n",KRED,RST);
 		if(scanf("%s",cliente));
-		printf("%d\n",validstr );
-		validstr = atoi(cliente);
+		
 	}
 
 
@@ -182,6 +217,7 @@ void query_7 (){
 	for(filial = 1; filial<4; filial++){
 		for (int mes = 1; mes < 13; ++mes)
 		{
+		//vendas = n_vendas(cliente,filial,mes);
 		printf("%s##                     ##                ##                ##\n",KBLU);
 		printf("%s##%s        %d            %s##%s        %d       %s##%s      %d        %s##\n",KBLU,RST,filial,KBLU,RST,mes,KBLU,RST,vendas,KBLU);
 		printf("%s#############################################################%s\n",KBLU,RST);

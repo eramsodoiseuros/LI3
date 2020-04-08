@@ -190,7 +190,9 @@ void update_produto(Produtos p, char* produto, int filial, int mes, double preco
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_produtos(index,produto);
 
-	//search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID, update_registo(p2, filial, mes, preco, unidades, cliente, NP));
+	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+
+	update_registo_p(p2, filial, mes, preco, unidades, cliente, NP);
 }
 
 

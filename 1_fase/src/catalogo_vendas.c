@@ -66,7 +66,21 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 		if(validaVenda(linha, p, c)){
 			toktok(original, tokens);
 
+			/*
+			tokens[0] = código de produto
+			tokens[1] = preço unitário decimal (entre 0.0 e 999.99)
+			tokens[2] = número inteiro de unidades compradas (entre 1 e 200)
+			tokens[3] = letra N ou P conforme tenha sido uma compra Normal ou uma compra em Promoção
+			tokens[4] = código do cliente
+			tokens[5] = mês da compra (1 .. 12)
+			tokens[6] = filial (de 1 a 3)
+			*/
+
 			update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
+			update_cliente(c, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
+			update_produto(p, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
+
+			printf("\t_%c_\n", tokens[3][0]);
 			// update_filial(f1,...);
 
 			i1++;

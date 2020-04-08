@@ -42,5 +42,10 @@ Clientes iniciar_clientes(int* num);
  */
 void free_clientes(Clientes c);
 
+/**
+ *	Função que 
+ *	@param 
+ */
+void update_cliente(Clientes c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP);
 
 #endif

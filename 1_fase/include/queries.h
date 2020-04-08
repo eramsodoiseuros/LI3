@@ -86,7 +86,7 @@ a estrategia é guardar o nr de produtos e clientes lidos no ficheiro vendas e c
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_7();
+void query_7();
 
 /**
  *	Dado um intervalo fechado de meses, por exemplo [1..3], determinar o total de vendas (nº de registos de venda) registadas nesse intervalo e o total facturado;
@@ -94,7 +94,7 @@ a estrategia é guardar o nr de produtos e clientes lidos no ficheiro vendas e c
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_8();
+void query_8(Faturacao* f);
 
 /**
  *	Dado um código de produto e uma filial, determinar os códigos (e número total) dos clientes que o compraram, distinguindo entre compra N e compra P;

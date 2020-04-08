@@ -159,5 +159,7 @@ void update_cliente(Clientes c, char* cliente, int filial, int mes, double preco
 
 	hF_clientes(index,cliente);
 
-	//search_update(c->tabela_clientes[index[0]][index[1]], nID, update_registo(c2, int filial, int mes, double preco, int unidades, produto, NP));
+	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
+
+	update_registo_c(c2, filial, mes, preco, unidades, produto, NP);
 }

@@ -60,5 +60,10 @@ int get_size(Produtos p, char letra);
  */
 void free_produtos(Produtos p);
 
+/**
+ *	Função que 
+ *	@param 
+ */
+void update_produto(Produtos p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP);
 
 #endif

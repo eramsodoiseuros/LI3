@@ -78,8 +78,8 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 
 			update_faturacao(f2, atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]));
 
-			update_cliente(c, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
-			update_produto(p, tokens[0], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[4], tokens[3][0]);
+			// update_cliente(c, tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
+			// update_produto(p, tokens[0], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[4], tokens[3][0]);
 
 			// update_filial(f1,...);
 
@@ -95,9 +95,9 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 }
 
 // Função que inicializa as estruturas, escreve na posição 4 e 5 do array
-void init_Vendas(int num[6], Produtos p, Clientes c , Filial f1, Faturacao f2){
+void init_Vendas(int num[6], Produtos p, Clientes c , Filial f1, Faturacao f2, char* path){
 	int valores[2];
-	load_vendas("../Vendas_1M.txt", p, c, f1, f2, valores);
+	load_vendas(path, p, c, f1, f2, valores);
 
 	num[4] = valores[0];
 	num[5] = valores[1];

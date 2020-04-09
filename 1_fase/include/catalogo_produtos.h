@@ -7,18 +7,9 @@
 #include <string.h>
 #include <ctype.h>
 
-
 #include "AVL.h"
 
 typedef struct produtos* Produtos;
-typedef struct produto* Produto;
-
-
-/**
- *	Função que inicializa um registo produto
- *	@param o produto
- */
-Produto iniciar_produto();
 
 /**
  *	Função que verifica se um id existe na estrutura
@@ -60,10 +51,5 @@ int get_size(Produtos p, char letra);
  */
 void free_produtos(Produtos p);
 
-/**
- *	Função que 
- *	@param 
- */
-void update_produto(Produtos p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP);
 
 #endif

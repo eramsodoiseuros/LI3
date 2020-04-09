@@ -2,7 +2,7 @@ INC = ../include/
 OBJ = ../src/
 
 
-objects = $(OBJ)main.o $(OBJ)IO.o $(OBJ)queries.o $(OBJ)catalogo_vendas.o $(OBJ)catalogo_produtos.o $(OBJ)catalogo_clientes.o $(OBJ)AVL.o $(OBJ)faturacao.o $(OBJ)filial.o
+objects = $(OBJ)main.o $(OBJ)IO.o $(OBJ)queries.o $(OBJ)catalogo_vendas.o $(OBJ)catalogo_produtos.o $(OBJ)catalogo_clientes.o $(OBJ)AVL.o $(OBJ)faturacao.o $(OBJ)filial.o $(OBJ)registos_cliente.o $(OBJ)registos_produto.o
 CFLAGS = -g -Wall -ansi -std=c99 -pedantic -O2 
 CC = gcc
 
@@ -20,6 +20,8 @@ catalogo_clientes.o : $(INC)catalogo_clientes.h $(INC)AVL.h
 AVL.o : $(INC)AVL.h
 faturacao.o : $(INC)faturacao.h 
 filial.o : $(INC)filial.h
+registos_cliente.o : $(INC)registos_produto.h $(INC)AVL.h
+registos_produto.o : $(INC)registos_cliente.h $(INC)AVL.h
 
 
 

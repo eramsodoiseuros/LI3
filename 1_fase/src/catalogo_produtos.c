@@ -9,14 +9,6 @@ struct produtos{
 	int size[LETRAS];
 };
 
-struct produto{
-    int vendido_in[5];
-    int vezes_comprado[12][3];
-    int vezes_N;
-    int vezes_P;
-    // void* lista_comprado[12]; 
-};
-
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
 void hF_produtos(int index[3], char value[]){
@@ -38,7 +30,7 @@ int insert_produto(Produtos p, char* id){
 	int nID = num_(id,2);
 	hF_produtos(index, id);
 
-	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID, id, 'p');
+	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID, id, 'b');
 	return index[0];
 }
 
@@ -148,52 +140,3 @@ void lista_produtos(Produtos p, char letra, String* lista){
 void free_produtos(Produtos p){
 	free(p);
 }
-
-
-//
-Produto iniciar_produto(){
-	Produto p = malloc(sizeof(struct produto));
-
-	for(int i = 0; i < 5; i++)
-		p->vendido_in[i] = 0;
-
-	for(int m = 0; m < 12; m++)
-		for(int i = 0; i < 3; i++)
-			p->vezes_comprado[m][i] = 0;
-
-	p->vezes_N = 0;
-	p->vezes_P = 0;
-
-	return p;
-}
-
-//
-void update_registo_p(Produto p, int filial, int mes, double preco, int unidades, char* cliente, char NP){
-
-	p->vendido_in[0]++;
-	p->vendido_in[filial]++;
-
-	if(p->vendido_in[1] && p->vendido_in[2] && p->vendido_in[3])
-		p->vendido_in[4] = 1;
-
-	p->vezes_comprado[mes-1][filial-1]++;
-
-	if(NP == 'N')
-		p->vezes_N++;
-	if (NP == 'P')
-		p->vezes_P++;
-
-}
-
-//
-void update_produto(Produtos p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP){
-	int nID = num_(produto,2);
-	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
-	hF_produtos(index,produto);
-
-	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
-
-	update_registo_p(p2, filial, mes, preco, unidades, cliente, NP);
-}
-
-

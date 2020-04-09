@@ -17,12 +17,6 @@ struct clientes{
 	AVL tabela_clientes[LETRAS][HASHNUMBER];
 };
 
-struct cliente{
-    int comprou_in[5];
-    int size_comprados;
-    // void* lista_comprados[12]; 
-};
-
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
 void hF_clientes(int index[2], char value[]){
@@ -44,7 +38,7 @@ void insert_cliente(Clientes c, char* id){
 
 	hF_clientes(index, id);
 
-	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]], nID, id, 'c');
+	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]], nID, id, 'b');
 }
 
 // Função que verifica se um id existe na estrutura
@@ -125,41 +119,4 @@ Clientes iniciar_clientes(int* num){
 // Função que liberta o espaço alocado para a estrutura
 void free_clientes(Clientes c){
 	free(c);
-}
-
-
-//
-Cliente iniciar_cliente(){
-	Cliente c = malloc(sizeof(struct cliente));
-
-	for(int i = 0; i < 5; i++)
-		c->comprou_in[i] = 0;
-	c->size_comprados = 0;
-
-	return c;
-}
-
-//
-void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP){
-	c->comprou_in[0]++;
-	c->comprou_in[filial]++;
-	
-	if(c->comprou_in[1] && c->comprou_in[2] && c->comprou_in[3])
-		c->comprou_in[4] = 1;
-    
-    //if(new_produto(c, cp))
-    c->size_comprados++;
-
-}
-
-//
-void update_cliente(Clientes c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP){
-	int nID = num_(cliente,1);
-	int index[2]; index[0] = 0, index[1] = 0;
-
-	hF_clientes(index,cliente);
-
-	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
-
-	update_registo_c(c2, filial, mes, preco, unidades, produto, NP);
 }

@@ -7,14 +7,9 @@
 #include <string.h>
 #include <ctype.h>
 
-typedef struct clientes* Clientes;
-typedef struct cliente* Cliente;
+#include "AVL.h"
 
-/**
- *	Função que inicializa um registo cliente
- *	@param o cliente
- */
-Cliente iniciar_cliente();
+typedef struct clientes* Clientes;
 
 /**
  *	Função que verifica se um id existe na estrutura
@@ -42,10 +37,5 @@ Clientes iniciar_clientes(int* num);
  */
 void free_clientes(Clientes c);
 
-/**
- *	Função que 
- *	@param 
- */
-void update_cliente(Clientes c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP);
 
 #endif

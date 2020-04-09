@@ -1,11 +1,10 @@
 #include "../include/AVL.h"
-#include "../include/catalogo_clientes.h"
-#include "../include/catalogo_produtos.h"
+#include "../include/registos_cliente.h"
+#include "../include/registos_produto.h"
 
 struct arvore{
 	int valor;             // valor para se poder gerir
     void* info;            // info que realmente se guarda
-    char* codigo;          // dá para ser produto ou cliente
 	struct arvore *esq, *dir;
 	int altura;
 };
@@ -55,7 +54,7 @@ int valor(AVL t){
 
 //Função que devolve a string de uma arvore
 char* codigo(AVL t){
-    return t->codigo;
+    return (char*) t->info;
 }
 
 // Função que indica o maior de dois números
@@ -74,14 +73,19 @@ AVL create_nodo(int valor, char* id, char tipo){
     AVL new = malloc(sizeof(struct arvore));
 
     new->valor = valor;
-    new->codigo = sdup(id);
+
+    if(tipo == 'b'){
+        new->info = sdup(id);
+    }
 
     if(tipo == 'c'){
-        new->info = iniciar_cliente();
+        valor++;
+        //new->info = iniciar_cliente();
     }
 
     if(tipo == 'p'){
-        new->info = iniciar_produto();
+        valor++;
+        //new->info = iniciar_produto();
     }
 
     new->esq = NULL;

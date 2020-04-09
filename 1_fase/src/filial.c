@@ -1,12 +1,13 @@
 #include "../include/filial.h"
-
-#define LETRAS 26
-#define HASHNUMBER_C 599
-#define HASHNUMBER_P 151
+#include "../include/registos_cliente.h"
+#include "../include/registos_produto.h"
 
 struct filial{
 	int n_clientes[4];
 	int n_PC; // número de produtos comprados
+
+	RP produtos;
+	RC clientes;
 };
 
 // Função que dado os parametros de uma venda dá update na estrutura filial

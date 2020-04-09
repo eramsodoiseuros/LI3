@@ -35,4 +35,22 @@ void update_produto(RP p, char* produto, int filial, int mes, double preco, int 
  */
 RP iniciar_RP();
 
+/**
+ *	Função que 
+ *	@param 
+ */
+int produto_vendido(RP p, char* produto, int x);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int p_vezes_comprado(RP p, char* produto, int m, int f);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int p_NP_vezes(RP p, char* produto, char NP);
+
 #endif

@@ -42,3 +42,8 @@ void f_cliente(Filial f, char* id){
 int comprou_in(char* id, Filial f, int filial){
 	return 0;
 }
+
+
+RP get_produtos(Filial f){
+	return f->produtos;
+}

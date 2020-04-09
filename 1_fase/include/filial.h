@@ -7,6 +7,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "../include/registos_cliente.h"
+#include "../include/registos_produto.h"
+
 typedef struct filial* Filial;
 
 
@@ -34,6 +37,8 @@ void f_cliente(Filial f, char* id);
  *	@param a estrutura filial a iniciar
 */
 Filial iniciar_filial();
+
+RP get_produtos(Filial f);
 
 
 #endif

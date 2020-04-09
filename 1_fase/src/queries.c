@@ -42,14 +42,23 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 	}
 
 	if(r == 5){
+		free_clientes(*c);
 		free_produtos(*p);
-		
+	
+		*p 	= iniciar_produtos(num,*f1);
+		*f2 = iniciar_faturacao();
+		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_5M.txt");
+	}
+
+	if(r == 6){
+		free_produtos(*p);
+
 		*p 	= iniciar_produtos(num,*f1);
 		*f2 = iniciar_faturacao();
 		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
 	}
 
-	if(r == 6){
+	if(r == 7){
 		free_clientes(*c);
 
 		*c = iniciar_clientes(num,*f1);

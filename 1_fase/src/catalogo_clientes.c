@@ -87,13 +87,13 @@ void load_clientes(Clientes c, char* path, int num[2], Filial f){
      	_exit(0);            
     }
 
-	while( fgets(linha, 6, file) ){
+	for(i2=0; fgets(linha, 6, file) ;i2++ ){
 		if(valida_cliente(linha)){
 			insert_cliente(c,linha);
 			f_cliente(f, linha);
 			i1++;
 		}
-		i2++;
+		
 	}
 
 	num[0] = i1;

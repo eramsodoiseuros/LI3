@@ -22,20 +22,23 @@ void print_menu(){
 }
 
 int escolhe_file(){
-	int r;
-
-	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], Todos [4]\n\t->  ");
+	int r=1;
+	char* inpt=malloc(sizeof(char)*buffsize);
+	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], Vendas_3M [4], Vendas_5M [5]\n\t->  ");
 	
-	if(scanf("%d", &r)){
-		if(r!= 1 && r!= 2 && r!= 3 && r!= 4){	
-			printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
+	if(scanf("%s", inpt)){
+		r = atoi(inpt);
+	
+		if(r<1 || r>5){	
+			printf("\n\tO programa falhou na leitura de um número. [1...5]\n");
 			escolhe_file();
 		}
 	}
 	else {
-		printf("\n\tO programa falhou na leitura de um número. [1...4]\n");
+		printf("\n\tO programa falhou na leitura de um número. [1...5]\n");
 		escolhe_file();
 	}
+
 
 	return r;
 }
@@ -115,22 +118,31 @@ void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	if(r == 1){
 		query_1(c, p, f1, f2, num, 1);
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-		query_1(c, p, f1, f2, num, 5);
+		query_1(c, p, f1, f2, num, 6);
 	}
 	if(r == 2){
 		query_1(c, p, f1, f2, num, 2);
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-		query_1(c, p, f1, f2, num, 6);
+		query_1(c, p, f1, f2, num, 7);
 	}
 	if (r == 3){
 		query_1(c, p, f1, f2, num, 3);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 	}
 	if(r == 4){
 		query_1(c, p, f1, f2, num, 4);
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+		printf("%s\n\tFicheiro lido: %sVendas_3M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+	}
+
+	if(r == 5){
+		query_1(c, p, f1, f2, num, 5);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sVendas_5M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 	}
 }
 

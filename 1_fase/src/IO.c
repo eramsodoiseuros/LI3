@@ -46,10 +46,9 @@ int escolhe_file(){
 //
 char letra_(){
 	char letra;
-	printf("%sInsira uma Letra: %s\n",KBLU,RST);
 	if(scanf("%c", &letra));
  	if(letra < 'A' || letra >'Z'){
-    	printf("Valor Inválido\n");
+		printf("%sInsira uma Letra: %s\n",KBLU,RST);
     	letra = letra_();
   	}
 	return letra;

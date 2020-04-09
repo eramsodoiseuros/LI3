@@ -86,4 +86,14 @@ void update_produto(RP p, char* produto, int filial, int mes, double preco, int 
 	update_registo_p(p2, filial, mes, preco, unidades, cliente, NP);
 }
 
+//
+RP iniciar_RP(){
+	RP p = malloc(sizeof(struct registos_produto));
 
+	for (int i = 0; i < LETRAS; i++)
+		for (int j = 0; j < LETRAS; j++)
+			for(int k = 0; k < HASHNUMBER; k++)
+				p->tabela_produtos[i][j][k] = NULL;
+
+	return p;
+}

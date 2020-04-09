@@ -17,6 +17,11 @@ typedef struct produto* Produto;
  *	@param o produto
  */
 Produto iniciar_produto();
+/**
+ *	Função que insere um index, de tipologia Produto, numa estrutura de dados
+ *	@param 
+ */
+int insert_p(RP p, char* id);
 
 /**
  *	Função que 
@@ -24,5 +29,10 @@ Produto iniciar_produto();
  */
 void update_produto(RP p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP);
 
-#endif
+/**
+ *	Função que 
+ *	@param 
+ */
+RP iniciar_RP();
 
+#endif

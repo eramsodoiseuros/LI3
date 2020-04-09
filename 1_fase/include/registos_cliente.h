@@ -18,9 +18,21 @@ typedef struct cliente* Cliente;
 Cliente iniciar_cliente();
 
 /**
+ *	Função que insere um index, de tipologia Cliente, numa estrutura de dados
+ *	@param estrutura de Registo, string id a inserir
+ */
+void insert_c(RC c, char* id);
+
+/**
  *	Função que 
  *	@param 
  */
 void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+RC iniciar_RC();
 
 #endif

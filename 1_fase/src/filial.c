@@ -24,7 +24,18 @@ Filial iniciar_filial(){
 		f->n_clientes[i] = 0;
 	f->n_PC = 0;
 
+	f->produtos = iniciar_RP();
+	f->clientes = iniciar_RC();
+
 	return f;
+}
+
+void f_produto(Filial f, char* id){
+	insert_p(f->produtos, id);
+}
+
+void f_cliente(Filial f, char* id){
+	insert_c(f->clientes, id);
 }
 
 // Função que verifica se um cliente já comprou numa filial

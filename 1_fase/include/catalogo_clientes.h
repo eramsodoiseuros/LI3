@@ -8,6 +8,7 @@
 #include <ctype.h>
 
 #include "AVL.h"
+#include "filial.h"
 
 typedef struct clientes* Clientes;
 
@@ -29,7 +30,7 @@ int valida_cliente(char* id);
  *	Função que inicializa as estruturas, escreve na posição 0 e 1 do array
  *	@param o array para escrever e a estrutura clientes
  */
-Clientes iniciar_clientes(int* num);
+Clientes iniciar_clientes(int* num, Filial f);
 
 /**
  *	Função que liberta o espaço alocado para a estrutura

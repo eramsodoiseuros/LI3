@@ -1,5 +1,5 @@
 #include "../include/catalogo_produtos.h"
-
+#include "../include/filial.h"
 
 #define LETRAS 26
 #define HASHNUMBER 151
@@ -62,7 +62,7 @@ int valida_produto(char* id){
 }
 
 // Função que lê de um ficheiro de produtos
-void load_produtos(Produtos p, char* path, int num[2]){
+void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	char linha[7];
 	int l1 = 0, i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
@@ -77,6 +77,9 @@ void load_produtos(Produtos p, char* path, int num[2]){
 		if(valida_produto(linha)){
 			l1 = insert_produto(p, linha);
 			p->size[l1]++;
+
+			f_produto(f, linha);
+			
 			i1++;
 		}
 		i2++;
@@ -88,7 +91,7 @@ void load_produtos(Produtos p, char* path, int num[2]){
 }
 
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
-Produtos iniciar_produtos(int* num){
+Produtos iniciar_produtos(int* num, Filial f){
 	Produtos p = malloc(sizeof(struct produtos));
 	int valores[2];
 
@@ -99,7 +102,7 @@ Produtos iniciar_produtos(int* num){
 				p->tabela_produtos[i][j][k] = NULL;
 	}
 	
-	load_produtos(p,"../Produtos.txt",valores);
+	load_produtos(p,"../Produtos.txt", valores, f);
 
 	num[2] = valores[0];
 	num[3] = valores[1];

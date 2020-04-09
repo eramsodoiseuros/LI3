@@ -76,7 +76,7 @@ int valida_cliente(char * id){
 }
 
 // Função que lê de um ficheiro de clientes
-void load_clientes(Clientes c, char* path, int num[2]){
+void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	char linha[6];
 	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
@@ -90,6 +90,7 @@ void load_clientes(Clientes c, char* path, int num[2]){
 	for(i2=0; fgets(linha, 6, file) ;i2++ ){
 		if(valida_cliente(linha)){
 			insert_cliente(c,linha);
+			f_cliente(f, linha);
 			i1++;
 		}
 		
@@ -101,7 +102,7 @@ void load_clientes(Clientes c, char* path, int num[2]){
 }
 
 // Função que inicializa as estruturas, escreve na posição 0 e 1 do array
-Clientes iniciar_clientes(int* num){
+Clientes iniciar_clientes(int* num, Filial f){
 	Clientes c = malloc(sizeof(struct clientes));
 	int valores[2];
 
@@ -109,7 +110,7 @@ Clientes iniciar_clientes(int* num){
 		for(int j = 0; j < HASHNUMBER; j++)
 			c->tabela_clientes[i][j] = NULL;
 
-	load_clientes(c,"../Clientes.txt", valores);
+	load_clientes(c,"../Clientes.txt", valores, f);
 
 	num[0] = valores[0];
 	num[1] = valores[1];

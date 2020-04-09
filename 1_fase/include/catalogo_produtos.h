@@ -8,6 +8,7 @@
 #include <ctype.h>
 
 #include "AVL.h"
+#include "filial.h"
 
 typedef struct produtos* Produtos;
 
@@ -29,7 +30,7 @@ int valida_produto(char * id);
  *	Função que inicializa as estruturas, escreve na posição 2 e 3 do array
  *	@param o array para escrever e a estrutura produtos
  */
-Produtos iniciar_produtos(int* num);
+Produtos iniciar_produtos(int* num, Filial f);
 
 /**
  *	Função que cria uma lista de produtos validos

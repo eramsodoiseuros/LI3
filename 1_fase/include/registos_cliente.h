@@ -35,4 +35,16 @@ void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int 
  */
 RC iniciar_RC();
 
+/**
+ *	Função que 
+ *	@param 
+ */
+int cliente_comprou(RC c, char* cliente, int x);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int c_quantos_comprou(RC c, char* cliente);
+
 #endif

@@ -83,3 +83,27 @@ RC iniciar_RC(){
 
 	return c;
 }
+
+//
+int cliente_comprou(RC c, char* cliente, int x){
+	int nID = num_(cliente,1);
+	int index[2]; index[0] = 0, index[1] = 0;
+
+	hF_c(index,cliente);
+
+	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
+
+	return c2->comprou_in[x];
+}
+
+//
+int c_quantos_comprou(RC c, char* cliente){
+	int nID = num_(cliente,1);
+	int index[2]; index[0] = 0, index[1] = 0;
+
+	hF_c(index,cliente);
+
+	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
+
+	return c2->size_comprados;
+}

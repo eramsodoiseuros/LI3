@@ -97,3 +97,45 @@ RP iniciar_RP(){
 
 	return p;
 }
+
+//
+int produto_vendido(RP p, char* produto, int x){
+	int nID = num_(produto,2);
+	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
+	hF_p(index,produto);
+
+	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+
+	return p2->vendido_in[x];
+}
+
+//
+int p_vezes_comprado(RP p, char* produto, int m, int f){
+	int nID = num_(produto,2);
+	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
+	hF_p(index,produto);
+
+	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+
+	return p2->vezes_comprado[m-1][f-1];
+}
+
+//
+int p_NP_vezes(RP p, char* produto, char NP){
+	int r = 0;
+	int nID = num_(produto,2);
+	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
+	hF_p(index,produto);
+
+	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+
+	if(NP == 'N'){
+		r = p2->vezes_N;
+	}
+
+	if(NP == 'P'){
+		r = p2->vezes_P;
+	}
+
+	return r;
+}

@@ -47,3 +47,7 @@ int comprou_in(char* id, Filial f, int filial){
 RP get_produtos(Filial f){
 	return f->produtos;
 }
+
+RC get_clientes(Filial f){
+	return f->clientes;
+}

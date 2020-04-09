@@ -38,7 +38,17 @@ void f_cliente(Filial f, char* id);
 */
 Filial iniciar_filial();
 
+/**
+ *	Função que 
+ *	@param 
+ */
 RP get_produtos(Filial f);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+RC get_clientes(Filial f);
 
 
 #endif

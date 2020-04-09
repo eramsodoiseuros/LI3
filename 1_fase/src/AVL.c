@@ -79,13 +79,11 @@ AVL create_nodo(int valor, char* id, char tipo){
     }
 
     if(tipo == 'c'){
-        valor++;
-        //new->info = iniciar_cliente();
+        new->info = iniciar_cliente();
     }
 
     if(tipo == 'p'){
-        valor++;
-        //new->info = iniciar_produto();
+        new->info = iniciar_produto();
     }
 
     new->esq = NULL;

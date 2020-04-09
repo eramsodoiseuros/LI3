@@ -72,3 +72,14 @@ void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int 
 
 	update_registo_c(c2, filial, mes, preco, unidades, produto, NP);
 }
+
+//
+RC iniciar_RC(){
+	RC c = malloc(sizeof(struct registos_cliente));
+
+	for (int i = 0; i < LETRAS; i++)
+		for(int k = 0; k < HASHNUMBER; k++)
+			c->tabela_clientes[i][k] = NULL;
+
+	return c;
+}

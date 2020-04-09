@@ -5,24 +5,28 @@
 // QUERY 1
 
 void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], int r){
-		
+
 	if(r == 1){
 		free_clientes(*c);
-		*c = iniciar_clientes(num);
+		
+		*f1 = iniciar_filial();
+		*c = iniciar_clientes(num,*f1);
 	}
 	
 	if(r == 2){
 		free_produtos(*p);
-		*p = iniciar_produtos(num);
+
+		*f1 = iniciar_filial();
+		*p = iniciar_produtos(num,*f1);
 	}
 
 	if (r == 3){
 		free_clientes(*c);
 		free_produtos(*p);
 
-		*c 	= iniciar_clientes(num);
-		*p 	= iniciar_produtos(num);
-		// iniciar_filial(f1);
+		*f1 = iniciar_filial();
+		*c 	= iniciar_clientes(num,*f1);
+		*p 	= iniciar_produtos(num,*f1);
 		*f2 = iniciar_faturacao();
 		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
 	}
@@ -31,16 +35,16 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 		free_clientes(*c);
 		free_produtos(*p);
 
-		*c 	= iniciar_clientes(num);
-		*p 	= iniciar_produtos(num);
+		*c 	= iniciar_clientes(num,*f1);
+		*p 	= iniciar_produtos(num,*f1);
 		*f2 = iniciar_faturacao();
 		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_3M.txt");
 	}
 
 	if(r == 5){
 		free_produtos(*p);
-
-		*p 	= iniciar_produtos(num);
+		
+		*p 	= iniciar_produtos(num,*f1);
 		*f2 = iniciar_faturacao();
 		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
 	}
@@ -48,7 +52,7 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 	if(r == 6){
 		free_clientes(*c);
 
-		*c = iniciar_clientes(num);
+		*c = iniciar_clientes(num,*f1);
 		*f2 = iniciar_faturacao();
 		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
 	}

@@ -79,7 +79,7 @@ void query_2(Produtos* p, char letra, String* lista){
 }
 
 
-void query_3 (Faturacao* f, Filial* f2){
+void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 
     int vendas = 0;
     //double fat_fil = 0;
@@ -90,12 +90,12 @@ void query_3 (Faturacao* f, Filial* f2){
     int filial=1;
     char produto[7];
 
-    RP p = get_produtos(f2);
+    RP p = get_produtos(*f2);
 
     printf("%sInsira um produto: %s\n",KBLU,RST);
     if(scanf("%s",produto));
 
-    while(valida_produto(produto)==0){
+    while(search_P(*pr, produto)==0){
     	printf("%sProduto Invalido%s\n",KRED,RST);
     	if(scanf("%s",produto));
     }
@@ -123,7 +123,7 @@ void query_3 (Faturacao* f, Filial* f2){
 
 	if(filial == 4){
 
-	vendas = produto_vendido(p,produto,4);
+	vendas = produto_vendido(p,produto,0);
 
 	printf("A totalidade de vendas desse produto é:  %d\n",vendas );
 	}
@@ -139,14 +139,14 @@ void query_3 (Faturacao* f, Filial* f2){
 
 	vendas = produto_vendido(p,produto,2);
 
-	printf("A totalidade de vendas desse produtp é:  %d\n",vendas );
+	printf("O numero de vendas desse produto nessa filial:  %d\n",vendas );
 	}
 
 	if(filial == 3){
 
 	vendas = produto_vendido(p,produto,3);
 
-	printf("A totalidade de vendas desse produtp é:  %d\n",vendas );
+	printf("O numero de vendas desse produto nessa filial:  %d\n",vendas );
 	}
 }
 

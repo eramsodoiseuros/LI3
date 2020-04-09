@@ -34,7 +34,8 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 	if(r == 4){
 		free_clientes(*c);
 		free_produtos(*p);
-
+		
+		*f1 = iniciar_filial();
 		*c 	= iniciar_clientes(num,*f1);
 		*p 	= iniciar_produtos(num,*f1);
 		*f2 = iniciar_faturacao();

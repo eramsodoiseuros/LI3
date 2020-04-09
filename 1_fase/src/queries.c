@@ -82,6 +82,8 @@ void query_2(Produtos* p, char letra, String* lista){
 void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 
     int vendas = 0;
+    int vendasP = 0;
+    int vendasN = 0;
     //double fat_fil = 0;
     //int exit = 0;
 
@@ -124,8 +126,13 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 	if(filial == 4){
 
 	vendas = produto_vendido(p,produto,0);
+	vendasP = p_NP_vezes(p,produto,'P');
+	vendasN = p_NP_vezes(p,produto,'N');
 
+	printf("A totalidade de vendas desse produto com preço normal é:  %d\n",vendasN );
+	printf("A totalidade de vendas desse produto em promoção é:  %d\n",vendasP );
 	printf("A totalidade de vendas desse produto é:  %d\n",vendas );
+
 	}
 
 	if(filial == 1){

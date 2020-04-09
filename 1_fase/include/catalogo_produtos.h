@@ -44,7 +44,7 @@ void lista_produtos(Produtos p, char letra, String* lista);
  *	@param estrutura com os produtos, e letra dos produtos pretendidos
  *	@param o número de produtos começados por uma letra
  */
-int get_size(Produtos p, char letra);
+int get_size(Produtos p, int l);
 
 /**
  *	Função que liberta o espaço alocado para a estrutura

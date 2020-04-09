@@ -49,7 +49,10 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	char* inpt =malloc(sizeof(char)*buffsize);
 	int tamanho;
 
-	tamanho = get_size(*p,'A');
+
+	for(int i = 0; i<26 ; i++){
+		tamanho += get_size(*p,i);
+	}
 	String lista[tamanho];
 	
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");

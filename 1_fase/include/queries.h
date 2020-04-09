@@ -45,7 +45,7 @@ void query_2(Produtos* p, char letra, String* s);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_3(Faturacao* f, Filial* f2, Produtos* pr);
+void query_3(Faturacao* f, Filial* f2, Produtos* p);
 
 /**
  *	Determinar a lista ordenada dos códigos dos produtos (e o seu número total) que ninguém comprou.

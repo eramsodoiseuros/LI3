@@ -43,16 +43,30 @@ int escolhe_file(){
 	return r;
 }
 
+//
+char letra_(){
+	char letra;
+	printf("%sInsira uma Letra: %s\n",KBLU,RST);
+	if(scanf("%c", &letra));
+ 	if(letra < 'A' || letra >'Z'){
+    	printf("Valor Inválido\n");
+    	letra = letra_();
+  	}
+	return letra;
+}
+
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa;
-	char* inpt =malloc(sizeof(char)*buffsize);
-	int tamanho;
-
+	char* inpt = malloc(sizeof(char)*buffsize);
+	char letra;
+	int tamanho = 0;
 
 	for(int i = 0; i<26 ; i++){
-		tamanho += get_size(*p,i);
+		if(tamanho <= get_size(*p,'A'+i))
+			tamanho = get_size(*p,'A'+i);
 	}
+
 	String lista[tamanho];
 	
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
@@ -71,7 +85,8 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				for(int i = 0; i < tamanho; i++){
 					lista[i] = NULL;
 				}
-				query_2(p, 'A', lista);
+				letra = letra_();
+			    query_2(p, letra, lista);
 				navegador(lista, tamanho);
 				break;
 

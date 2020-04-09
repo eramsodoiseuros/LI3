@@ -38,10 +38,10 @@ int insert_produto(Produtos p, char* id){
 int search_P(Produtos p, char* id){
 	int r = 0, nID = num_(id,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
-	if(atoi(id)==0){
-		hF_produtos(index,id);
-		r = search_tree(p->tabela_produtos[index[0]][index[1]][index[2]], nID);}
-	else r=0;
+
+	hF_produtos(index,id);
+	r = search_tree(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+
 	return r;
 }
 
@@ -110,9 +110,8 @@ Produtos iniciar_produtos(int* num, Filial f){
 }
 
 //
-int get_size(Produtos p, int l){
-
-	return p->size[l];
+int get_size(Produtos p, char l){
+	return p->size[l-'A'];
 }
 
 //
@@ -133,11 +132,12 @@ int print_simples(String* lista, AVL a, int pos){
 //
 void lista_produtos(Produtos p, char letra, String* lista){
 	int r = 0;
-	//printf("%d\n",l1 );
-	for(int l1 = 0; l1 < LETRAS; l1++)
-		for(int l2 = 0; l2 < LETRAS; l2++)
-			for(int h = 0; h < HASHNUMBER; h++)
-				r += print_simples(lista,p->tabela_produtos[l1][l2][h],r);
+
+	int l1  = letra - 'A';
+
+	for(int l2 = 0; l2 < LETRAS; l2++)
+		for(int h = 0; h < HASHNUMBER; h++)
+			r += print_simples(lista,p->tabela_produtos[l1][l2][h],r);
 }
 
 // Função que liberta o espaço alocado para a estrutura

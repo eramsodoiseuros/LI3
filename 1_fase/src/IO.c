@@ -56,17 +56,10 @@ char letra_(){
 
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
-	int tarefa;
+	int tarefa, tamanho = 0;
 	char* inpt = malloc(sizeof(char)*buffsize);
 	char letra;
-	int tamanho = 0;
-
-	for(int i = 0; i<26 ; i++){
-		if(tamanho <= get_size(*p,'A'+i))
-			tamanho = get_size(*p,'A'+i);
-	}
-
-	String lista[tamanho];
+	String* lista;
 	
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
 	if(scanf("%s", inpt)){
@@ -81,11 +74,9 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 
 			case 2:
-				for(int i = 0; i < tamanho; i++){
-					lista[i] = NULL;
-				}
 				letra = letra_();
-			    query_2(p, letra, lista);
+				tamanho = get_size(*p, letra);
+			    lista = query_2(p, letra, tamanho);
 				navegador(lista, tamanho);
 				break;
 
@@ -128,7 +119,6 @@ void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int r;
 	int num[6];
 	
-	
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
 
 	r = escolhe_file();
@@ -166,14 +156,14 @@ void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 //
 void navegador(String* lista, int tamanho){
 
-    int val=1;
-    int exit=0;
-    char* scanS=malloc(sizeof(char)*buffsize);
-    int validstr=1;
-    int scanout=1;
+    int val = 1;
+    int exit = 0;
+    char* scanS = malloc(sizeof(char)*buffsize);
+    int validstr = 1;
+    int scanout = 1;
     int pag = 1;
-    int i =0;
-    int count=0;
+    int i = 0;
+    int count = 0;
     
 
     while(exit!=1){
@@ -182,26 +172,17 @@ void navegador(String* lista, int tamanho){
             val=1;
             printf("Página inválida ou não existente\n");
         }
-
         else{
-            if(lista != NULL || pag<(tamanho/10))
+
+            if(lista != NULL || pag < (tamanho/10))
             printf("%s************ Página %d ************%s\n",KBLU,(pag), RST);
             printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
-
-
-           
-            	             
-            for(i=(pag*10)-Pagsize; count<Pagsize; i++)
-            	{
-            		
+	             
+            for(i=(pag*10)-Pagsize; count<Pagsize; i++){
             	printf("%s \n",getString(lista[i]));
             	count++;
-                
             }
-            count = 0;
-      
-
-            	            
+            count = 0;	            
         }
 
         printf("\n");
@@ -209,6 +190,7 @@ void navegador(String* lista, int tamanho){
         printf("%s(A para Página Anterior) \n",KBLU);
         printf("%s(E para sair)%s \n",KBLU,RST);
         printf("Inserir número página: \n");
+
         scanout=read(0,scanS,buffsize);
         scanS=strtok(scanS," \n");
 
@@ -229,7 +211,8 @@ void navegador(String* lista, int tamanho){
 void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	char* r = malloc(sizeof(char*));
 	printf("Pretende dar print ao menu? Yes: [y] No: [n]\n");
-	if(scanf("%c", r)){
+
+	if(scanf("%s", r)){
 		if(r[0] == 'y' || r[0] == 'Y'){
 			print_menu();
 			load_query1(c,p,f1,f2);
@@ -245,7 +228,6 @@ void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			}
 		}
 	}
-
 	else {
 		printf("\n\tO programa falhou na leitura da resposta. Yes: [y/Y] No: [n/N]\n");
 		menu(c,p,f1,f2);

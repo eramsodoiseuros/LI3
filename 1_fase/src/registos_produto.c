@@ -11,9 +11,9 @@ struct registos_produto{
 struct produto{
     int vendido_in[5];
     int vezes_comprado[12][3];
-    int vezes_N;
-    int vezes_P;
-    // void* lista_comprado[12]; 
+    int vezes_N[12][3];
+    int vezes_P[12][3];
+    // void* lista_comprado[12];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -50,9 +50,14 @@ Produto iniciar_produto(){
 	for(int m = 0; m < 12; m++)
 		for(int i = 0; i < 3; i++)
 			p->vezes_comprado[m][i] = 0;
+	
+	for(int m = 0; m < 12; m++)
+		for(int i = 0; i < 3; i++)
+			p->vezes_N[12][3] = 0;
 
-	p->vezes_N = 0;
-	p->vezes_P = 0;
+	for(int m = 0; m < 12; m++)
+		for(int i = 0; i < 3; i++)
+			p->vezes_P[m][f] = 0;
 
 	return p;
 }
@@ -69,9 +74,9 @@ void update_registo_p(Produto p, int filial, int mes, double preco, int unidades
 	p->vezes_comprado[mes-1][filial-1]++;
 
 	if(NP == 'N')
-		p->vezes_N++;
+		p->vezes_N[mes-1][filial-1]++;
 	if (NP == 'P')
-		p->vezes_P++;
+		p->vezes_P[mes-1][filial-1]++;
 
 }
 
@@ -121,7 +126,7 @@ int p_vezes_comprado(RP p, char* produto, int m, int f){
 }
 
 //
-int p_NP_vezes(RP p, char* produto, char NP){
+int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes){
 	int r = 0;
 	int nID = num_(produto,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
@@ -130,11 +135,11 @@ int p_NP_vezes(RP p, char* produto, char NP){
 	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
 
 	if(NP == 'N'){
-		r = p2->vezes_N;
+		r = p2->vezes_N[mes-1][filial-1];
 	}
 
 	if(NP == 'P'){
-		r = p2->vezes_P;
+		r = p2->vezes_P[mes-1][filial-1];
 	}
 
 	return r;

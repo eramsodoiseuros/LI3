@@ -71,8 +71,17 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 ///////////////////////////////////////////////////////////
 // QUERY 2
 
-void query_2(Produtos* p, char letra, String* lista){
+String* query_2(Produtos* p, char letra, int tamanho){
+
+	String* lista = malloc(sizeof(String)*tamanho);
+
+	for(int i = 0; i < tamanho; i++){
+		lista[i] = NULL;
+	}
+
 	lista_produtos(*p, letra, lista);
+
+	return lista;
 }
 
 
@@ -159,7 +168,7 @@ void query_7 (){
 	char* cliente=malloc(sizeof(char)*buffsize);
 	int filial = 1;
 	int vendas = 0;
-	// int validstr = 0;
+	// String*int validstr = 0;
 	printf("%sInsira um cliente: %s\n",KBLU,RST);
 	if(scanf("%s",cliente));
 	

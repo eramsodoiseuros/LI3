@@ -39,8 +39,11 @@ int search_P(Produtos p, char* id){
 	int r = 0, nID = num_(id,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 
-	hF_produtos(index,id);
-	r = search_tree(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+	if(atoi(id)==0){
+		hF_produtos(index,id);
+		r = search_tree(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+	}
+	else r=0;
 
 	return r;
 }

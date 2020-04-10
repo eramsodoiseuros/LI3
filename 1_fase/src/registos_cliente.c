@@ -10,6 +10,7 @@ struct registos_cliente{
 
 struct cliente{
     int comprou_in[5];
+    int vezes_comprou[12][3];
     int size_comprados;
     // void* lista_comprados[12]; 
 };
@@ -43,6 +44,11 @@ Cliente iniciar_cliente(){
 
 	for(int i = 0; i < 5; i++)
 		c->comprou_in[i] = 0;
+	
+	for(int m = 0; m < 12; m++)
+		for(int i = 0; i < 3; i++)
+			c->vezes_comprou[m][i] = 0;
+
 	c->size_comprados = 0;
 
 	return c;

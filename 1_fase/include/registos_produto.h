@@ -51,6 +51,6 @@ int p_vezes_comprado(RP p, char* produto, int m, int f);
  *	Função que 
  *	@param 
  */
-int p_NP_vezes(RP p, char* produto, char NP);
+int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes);
 
 #endif

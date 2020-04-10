@@ -61,6 +61,8 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
 	
 	if(c->comprou_in[1] && c->comprou_in[2] && c->comprou_in[3])
 		c->comprou_in[4] = 1;
+
+	c->vezes_comprou[mes][filial]++;
     
     //if(new_produto(c, cp))
     c->size_comprados++;

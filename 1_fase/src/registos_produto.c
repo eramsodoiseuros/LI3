@@ -53,11 +53,11 @@ Produto iniciar_produto(){
 	
 	for(int m = 0; m < 12; m++)
 		for(int i = 0; i < 3; i++)
-			p->vezes_N[12][3] = 0;
+			p->vezes_N[m][i] = 0;
 
 	for(int m = 0; m < 12; m++)
 		for(int i = 0; i < 3; i++)
-			p->vezes_P[m][f] = 0;
+			p->vezes_P[m][i] = 0;
 
 	return p;
 }

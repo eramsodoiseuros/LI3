@@ -133,8 +133,8 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 
 		if(filial == 4){
 			vendas = produto_vendido(p,produto,0);
-			vendasP = p_NP_vezes(p,produto,'P');
-			vendasN = p_NP_vezes(p,produto,'N');
+			vendasP = p_NP_vezes(p,produto,'P', mes, 1);
+			vendasN = p_NP_vezes(p,produto,'N', mes, 1);
 
 			printf("A totalidade de vendas desse produto com preço normal é:  %d\n",vendasN );
 			printf("A totalidade de vendas desse produto em promoção é:  %d\n",vendasP );

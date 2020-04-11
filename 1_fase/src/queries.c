@@ -84,7 +84,8 @@ String* query_2(Produtos* p, char letra, int tamanho){
 	return lista;
 }
 
-
+///////////////////////////////////////////////////////////
+// QUERY 3
 void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 
     int vendas = 0;
@@ -182,6 +183,13 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 	}
 }
 
+///////////////////////////////////////////////////////////
+// QUERY 4
+//void query_4(){}
+
+///////////////////////////////////////////////////////////
+// QUERY 5
+//void query_5(){}
 
 
 String* query_4 (Filial* f,Produtos* pr) {
@@ -196,6 +204,9 @@ String* query_4 (Filial* f,Produtos* pr) {
 
 
 
+
+///////////////////////////////////////////////////////////
+// QUERY 7
 void query_7 (){
 	char* cliente=malloc(sizeof(char)*buffsize);
 	int filial = 1;
@@ -229,61 +240,34 @@ void query_7 (){
 	}
 }
 
-void query_8 (Faturacao* f){
-	char* inpt=malloc(sizeof(char)*buffsize);
-	int mes1=1;
-	int mes2;
-	int vendas =0;
+///////////////////////////////////////////////////////////
+// QUERY 8
+void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
+	int vendas = 0;
 	double faturado = 0;
-	int validstr = 1;
-	int exit = 0;
-	
 
-	while(exit!=1){
+	for(int i = mes1; i<=mes2; i++)
+		vendas += numero_vendas(*f1,i);
 
-		printf("%sInsira os meses que deseja consultar [1..12]:%s      %s[E para Sair] %s\n",KBLU,RST,KRED,RST);
-		if(scanf("%s",inpt));
-		validstr = atoi(inpt);
-		mes1 = atoi(inpt);
-		if(strcmp(inpt,"e")==0 || strcmp(inpt,"E")==0) exit = 1;
+	for(int i = mes1; i<=mes2; i++)
+		faturado += faturado_mes(*f1,i);
 
-		if(exit!=1){
-		while(validstr == 0){	
-			if(mes1>11 || mes1<0 || validstr == 0){
-			printf("Mês invalido. Tente novamente\n");
-			if(scanf("%s",inpt));
-			validstr = atoi(inpt);
-
-			}
-		}
-			
-		printf("%sAté: %s\n",KBLU,RST);
-		if(scanf("%s",inpt));
-		validstr = atoi(inpt);
-		mes2 = atoi(inpt);
-		while(validstr==0){
-			if(mes2>12 || mes2<mes1 || validstr == 0){
-				printf("Mês invalido. Tente novamente\n");
-				if(scanf("%s",inpt));
-				validstr = atoi(inpt);
-			}
-		}
-								
-		for(int i = mes1; i<=mes2; i++){
-
-			vendas+=numero_vendas(*f,i);
-		}
-
-		printf("%sTotal de vendas nesse intervalo é:%s %d\n",KBLU,RST,vendas);
-
-		for(int i = mes1; i<=mes2; i++){
-
-			faturado+=faturado_mes(*f,i);
-		}
-
-		printf("%sE o total faturado nesse intervalo é:%s %f\n",KBLU,RST,faturado);
-
-		}
-
-	}
+	v[0] = vendas;
+	f[0] = faturado;
 }
+
+///////////////////////////////////////////////////////////
+// QUERY 9
+//void query_9(){}
+
+///////////////////////////////////////////////////////////
+// QUERY 10
+//void query_10(){}
+
+///////////////////////////////////////////////////////////
+// QUERY 11
+//void query_11(){}
+
+///////////////////////////////////////////////////////////
+// QUERY 12
+//void query_12(){}

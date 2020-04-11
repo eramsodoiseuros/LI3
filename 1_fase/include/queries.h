@@ -94,7 +94,7 @@ void query_7();
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_8(Faturacao* f);
+void query_8(Faturacao* f1, int m1, int m2, int v[1] , double f[1]);
 
 /**
  *	Dado um código de produto e uma filial, determinar os códigos (e número total) dos clientes que o compraram, distinguindo entre compra N e compra P;

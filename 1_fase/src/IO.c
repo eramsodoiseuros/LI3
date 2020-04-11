@@ -81,6 +81,7 @@ int mes_(){
 int deseja_sair(){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int decisao = 1;
+	
 	printf("%s[E para Sair] %s\n",KRED,RST);
 	printf("%s[Qualquer outra letra para Ficar] %s\n",KRED,RST);
 	if(scanf("%s",inpt)){
@@ -125,8 +126,8 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 		
 			case 7:
-					query_7();
-					break;
+				query_7();
+				break;
 
 			case 8:
 				while(decisao){

@@ -149,6 +149,8 @@ void free_produtos(Produtos p){
 }
 
 
+/*
+
 int conta_produtos(){
 	int r = 0;
 	for (int l1 = 0; l1 < LETRAS; l1++){
@@ -215,3 +217,5 @@ int conta_String (String* s) {
 	}
 	return r;
 }
+
+*/

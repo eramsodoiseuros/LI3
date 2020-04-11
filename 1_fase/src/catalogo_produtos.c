@@ -147,3 +147,75 @@ void lista_produtos(Produtos p, char letra, String* lista){
 void free_produtos(Produtos p){
 	free(p);
 }
+
+/*
+
+int conta_produtos(){
+	int r = 0;
+	for (int l1 = 0; l1 < LETRAS; l1++){
+		for(int l2 = 0; l2 < LETRAS; l2++)
+			for(int h = 0; h < HASHNUMBER; h++)
+				r ++;
+	}
+
+	return r;
+}
+
+
+
+void lista_total_produtos(Produtos p, String* lista){
+	int r = 0;
+
+	for (int l1 = 0; l1 < LETRAS; l1++)
+		for(int l2 = 0; l2 < LETRAS; l2++)
+			for(int h = 0; h < HASHNUMBER; h++)
+				r += print_simples(lista,p->tabela_produtos[l1][l2][h],r);
+}
+
+
+String* lista_Nvendidos(Filial* f, Produtos pr){
+
+	RP p = get_produtos(*f);
+	int add = 0;
+	int i = 0;
+	int nProd = conta_produtos();
+	String* listaProd = malloc(sizeof(String)*nProd);
+
+
+	for(int l = 0; l < nProd; l++){
+		listaProd[l] = NULL;
+	}
+
+	lista_total_produtos(pr,listaProd);
+	
+	for (int j = 0; j < nProd; ++j)
+	{
+		if (produto_vendido(p,listaProd[j],0)==0) i++;
+	}
+
+	
+	String* s = malloc(sizeof(String)*i);
+
+	for (int j = 0; j < nProd; ++j)
+	{
+		if (produto_vendido(p,listaProd[j],0)==0 || add<i){
+
+			s[add] = listaProd[j];
+			add++;
+		}		
+	}
+
+	return s;
+}
+
+
+int conta_String (String* s) {
+
+	int r = 0;
+	while(s[r]!=NULL){
+		r++;
+	}
+	return r;
+}
+
+*/

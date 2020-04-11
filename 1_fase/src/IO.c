@@ -81,7 +81,7 @@ int mes_(){
 int deseja_sair(){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int decisao = 1;
-	
+
 	printf("%s[E para Sair] %s\n",KRED,RST);
 	printf("%s[Qualquer outra letra para Ficar] %s\n",KRED,RST);
 	if(scanf("%s",inpt)){
@@ -94,6 +94,9 @@ int deseja_sair(){
 
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
+	clock_t inicio, fim;
+	double cpu_time_used;
+
 	int tarefa, tamanho = 0;
 	int m1, m2, decisao = 1;
 	char* inpt = malloc(sizeof(char)*buffsize);
@@ -116,9 +119,16 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 
 			case 2:
 				letra = letra_();
+				inicio = clock();
+
 				tamanho = get_size(*p, letra);
 			    lista = query_2(p, letra, tamanho);
+
+			    fim = clock();
 				navegador(lista, tamanho);
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
+
 				break;
 
 			case 3:
@@ -135,9 +145,17 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 					m1 = mes_();
 					printf("%sAté: %s\n",KBLU,RST);
 					m2 = mes_();
+
+					inicio = clock();
 					query_8(f2, m1, m2, v, f);
+					fim = clock();
+
 					printf("%sTotal de vendas nesse intervalo é:%s %d\n",KBLU,RST,v[0]);
 					printf("%sE o total faturado nesse intervalo é:%s %f\n",KBLU,RST,f[0]);
+					
+					cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+					printf("CPUTIME: %f\n",cpu_time_used);
+					
 					decisao = deseja_sair();
 				}
 				break;
@@ -164,40 +182,73 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 
 
 void load_query1 (Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
-	int r;
-	int num[6];
+	int r, num[6];
+	
+	clock_t i, f;
+	double cpu_time_used;
 	
 	for(int i = 0; i <= 5; i++) num[i] = 0; 
 
 	r = escolhe_file();
 	if(r == 1){
+		i = clock();
 		query_1(c, p, f1, f2, num, 1);
+		f = clock();
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		
+		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
+		printf("CPUTIME: %f\n",cpu_time_used);
+
 		query_1(c, p, f1, f2, num, 6);
 	}
 	if(r == 2){
+		i = clock();
 		query_1(c, p, f1, f2, num, 2);
+		f = clock();
+
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+
+		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
+		printf("CPUTIME: %f\n",cpu_time_used);
+
 		query_1(c, p, f1, f2, num, 7);
 	}
 	if (r == 3){
+		i = clock();
 		query_1(c, p, f1, f2, num, 3);
+		f = clock();
+		
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+
+		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
+		printf("CPUTIME: %f\n",cpu_time_used);
 	}
 	if(r == 4){
+		i = clock();
 		query_1(c, p, f1, f2, num, 4);
+		f = clock();
+
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 		printf("%s\n\tFicheiro lido: %sVendas_3M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+		
+		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
+		printf("CPUTIME: %f\n",cpu_time_used);
 	}
 
 	if(r == 5){
+		i = clock();
 		query_1(c, p, f1, f2, num, 5);
+		f = clock();
+
 		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 		printf("%s\n\tFicheiro lido: %sVendas_5M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+		
+		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
+		printf("CPUTIME: %f\n",cpu_time_used);
 	}
 }
 

@@ -56,7 +56,7 @@ char letra_(){
 
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
-	int tarefa, tamanho = 0;
+	int tarefa, tamanho = 0, s = 0;
 	char* inpt = malloc(sizeof(char)*buffsize);
 	char letra;
 	String* lista;
@@ -84,12 +84,15 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				query_3(f2,f1,p);
 				break;
 		
+			case 4:
+					lista = query_4(f1,p);
+					s = conta_String(lista);
+
+					navegador(lista,s);
+					break;
 			case 7:
 					query_7();
 					break;
-		/*		case 5:
-					query_5();
-					break;*/
 				case 8:
 					query_8(f2);
 					break;

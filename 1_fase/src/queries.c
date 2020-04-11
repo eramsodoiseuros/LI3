@@ -132,34 +132,66 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 		}
 
 		if(filial == 4){
-			vendas = produto_vendido(p,produto,0);
-			vendasP = p_NP_vezes(p,produto,'P', mes, 1);
-			vendasN = p_NP_vezes(p,produto,'N', mes, 1);
+			for (int i = 0; i < 3; ++i)
+			{
+						
+			vendas += p_vezes_comprado(p,produto,mes,i);
+			vendasP += p_NP_vezes(p,produto,'P', i,mes);
+			vendasN += p_NP_vezes(p,produto,'N', i,mes);
+			}
 
-			printf("A totalidade de vendas desse produto com preço normal é:  %d\n",vendasN );
-			printf("A totalidade de vendas desse produto em promoção é:  %d\n",vendasP );
-			printf("A totalidade de vendas desse produto é:  %d\n",vendas );
+			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
+			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
+			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 
 		if(filial == 1){
-			vendas = produto_vendido(p,produto,1);
+			
+			vendas = p_vezes_comprado(p,produto,mes,0);
+			vendasP = p_NP_vezes(p,produto,'P', 0,mes);
+			vendasN = p_NP_vezes(p,produto,'N', 0,mes);
+			
 
-			printf("O numero de vendas desse produto nessa filial:  %d\n",vendas );
+			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
+			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
+			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 
 		if(filial == 2){
-			vendas = produto_vendido(p,produto,2);
+			vendas = p_vezes_comprado(p,produto,mes,1);
+			vendasP = p_NP_vezes(p,produto,'P', 1,mes);
+			vendasN = p_NP_vezes(p,produto,'N', 1,mes);
+			
 
-			printf("O numero de vendas desse produto nessa filial:  %d\n",vendas );
+			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
+			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
+			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 
 		if(filial == 3){
-			vendas = produto_vendido(p,produto,3);
+			
+			vendas = p_vezes_comprado(p,produto,mes,2);
+			vendasP = p_NP_vezes(p,produto,'P', 2,mes);
+			vendasN = p_NP_vezes(p,produto,'N', 2,mes);
+			
 
-			printf("O numero de vendas desse produto nessa filial:  %d\n",vendas );
+			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
+			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
+			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 	}
 }
+
+
+
+String* query_4 (Filial* f,Produtos* pr) {
+
+	return lista_Nvendidos(f,pr);
+
+}
+
+
+
 
 
 

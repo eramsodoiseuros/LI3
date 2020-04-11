@@ -50,7 +50,19 @@ int get_size(Produtos p, char l);
  *	Função que liberta o espaço alocado para a estrutura
  *	@param a estrutura a libertar
  */
+
+int conta_produtos();
+
+void lista_total_produtos(Produtos p, String* lista);
+
+String* lista_Nvendidos(Filial* f,Produtos* pr);
+
+int conta_String (String* s);
+
+
 void free_produtos(Produtos p);
+
+
 
 
 #endif

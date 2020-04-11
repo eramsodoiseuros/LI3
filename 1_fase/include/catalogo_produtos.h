@@ -55,7 +55,7 @@ int conta_produtos();
 
 void lista_total_produtos(Produtos p, String* lista);
 
-String* lista_Nvendidos(Filial* f,Produtos* pr);
+String* lista_Nvendidos(Filial* f,Produtos pr, int add[1]);
 
 int conta_String (String* s);
 

@@ -192,9 +192,9 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 //void query_5(){}
 
 
-String* query_4 (Filial* f,Produtos* pr) {
+String* query_4 (Filial* f,Produtos* pr, int add[1]) {
 
-	return lista_Nvendidos(f,pr);
+	return lista_Nvendidos(f,pr,add);
 
 }
 

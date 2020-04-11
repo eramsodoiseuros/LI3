@@ -99,6 +99,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 
 	int tarefa, tamanho = 0;
 	int m1, m2, decisao = 1;
+
 	char* inpt = malloc(sizeof(char)*buffsize);
 	char letra;
 	String* lista;
@@ -135,6 +136,12 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				query_3(f2,f1,p);
 				break;
 		
+			case 4:
+					lista = query_4(f1,p);
+					s = conta_String(lista);
+
+					navegador(lista,s);
+					break;
 			case 7:
 				query_7();
 				break;
@@ -159,6 +166,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 					decisao = deseja_sair();
 				}
 				break;
+
 			/*	case 9:
 					query_9();
 					break;

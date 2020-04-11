@@ -45,21 +45,61 @@ int escolhe_file(){
 
 //
 char letra_(){
-	char letra;
-	if(scanf("%c", &letra));
- 	if(letra < 'A' || letra >'Z'){
-		printf("%sInsira uma Letra: %s\n",KBLU,RST);
-    	letra = letra_();
-  	}
+	char* inpt = malloc(sizeof(char)*buffsize);
+	char letra = '1';
+	printf("%sInsira uma Letra [A...Z]: %s\n",KBLU,RST);
+
+	if(scanf("%s", inpt)){
+		letra = inpt[0];
+		if(letra < 'A' || letra >'Z'){
+			printf("%sInput Inválido.%s\n",KRED,RST);
+			letra = letra_();
+		}
+	}
+
 	return letra;
+}
+
+//
+int mes_(){
+	char* inpt = malloc(sizeof(char)*buffsize);
+	int mes = 0;
+	printf("%sInsira um Mês: %s\n",KBLU,RST);
+
+	if(scanf("%s", inpt)){
+		mes = atoi(inpt);
+	}
+
+ 	if(mes < 1 || mes > 12){
+ 		printf("%sInput Inválido.%s\n",KRED,RST);
+    	mes = mes_();
+  	}
+
+	return mes;
+}
+
+int deseja_sair(){
+	char* inpt = malloc(sizeof(char)*buffsize);
+	int decisao = 1;
+	printf("%s[E para Sair] %s\n",KRED,RST);
+	printf("%s[Qualquer outra letra para Ficar] %s\n",KRED,RST);
+	if(scanf("%s",inpt)){
+		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0)
+			decisao = 0;
+	}
+
+	return decisao;
 }
 
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int tarefa, tamanho = 0;
+	int m1, m2, decisao = 1;
 	char* inpt = malloc(sizeof(char)*buffsize);
 	char letra;
 	String* lista;
+	int v[1]; v[0] = 0;
+	double f[1]; f[0] = 0;
 	
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
 	if(scanf("%s", inpt)){
@@ -87,12 +127,19 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			case 7:
 					query_7();
 					break;
-		/*		case 5:
-					query_5();
-					break;*/
-				case 8:
-					query_8(f2);
-					break;
+
+			case 8:
+				while(decisao){
+					printf("%sInsira os meses que deseja consultar [1..12]:%s",KBLU,RST);
+					m1 = mes_();
+					printf("%sAté: %s\n",KBLU,RST);
+					m2 = mes_();
+					query_8(f2, m1, m2, v, f);
+					printf("%sTotal de vendas nesse intervalo é:%s %d\n",KBLU,RST,v[0]);
+					printf("%sE o total faturado nesse intervalo é:%s %f\n",KBLU,RST,f[0]);
+					decisao = deseja_sair();
+				}
+				break;
 			/*	case 9:
 					query_9();
 					break;

@@ -57,6 +57,16 @@ char* codigo(AVL t){
     return (char*) t->info;
 }
 
+//Função que devolve a string de uma arvore
+Cliente info_c(AVL t){
+    return (Cliente) t->info;
+}
+
+//Função que devolve a string de uma arvore
+Produto info_p(AVL t){
+    return (Produto) t->info;
+}
+
 // Função que indica o maior de dois números
 int max(int a, int b){ 
     return (a > b)? a : b;
@@ -177,16 +187,71 @@ int search_tree(AVL a, int id){
 }
 
 // Função que procura um elemento numa arvore binaria
-void* search_update(AVL a, int id){
-    void* r;
-    if(a == NULL) r = 0;
+void search_update(AVL a, int id, char tipo, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP){
+
+    if(tipo == 'c'){
+        if(a == NULL);
+        else{
+            if(id == a->valor){
+                update_registo_c( (Cliente) a->info, filial, mes, preco, unidades, produto, NP);
+            }
+            else{
+                if(id < a->valor) search_update(a->esq, id, tipo, cliente, filial, mes, preco, unidades, produto, NP);
+                else search_update(a->dir, id, tipo, cliente, filial, mes, preco, unidades, produto, NP);
+            }
+        }
+    }
+    
+    if(tipo == 'p'){
+        if(a == NULL);
+        else{
+            if(id == a->valor){
+                update_registo_p( (Produto) a->info, filial, mes, preco, unidades, cliente, NP);
+            }
+            else{
+                if(id < a->valor) search_update(a->esq, id, tipo, cliente, filial, mes, preco, unidades, produto, NP);
+                else search_update(a->dir, id, tipo, cliente, filial, mes, preco, unidades, produto, NP);
+            }
+        }
+    }
+}
+
+//
+int search_n(AVL a, char tipo){
+    int r = 0;
+    if(tipo == 'c'){
+        if(a == NULL) r = 0;
+        else{
+            if(comprou(a->info))
+                r++; 
+            r += search_n(a->esq,'c');
+            r += search_n(a->dir,'c');
+        }
+    }
+    
+    if(tipo == 'p'){
+        if(a == NULL) r = 0;
+        else{
+            if(vendeu(a->info))
+                r++; 
+            r += search_n(a->esq,'p');
+            r += search_n(a->dir,'p');
+        }
+    }
+    return r;
+}
+
+void* search_info(AVL a, int id){
+    void* r = NULL;
+
+    if(a == NULL);
     else{
         if(id == a->valor){
             r = a->info;
         }
         else{
-            if(id < a->valor) r = search_update(a->esq, id);
-            else r = search_update(a->dir, id);
+            if(id < a->valor) search_info(a->esq, id);
+            else search_info(a->dir, id);
         }
     }
 

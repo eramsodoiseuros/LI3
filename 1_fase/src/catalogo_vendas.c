@@ -49,7 +49,7 @@ int validaVenda(char* linha, Produtos p, Clientes c){
 
 // Função que lê de um ficheiro de vendas
 void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, int num[2]){
-	char linha[33], *original = malloc(sizeof(char)*33);
+	char linha[32], *original = malloc(sizeof(char)*32);
 	int i1 = 0, i2 = 0;
 	char* tokens[7];
 
@@ -80,10 +80,7 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 
 			update_cliente(get_clientes(f1), tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
 			update_produto(get_produtos(f1), tokens[0], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[4], tokens[3][0]);
-
-			// update_filial(f1,...);
-
-			i1++;
+			i1++;		
 		}
 		i2++;
 	}

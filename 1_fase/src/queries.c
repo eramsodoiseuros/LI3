@@ -183,12 +183,6 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 	}
 }
 
-///////////////////////////////////////////////////////////
-// QUERY 4
-/*String* query_4 (Filial* f,Produtos* pr) {
-	return lista_Nvendidos(f,pr);
-}
-*/
 
 ///////////////////////////////////////////////////////////
 // QUERY 5
@@ -196,7 +190,15 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 
 ///////////////////////////////////////////////////////////
 // QUERY 6
-//void query_6(){}
+void query_6(Filial* f, int c[1], int p[1]){
+
+	RP produtos = get_produtos(*f);
+	RC clientes = get_clientes(*f);
+
+	c[0] = c_nao_comprou(clientes);
+	p[0] = p_nao_vendeu(produtos);
+}
+
 
 ///////////////////////////////////////////////////////////
 // QUERY 7

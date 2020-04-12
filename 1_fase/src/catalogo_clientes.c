@@ -87,13 +87,14 @@ void load_clientes(Clientes c, char* path, int num[2], Filial f){
      	_exit(0);            
     }
 
-	for(i2=0; fgets(linha, 6, file) ;i2++ ){
+	while(fgets(linha, 6, file)){
 		if(valida_cliente(linha)){
 			insert_cliente(c,linha);
+
 			f_cliente(f, linha);
 			i1++;
 		}
-		
+		i2++;
 	}
 
 	num[0] = i1;
@@ -110,7 +111,7 @@ Clientes iniciar_clientes(int* num, Filial f){
 		for(int j = 0; j < HASHNUMBER; j++)
 			c->tabela_clientes[i][j] = NULL;
 
-	load_clientes(c,"../Clientes.txt", valores, f);
+	load_clientes(c,PATH_C, valores, f);
 
 	num[0] = valores[0];
 	num[1] = valores[1];

@@ -27,6 +27,12 @@ int insert_p(RP p, char* id);
  *	Função que 
  *	@param 
  */
+void update_registo_p(Produto p, int filial, int mes, double preco, int unidades, char* cliente, char NP);
+
+/**
+ *	Função que 
+ *	@param 
+ */
 void update_produto(RP p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP);
 
 /**
@@ -52,5 +58,17 @@ int p_vezes_comprado(RP p, char* produto, int m, int f);
  *	@param 
  */
 int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int vendeu(Produto p);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int p_nao_vendeu(RP p);
 
 #endif

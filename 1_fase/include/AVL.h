@@ -7,6 +7,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "registos_cliente.h"
+#include "registos_produto.h"
+
 typedef struct arvore* AVL;
 
 typedef struct string* String;
@@ -79,6 +82,36 @@ int valor(AVL a);
  */
 char* codigo(AVL a);
 
-void* search_update(AVL a, int id);
+/**
+ *	Função que devolve a string de uma arvore
+ *	@param o apontador para a estrutura
+ *	@param a string da raiz da arvore
+ */
+Cliente info_c(AVL t);
+
+/**
+ *	Função que devolve a string de uma arvore
+ *	@param o apontador para a estrutura
+ *	@param a string da raiz da arvore
+ */
+Produto info_p(AVL t);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void search_update(AVL a, int id, char tipo, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void* search_info(AVL a, int id);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int search_n(AVL a, char tipo);
 
 #endif

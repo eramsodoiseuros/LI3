@@ -27,6 +27,12 @@ void insert_c(RC c, char* id);
  *	Função que 
  *	@param 
  */
+void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP);
+
+/**
+ *	Função que 
+ *	@param 
+ */
 void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP);
 
 /**
@@ -46,5 +52,17 @@ int cliente_comprou(RC c, char* cliente, int x);
  *	@param 
  */
 int c_quantos_comprou(RC c, char* cliente);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int comprou(Cliente c);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int c_nao_comprou(RC c);
 
 #endif

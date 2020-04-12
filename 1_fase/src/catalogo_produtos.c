@@ -172,13 +172,13 @@ void lista_total_produtos(Produtos p, String* lista){
 }
 
 
-String* lista_Nvendidos(Filial* f, Produtos pr){
+String* lista_Nvendidos(Filial* f, Produtos pr, int add[1]){
 
 	RP p = get_produtos(*f);
-	int add = 0;
 	int i = 0;
 	int nProd = conta_produtos();
 	String* listaProd = malloc(sizeof(String)*nProd);
+	add[0] = 0;
 
 
 	for(int l = 0; l < nProd; l++){
@@ -197,10 +197,10 @@ String* lista_Nvendidos(Filial* f, Produtos pr){
 
 	for (int j = 0; j < nProd; ++j)
 	{
-		if (produto_vendido(p,listaProd[j],0)==0 || add<i){
+		if (produto_vendido(p,listaProd[j],0)==0 || add[0]<i){
 
-			s[add] = listaProd[j];
-			add++;
+			s[add[0]] = listaProd[j];
+			add[0]++;
 		}		
 	}
 

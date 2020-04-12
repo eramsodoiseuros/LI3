@@ -107,6 +107,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int aux_c[1], aux_p[1];
 	aux_c[0] = 0; aux_p[0] = 0;
 	double f[1]; f[0] = 0;
+	int s[1];
 	
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
 	if(scanf("%s", inpt)){
@@ -137,17 +138,17 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			case 3:
 				query_3(f2,f1,p);
 				break;
-		
-			/*case 4:
-					lista = query_4(f1,p);
-					s = conta_String(lista);
+				
+			case 4:
+					lista = query_4(f1,p,s);
+					navegador(lista,s[0]);
+					break;
 
-					navegador(lista,s);
-					break;*/
 			case 6:
 				query_6(f1,aux_c,aux_p);
 				printf("c_%d_p_%d\n",aux_c[0],aux_p[0]);
 				break;
+
 			case 7:
 				query_7();
 				break;

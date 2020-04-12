@@ -45,7 +45,9 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 	if(r == 5){
 		free_clientes(*c);
 		free_produtos(*p);
-	
+		
+		*f1 = iniciar_filial();
+		*c 	= iniciar_clientes(num,*f1);
 		*p 	= iniciar_produtos(num,*f1);
 		*f2 = iniciar_faturacao();
 		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_5M.txt");
@@ -185,28 +187,21 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 
 ///////////////////////////////////////////////////////////
 // QUERY 4
-/*String* query_4 (Filial* f,Produtos* pr) {
-	return lista_Nvendidos(f,pr);
-}
-*/
-
-///////////////////////////////////////////////////////////
-// QUERY 5
-//void query_5(){}
-
-
 String* query_4 (Filial* f,Produtos* pr, int add[1]) {
 
 	return lista_Nvendidos(f,pr,add);
 
 }
 
+///////////////////////////////////////////////////////////
+// QUERY 5
+//void query_5(){}
 
 
 
-
-
-
+///////////////////////////////////////////////////////////
+// QUERY 6
+//void query_6(){}
 
 
 ///////////////////////////////////////////////////////////
@@ -266,7 +261,19 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 
 ///////////////////////////////////////////////////////////
 // QUERY 10
-//void query_10(){}
+String* query_10(char* cliente, int mes, Clientes* c, Filial* f, Produtos* p, int add[1]){
+
+	RC cl = get_clientes(*f);
+	String s;
+	int comprado = 0;
+
+	for (int i = 0; i < 3; ++i)
+	{
+		//if(c_comprou_p()==1) comprado += c_vezes_comprouP(cl,pl,cliente,mes,i);
+			}
+	
+
+}
 
 ///////////////////////////////////////////////////////////
 // QUERY 11

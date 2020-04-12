@@ -101,6 +101,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int m1, m2, decisao = 1;
 
 	char* inpt = malloc(sizeof(char)*buffsize);
+	char* cliente=malloc(sizeof(char)*buffsize);
 	char letra;
 	String* lista;
 	int v[1]; v[0] = 0;
@@ -168,11 +169,21 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 
 			/*	case 9:
 					query_9();
-					break;
+					break;*/
 				case 10:
-					query_10();
+				printf("%sInsira um cliente: %s\n",KBLU,RST);
+				if(scanf("%s",cliente)){
+	
+					while (valida_cliente(cliente)==0) {
+						printf("%sCliente Invalido%s\n",KRED,RST);
+						if(scanf("%s",cliente));
+					}
+				}
+				m1 = mes_();
+	
+					//query_10();
 					break;
-				case 11:
+			/*	case 11:
 					query_10();
 					break;
 				case 12:

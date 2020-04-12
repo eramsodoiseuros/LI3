@@ -149,7 +149,7 @@ void free_produtos(Produtos p){
 }
 
 
-/*
+
 
 int conta_produtos(){
 	int r = 0;
@@ -186,21 +186,24 @@ String* lista_Nvendidos(Filial* f, Produtos pr, int add[1]){
 		listaProd[l] = NULL;
 	}
 
-	lista_total_produtos(pr,listaProd);
 	
 	for (int j = 0; j < nProd; ++j)
 	{
-		if (produto_vendido(p,listaProd[j],0)==0) i++;
+		lista_total_produtos(pr,listaProd);
+		if (produto_vendido(p,listaProd->id_produto,0)==0) i++;
 	}
 
-	
+	for(int k = 0; k < nProd; k++){
+		listaProd[k] = NULL;
+	}
+
 	String* s = malloc(sizeof(String)*i);
 
 	for (int j = 0; j < nProd; ++j)
 	{
-		if (produto_vendido(p,listaProd[j],0)==0 || add[0]<i){
+		if (produto_vendido(p,listaProd->id_produto,0)==0 || add[0]<i){
 
-			s[add[0]] = listaProd[j];
+			s->id_produto = listaProd->id_produto;
 			add[0]++;
 		}		
 	}
@@ -218,4 +221,3 @@ int conta_String (String* s) {
 	return r;
 }
 
-*/

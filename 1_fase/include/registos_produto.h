@@ -71,4 +71,22 @@ int vendeu(Produto p);
  */
 int p_nao_vendeu(RP p);
 
+/**
+ *	Função que 
+ *	@param 
+ */
+//int conta_produtos();
+
+/**
+ *	Função que 
+ *	@param 
+ */
+//String* lista_Nvendidos(Filial* f,Produtos pr, int add[1]);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+//int conta_String (String* s);
+
 #endif

@@ -62,6 +62,7 @@ Faturacao iniciar_faturacao(){
 	return f1;
 }
 
+// Função que
 void print_fat(Faturacao f1){
 
 	for(int m = 0; m < 12; m++)

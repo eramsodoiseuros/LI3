@@ -73,13 +73,9 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 ///////////////////////////////////////////////////////////
 // QUERY 2
 
-String* query_2(Produtos* p, char letra, int tamanho){
+Lista_Strings query_2(Produtos* p, char letra){
 
-	String* lista = malloc(sizeof(String)*tamanho);
-
-	for(int i = 0; i < tamanho; i++){
-		lista[i] = NULL;
-	}
+	Lista_Strings lista = iniciar_lista();
 
 	lista_produtos(*p, letra, lista);
 
@@ -88,7 +84,9 @@ String* query_2(Produtos* p, char letra, int tamanho){
 
 ///////////////////////////////////////////////////////////
 // QUERY 3
+
 void query_3 (Faturacao* f, Filial* f2, Produtos* pr, char* produto, int mes, int vendasT[1], int vendasP[1], int vendasN[1], int filial){
+
 
       
     RP p = get_produtos(*f2);
@@ -132,19 +130,20 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr, char* produto, int mes, in
 
 ///////////////////////////////////////////////////////////
 // QUERY 4
-/*String* query_4 (Filial* f,Produtos* pr, int add[1]) {
 
 
-	return lista_Nvendidos(f,pr,add);
-
+/*Lista_Strings query_4 (Filial* f,Produtos* pr, int add[1]) {
+	return lista_Nvendidos(f,*pr,add);
 }
 */
 ///////////////////////////////////////////////////////////
 // QUERY 5
+
 //void query_5(){}
 
 ///////////////////////////////////////////////////////////
 // QUERY 6
+
 void query_6(Filial* f, int c[1], int p[1]){
 
 	RP produtos = get_produtos(*f);
@@ -154,29 +153,10 @@ void query_6(Filial* f, int c[1], int p[1]){
 	p[0] = p_nao_vendeu(produtos);
 }
 
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////
-// QUERY 5
-//void query_5(){}
-
-
-
-///////////////////////////////////////////////////////////
-// QUERY 6
-//void query_6(){}
-
-
-
 ///////////////////////////////////////////////////////////
 // QUERY 7
 void query_7 (Filial* f, Clientes* c, char* cliente, int vendas[12][3]){
+
 	
 	RC cl = get_clientes(*f);
 	
@@ -194,6 +174,7 @@ void query_7 (Filial* f, Clientes* c, char* cliente, int vendas[12][3]){
 
 ///////////////////////////////////////////////////////////
 // QUERY 8
+
 void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 	int vendas = 0;
 	double faturado = 0;
@@ -211,12 +192,16 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 
 ///////////////////////////////////////////////////////////
 // QUERY 9
+
 //void query_9(){}
 
 ///////////////////////////////////////////////////////////
 // QUERY 10
-/*String* query_10(char* cliente, int mes, Clientes* c, Filial* f, Produtos* p, int add[1]){
 
+
+/*
+
+String* query_10(char* cliente, int mes, Clientes* c, Filial* f, Produtos* p, int add[1]){
 	RC cl = get_clientes(*f);
 	String s;
 	int comprado = 0;
@@ -225,14 +210,17 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 	{
 		//if(c_comprou_p()==1) comprado += c_vezes_comprouP(cl,pl,cliente,mes,i);
 			}
-	
 
 }*/
 
+
+
 ///////////////////////////////////////////////////////////
 // QUERY 11
+
 //void query_11(){}
 
 ///////////////////////////////////////////////////////////
 // QUERY 12
+
 //void query_12(){}

@@ -54,7 +54,7 @@ Cliente iniciar_cliente(){
 	return c;
 }
 
-//
+// Função que
 void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP){
 	c->comprou_in[0]++;
 	c->comprou_in[filial]++;
@@ -68,7 +68,7 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
     c->size_comprados++;
 }
 
-//
+// Função que
 void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP){
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -78,7 +78,7 @@ void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int 
 	search_update(c->tabela_cliente[index[0]][index[1]], nID, 'c', cliente, filial, mes, preco, unidades, produto, NP);
 }
 
-//
+// Função que
 RC iniciar_RC(){
 	RC c = malloc(sizeof(struct registos_cliente));
 
@@ -89,7 +89,7 @@ RC iniciar_RC(){
 	return c;
 }
 
-//
+// Função que
 int cliente_comprou(RC c, char* cliente, int x){
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -101,7 +101,7 @@ int cliente_comprou(RC c, char* cliente, int x){
 	return c2->comprou_in[x];
 }
 
-//
+// Função que
 int c_quantos_comprou(RC c, char* cliente){
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -114,6 +114,7 @@ int c_quantos_comprou(RC c, char* cliente){
 }
 
 
+// Função que
 
 int c_vezes_comprou (RC c, char* cliente, int m, int f){
 	int nID = num_(cliente,1);
@@ -121,22 +122,39 @@ int c_vezes_comprou (RC c, char* cliente, int m, int f){
 	hF_c(index,cliente);
 
 	Cliente c2 = search_info(c->tabela_cliente[index[0]][index[1]], nID);
-	
+
 	return c2->vezes_comprou[m][f];
 }
 
+
+// Função que
 int comprou(Cliente c){
 	return (c->comprou_in[0] == 0);
 }
 
-//
+// Função que
+int comprou_tudo(Cliente c){
+	return (c->comprou_in[4] == 1);
+}
+
+// Função que
+Lista_Strings c_comprou_tudo(RC c){
+	Lista_Strings lista = malloc(sizeof(Lista_Strings));
+
+	for (int i = 0; i < LETRAS; i++)
+		for(int k = 0; k < HASHNUMBER; k++)
+			i++;//search_c(c->tabela_cliente[i][k], lista);
+
+	return lista;
+}
+
+// Função que
 int c_nao_comprou(RC c){
 	int r = 0;
 
 	for (int i = 0; i < LETRAS; i++)
 		for(int k = 0; k < HASHNUMBER; k++)
-			r += search_n(c->tabela_cliente[i][k], 'c');
+			search_n(c->tabela_cliente[i][k], 'c');
 
 	return r;
-
 }

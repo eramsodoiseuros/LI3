@@ -47,6 +47,10 @@ void update_faturacao(Faturacao f1, int filial, int mes, double preco, int unida
 */
 Faturacao iniciar_faturacao();
 
+/**
+ *	Função que 
+ *	@param 
+ */
 void print_fat(Faturacao f1);
 
 #endif

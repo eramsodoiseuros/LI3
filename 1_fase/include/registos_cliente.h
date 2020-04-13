@@ -55,7 +55,7 @@ int c_quantos_comprou(RC c, char* cliente);
 
 
 
-//int c_vezes_comprou (RC c, char* cliente, int m, int f);
+int c_vezes_comprou (RC c, char* cliente, int m, int f);
 
 /**
  *	Função que 

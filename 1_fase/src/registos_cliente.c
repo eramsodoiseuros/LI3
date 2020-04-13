@@ -113,17 +113,18 @@ int c_quantos_comprou(RC c, char* cliente){
 	return c2->size_comprados;
 }
 
-/*
+
 
 int c_vezes_comprou (RC c, char* cliente, int m, int f){
-	int nID = num_(produto,2);
+	int nID = num_(cliente,1);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_c(index,cliente);
 
-	Cliente c2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+	Cliente c2 = search_info(c->tabela_cliente[index[0]][index[1]], nID);
+	
+	return c2->vezes_comprou[m][f];
+}
 
-	return c2->vezes_comprou[m-1][f-1];
-*/
 int comprou(Cliente c){
 	return (c->comprou_in[0] == 0);
 }

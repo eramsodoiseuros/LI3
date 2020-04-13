@@ -75,6 +75,8 @@ int mes_(){
     	mes = mes_();
   	}
 
+  	free(inpt);
+
 	return mes;
 }
 
@@ -92,6 +94,91 @@ int deseja_sair(){
 	return decisao;
 }
 
+
+char* produto_(Produtos* pr){
+	char* produto = malloc(sizeof(char)*buffsize);
+
+	printf("%sInsira um produto: %s\n",KBLU,RST);
+    if(scanf("%s",produto)){
+    while(search_P(*pr, produto)==0){
+	printf("%sProduto Invalido%s\n",KRED,RST);
+	if(scanf("%s",produto));
+	}
+    }
+    return produto;
+
+}
+
+char* cliente_(Clientes* c){
+	char* cliente = malloc(sizeof(char)*buffsize);
+
+	printf("%sInsira um cliente: %s\n",KBLU,RST);
+    if(scanf("%s",cliente)){
+    while(search_C(*c, cliente)==0){
+	printf("%sCliente Invalido%s\n",KRED,RST);
+	if(scanf("%s",cliente));
+	}
+    }
+    return cliente;
+
+}
+
+int filial_(){
+	char* inpt = malloc(sizeof(char)*buffsize);
+	int filial = 0;
+	printf("%sInsira uma filial [1..3] ou [4] para valores globais: %s\n",KBLU,RST);
+	
+	if(scanf("%s",inpt)){
+		filial=atoi(inpt);
+
+		while(filial<=0 || filial>4){
+			printf("%sOpção Invalida%s\n",KRED,RST);
+			if(scanf("%s",inpt));
+			filial=atoi(inpt);
+		}
+
+
+	}
+	free(inpt);
+	return filial;
+}
+
+
+
+
+
+
+
+
+void faz_tabela7 (char* cliente, int vendas[12][3]){
+
+	int venda_tot = 0;
+
+	printf("%s#################################################################################################################################\n",KBLU);
+	printf("%s##                                                                                                                             ##\n",KBLU);
+	printf("%s##%s                                                         %s                                                              %s ##\n",KBLU,RST,cliente,KBLU);
+	printf("%s##                                                                                                                             ##\n",KBLU);
+	printf("%s#################################################################################################################################\n",KBLU);
+	printf("%s##                     ##                          ##                       ##                        ##                       ##\n",KBLU);
+	printf("%s##%s       Mês           %s##%s       Filial 1           %s##%s     Filial 2          %s##%s      Filial 3          %s##%s    Vendas Totais%s      ##%s\n",KBLU,RST,KBLU,RST,KBLU,RST,KBLU,RST,KBLU,RST,KBLU,RST);
+	printf("%s##                     ##                          ##                       ##                        ##                       ##\n",KBLU);
+	printf("%s#################################################################################################################################\n",KBLU);
+
+	
+		for (int mes = 0; mes < 12; ++mes){
+			for (int i = 0; i < 3; ++i)
+			{
+				venda_tot += vendas[mes][i];
+			}
+			printf("%s##                     ##                          ##                       ##                        ##                       ##\n",KBLU);
+			printf("%s##%s         %d                      %d                           %d                          %d                      %d         \n",KBLU,RST,mes+1,vendas[mes][0],vendas[mes][1],vendas[mes][2],venda_tot);
+			printf("%s#################################################################################################################################%s\n",KBLU,RST);
+			venda_tot = 0;
+		}
+}
+
+
+
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	clock_t inicio, fim;
@@ -108,8 +195,19 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int aux_c[1], aux_p[1];
 	aux_c[0] = 0; aux_p[0] = 0;
 	double f[1]; f[0] = 0;
-	int s[1];
-	
+	int filial=0;
+	char* produto=malloc(sizeof(char)*buffsize);
+	int vendas[12][3];
+	int vendasT[1];
+    int vendasP[1];
+    int vendasN [1];
+
+	for (int mes = 0; mes < 12; ++mes){
+		for(int filial = 0; filial<3; filial++){
+			vendas[mes][filial] = 0;
+		}
+	}	
+		
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
 	if(scanf("%s", inpt)){
 		tarefa = atoi(inpt);
@@ -137,12 +235,20 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 
 			case 3:
-				query_3(f2,f1,p);
+
+    			produto = produto_(p);
+    			m1 = mes_();
+    			filial = filial_();
+				query_3(f2,f1,p,produto,m1,vendasT,vendasP,vendasN,filial);
+
+				printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN[0] );
+				printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP[0] );
+				printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendasT[0] );
 				break;
 				
 			case 4:
-					lista = query_4(f1,p,s);
-					navegador(lista,s[0]);
+					//lista = query_4(f1,p,s);
+					//navegador(lista,s[0]);
 					break;
 
 			case 6:
@@ -151,7 +257,14 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 
 			case 7:
-				query_7();
+				cliente = cliente_(c);
+				inicio = clock();
+				query_7(f1,c,cliente,vendas);
+				fim = clock();
+				faz_tabela7(cliente,vendas);
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
+
 				break;
 
 			case 8:

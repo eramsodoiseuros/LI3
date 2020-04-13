@@ -5,7 +5,7 @@
 #define HASHNUMBER 599
 
 struct registos_cliente{
-	AVL tabela_clientes[LETRAS][HASHNUMBER];
+	AVL tabela_cliente[LETRAS][HASHNUMBER];
 };
 
 struct cliente{
@@ -35,7 +35,7 @@ void insert_c(RC c, char* id){
 
 	hF_c(index, id);
 
-	c->tabela_clientes[index[0]][index[1]] = insert_tree(c->tabela_clientes[index[0]][index[1]], nID, id, 'c');
+	c->tabela_cliente[index[0]][index[1]] = insert_tree(c->tabela_cliente[index[0]][index[1]], nID, id, 'c');
 }
 
 // Função que inicializa um cliente
@@ -62,11 +62,10 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
 	if(c->comprou_in[1] && c->comprou_in[2] && c->comprou_in[3])
 		c->comprou_in[4] = 1;
 
-	c->vezes_comprou[mes][filial]++;
+	c->vezes_comprou[mes-1][filial-1]++;
     
     //if(new_produto(c, cp))
     c->size_comprados++;
-
 }
 
 //
@@ -76,9 +75,7 @@ void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int 
 
 	hF_c(index,cliente);
 
-	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
-
-	update_registo_c(c2, filial, mes, preco, unidades, produto, NP);
+	search_update(c->tabela_cliente[index[0]][index[1]], nID, 'c', cliente, filial, mes, preco, unidades, produto, NP);
 }
 
 //
@@ -87,7 +84,7 @@ RC iniciar_RC(){
 
 	for (int i = 0; i < LETRAS; i++)
 		for(int k = 0; k < HASHNUMBER; k++)
-			c->tabela_clientes[i][k] = NULL;
+			c->tabela_cliente[i][k] = NULL;
 
 	return c;
 }
@@ -99,7 +96,7 @@ int cliente_comprou(RC c, char* cliente, int x){
 
 	hF_c(index,cliente);
 
-	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
+	Cliente c2 = search_info(c->tabela_cliente[index[0]][index[1]], nID);
 
 	return c2->comprou_in[x];
 }
@@ -111,11 +108,12 @@ int c_quantos_comprou(RC c, char* cliente){
 
 	hF_c(index,cliente);
 
-	Cliente c2 = search_update(c->tabela_clientes[index[0]][index[1]], nID);
+	Cliente c2 = search_info(c->tabela_cliente[index[0]][index[1]], nID);
 
 	return c2->size_comprados;
 }
 
+/*
 
 int c_vezes_comprou (RC c, char* cliente, int m, int f){
 	int nID = num_(produto,2);
@@ -125,4 +123,19 @@ int c_vezes_comprou (RC c, char* cliente, int m, int f){
 	Cliente c2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
 
 	return c2->vezes_comprou[m-1][f-1];
+*/
+int comprou(Cliente c){
+	return (c->comprou_in[0] == 0);
+}
+
+//
+int c_nao_comprou(RC c){
+	int r = 0;
+
+	for (int i = 0; i < LETRAS; i++)
+		for(int k = 0; k < HASHNUMBER; k++)
+			r += search_n(c->tabela_cliente[i][k], 'c');
+
+	return r;
+
 }

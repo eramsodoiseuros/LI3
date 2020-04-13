@@ -5,7 +5,7 @@
 #define HASHNUMBER 151
 
 struct registos_produto{
-	AVL tabela_produtos[LETRAS][LETRAS][HASHNUMBER];
+	AVL tabela_produto[LETRAS][LETRAS][HASHNUMBER];
 };
 
 struct produto{
@@ -36,7 +36,7 @@ int insert_p(RP p, char* id){
 	int nID = num_(id,2);
 	hF_p(index, id);
 
-	p->tabela_produtos[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produtos[index[0]][index[1]][index[2]] , nID, id, 'p');
+	p->tabela_produto[index[0]][index[1]][index[2]] = insert_tree(p->tabela_produto[index[0]][index[1]][index[2]] , nID, id, 'p');
 	return index[0];
 }
 
@@ -77,7 +77,6 @@ void update_registo_p(Produto p, int filial, int mes, double preco, int unidades
 		p->vezes_N[mes-1][filial-1]++;
 	if (NP == 'P')
 		p->vezes_P[mes-1][filial-1]++;
-
 }
 
 //
@@ -86,9 +85,7 @@ void update_produto(RP p, char* produto, int filial, int mes, double preco, int 
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_p(index,produto);
 
-	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
-
-	update_registo_p(p2, filial, mes, preco, unidades, cliente, NP);
+	search_update(p->tabela_produto[index[0]][index[1]][index[2]], nID, 'p', cliente, filial, mes, preco, unidades, produto, NP);
 }
 
 //
@@ -98,7 +95,7 @@ RP iniciar_RP(){
 	for (int i = 0; i < LETRAS; i++)
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
-				p->tabela_produtos[i][j][k] = NULL;
+				p->tabela_produto[i][j][k] = NULL;
 
 	return p;
 }
@@ -109,7 +106,7 @@ int produto_vendido(RP p, char* produto, int x){
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_p(index,produto);
 
-	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+	Produto p2 = search_info(p->tabela_produto[index[0]][index[1]][index[2]], nID);
 
 	return p2->vendido_in[x];
 }
@@ -120,7 +117,7 @@ int p_vezes_comprado(RP p, char* produto, int m, int f){
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_p(index,produto);
 
-	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+	Produto p2 = search_info(p->tabela_produto[index[0]][index[1]][index[2]], nID);
 
 	return p2->vezes_comprado[m-1][f-1];
 }
@@ -132,7 +129,7 @@ int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes){
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_p(index,produto);
 
-	Produto p2 = search_update(p->tabela_produtos[index[0]][index[1]][index[2]], nID);
+	Produto p2 = search_info(p->tabela_produto[index[0]][index[1]][index[2]], nID);
 
 	if(NP == 'N'){
 		r = p2->vezes_N[mes-1][filial-1];
@@ -141,6 +138,23 @@ int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes){
 	if(NP == 'P'){
 		r = p2->vezes_P[mes-1][filial-1];
 	}
+
+	return r;
+}
+
+//
+int vendeu(Produto p){
+	return (p->vendido_in[0] == 0);
+}
+
+//
+int p_nao_vendeu(RP p){
+	int r = 0;
+
+	for (int i = 0; i < LETRAS; i++)
+		for (int j = 0; j < LETRAS; j++)
+			for(int k = 0; k < HASHNUMBER; k++)
+				r += search_n(p->tabela_produto[i][j][k], 'p');
 
 	return r;
 }

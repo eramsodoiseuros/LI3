@@ -82,7 +82,6 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 			p->size[l1]++;
 
 			f_produto(f, linha);
-			
 			i1++;
 		}
 		i2++;
@@ -105,7 +104,7 @@ Produtos iniciar_produtos(int* num, Filial f){
 				p->tabela_produtos[i][j][k] = NULL;
 	}
 	
-	load_produtos(p,"../Produtos.txt", valores, f);
+	load_produtos(p,PATH_P, valores, f);
 
 	num[2] = valores[0];
 	num[3] = valores[1];

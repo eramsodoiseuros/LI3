@@ -10,6 +10,8 @@
 #include "AVL.h"
 #include "filial.h"
 
+#define PATH_P "../Produtos.txt"
+
 typedef struct produtos* Produtos;
 
 /**

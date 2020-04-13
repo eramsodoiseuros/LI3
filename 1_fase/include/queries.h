@@ -70,13 +70,8 @@ String* query_4 (Filial* f, Produtos* pr, int add[1]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-/*
+void query_6(Filial* f, int c[1], int p[1]);
 
-void query_6();
-
-a estrategia é guardar o nr de produtos e clientes lidos no ficheiro vendas e comparar
-
-*/
 
 /**
  *	Dado um código de cliente, criar uma tabela com o número total de produtos comprados (ou seja a soma das quantidades de todas as vendas do produto),

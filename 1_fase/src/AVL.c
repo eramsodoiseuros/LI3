@@ -57,16 +57,6 @@ char* codigo(AVL t){
     return (char*) t->info;
 }
 
-//Função que devolve a string de uma arvore
-Cliente info_c(AVL t){
-    return (Cliente) t->info;
-}
-
-//Função que devolve a string de uma arvore
-Produto info_p(AVL t){
-    return (Produto) t->info;
-}
-
 // Função que indica o maior de dois números
 int max(int a, int b){ 
     return (a > b)? a : b;

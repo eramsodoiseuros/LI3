@@ -7,8 +7,6 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "registos_cliente.h"
-#include "registos_produto.h"
 
 typedef struct arvore* AVL;
 
@@ -81,20 +79,6 @@ int valor(AVL a);
  *	@param a string da raiz da arvore
  */
 char* codigo(AVL a);
-
-/**
- *	Função que devolve a string de uma arvore
- *	@param o apontador para a estrutura
- *	@param a string da raiz da arvore
- */
-Cliente info_c(AVL t);
-
-/**
- *	Função que devolve a string de uma arvore
- *	@param o apontador para a estrutura
- *	@param a string da raiz da arvore
- */
-Produto info_p(AVL t);
 
 /**
  *	Função que 

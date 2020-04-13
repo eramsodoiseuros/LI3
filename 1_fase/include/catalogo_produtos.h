@@ -36,10 +36,15 @@ Produtos iniciar_produtos(int* num, Filial f);
 
 /**
  *	Função que cria uma lista de produtos validos
- *	@param estrutura com os produtos, e letra dos produtos pretendidos
- *	@param a lista de produtos começados por uma letra
+ *	@param estrutura com os produtos, a letra dos produtos pretendidos e a estrutura a preencher
  */
 void lista_produtos(Produtos p, char letra, String* lista);
+
+/**
+ *	Função que cria uma lista de produtos validos
+ *	@param estrutura com os produtos e a estrutura a preencher
+ */
+void lista_total_produtos(Produtos p, String* lista);
 
 /**
  *	Função que devolve o numero de produtos com uma determinada letra
@@ -52,19 +57,6 @@ int get_size(Produtos p, char l);
  *	Função que liberta o espaço alocado para a estrutura
  *	@param a estrutura a libertar
  */
-
-int conta_produtos();
-
-void lista_total_produtos(Produtos p, String* lista);
-
-String* lista_Nvendidos(Filial* f,Produtos pr, int add[1]);
-
-int conta_String (String* s);
-
-
 void free_produtos(Produtos p);
-
-
-
 
 #endif

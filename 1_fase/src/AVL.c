@@ -28,7 +28,7 @@ char* sdup(const char *s){
     return (char *) memcpy (novo, s, tamanho);
 }
 
-// 
+// Função que
 String iniciar_string(char* id){
     String s = malloc(sizeof(String));
 
@@ -78,7 +78,6 @@ int altura(AVL a){
 }
 
 // Função que cria um Nodo novo da arvore, ou até mesmo uma arvore nova, com um dado valor
-// 0 para clientes, 1 para produtos
 AVL create_nodo(int valor, char* id, char tipo){
     AVL new = malloc(sizeof(struct arvore));
 
@@ -216,7 +215,7 @@ void search_update(AVL a, int id, char tipo, char* cliente, int filial, int mes,
     }
 }
 
-//
+// Função que
 int search_n(AVL a, char tipo){
     int r = 0;
     if(tipo == 'c'){
@@ -241,6 +240,7 @@ int search_n(AVL a, char tipo){
     return r;
 }
 
+// Função que
 void* search_info(AVL a, int id){
     void* r = NULL;
 

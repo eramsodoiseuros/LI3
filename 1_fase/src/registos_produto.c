@@ -40,7 +40,7 @@ int insert_p(RP p, char* id){
 	return index[0];
 }
 
-//
+// Função que
 Produto iniciar_produto(){
 	Produto p = malloc(sizeof(struct produto));
 
@@ -62,7 +62,7 @@ Produto iniciar_produto(){
 	return p;
 }
 
-//
+// Função que
 void update_registo_p(Produto p, int filial, int mes, double preco, int unidades, char* cliente, char NP){
 
 	p->vendido_in[0]++;
@@ -79,7 +79,7 @@ void update_registo_p(Produto p, int filial, int mes, double preco, int unidades
 		p->vezes_P[mes-1][filial-1]++;
 }
 
-//
+// Função que
 void update_produto(RP p, char* produto, int filial, int mes, double preco, int unidades, char* cliente, char NP){
 	int nID = num_(produto,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
@@ -88,7 +88,7 @@ void update_produto(RP p, char* produto, int filial, int mes, double preco, int 
 	search_update(p->tabela_produto[index[0]][index[1]][index[2]], nID, 'p', cliente, filial, mes, preco, unidades, produto, NP);
 }
 
-//
+// Função que
 RP iniciar_RP(){
 	RP p = malloc(sizeof(struct registos_produto));
 
@@ -100,7 +100,7 @@ RP iniciar_RP(){
 	return p;
 }
 
-//
+// Função que
 int produto_vendido(RP p, char* produto, int x){
 	int nID = num_(produto,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
@@ -111,7 +111,7 @@ int produto_vendido(RP p, char* produto, int x){
 	return p2->vendido_in[x];
 }
 
-//
+// Função que
 int p_vezes_comprado(RP p, char* produto, int m, int f){
 	int nID = num_(produto,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
@@ -122,7 +122,7 @@ int p_vezes_comprado(RP p, char* produto, int m, int f){
 	return p2->vezes_comprado[m-1][f-1];
 }
 
-//
+// Função que
 int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes){
 	int r = 0;
 	int nID = num_(produto,2);
@@ -142,12 +142,12 @@ int p_NP_vezes(RP p, char* produto, char NP, int filial, int mes){
 	return r;
 }
 
-//
+// Função que
 int vendeu(Produto p){
 	return (p->vendido_in[0] == 0);
 }
 
-//
+// Função que
 int p_nao_vendeu(RP p){
 	int r = 0;
 
@@ -158,3 +158,59 @@ int p_nao_vendeu(RP p){
 
 	return r;
 }
+
+/*
+
+// Função que
+int conta_produtos(){
+	int r = 0;
+
+	for (int l1 = 0; l1 < LETRAS; l1++)
+		for(int l2 = 0; l2 < LETRAS; l2++)
+			for(int h = 0; h < HASHNUMBER; h++)
+				r ++;
+
+	return r;
+}
+
+// Função que
+String* lista_Nvendidos(Filial* f, Produtos pr, int add[1]){
+	RP p = get_produtos(*f);
+	int i = 0, nProd = conta_produtos();
+	String* listaProd = malloc(sizeof(String)*nProd);
+	add[0] = 0;
+
+	for(int l = 0; l < nProd; l++)
+		listaProd[l] = NULL;
+	
+	for (int j = 0; j < nProd; ++j){
+		lista_total_produtos(pr,listaProd);
+		if (produto_vendido(p,listaProd->id_produto,0)==0) i++;
+	}
+
+	for(int k = 0; k < nProd; k++)
+		listaProd[k] = NULL;
+
+	String* s = malloc(sizeof(String)*i);
+
+	for (int j = 0; j < nProd; ++j){
+		if (produto_vendido(p,listaProd->id_produto,0)==0 || add[0]<i){
+			s->id_produto = listaProd->id_produto;
+			add[0]++;
+		}		
+	}
+
+	return s;
+}
+
+// Função que
+int conta_String (String* s) {
+
+	int r = 0;
+	while(s[r]!=NULL){
+		r++;
+	}
+	return r;
+}
+
+*/

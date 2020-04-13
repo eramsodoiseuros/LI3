@@ -30,10 +30,12 @@ Filial iniciar_filial(){
 	return f;
 }
 
+// Função que
 void f_produto(Filial f, char* id){
 	insert_p(f->produtos, id);
 }
 
+// Função que
 void f_cliente(Filial f, char* id){
 	insert_c(f->clientes, id);
 }
@@ -43,11 +45,12 @@ int comprou_in(char* id, Filial f, int filial){
 	return 0;
 }
 
-
+// Função que
 RP get_produtos(Filial f){
 	return f->produtos;
 }
 
+// Função que
 RC get_clientes(Filial f){
 	return f->clientes;
 }

@@ -24,8 +24,10 @@
 #define buffsize 200
 
 
-// to print or not to print
+/**
+ *	Função que 
+ *	@param 
+ */
 void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2);
-void navegador(String* lista, int tamanho);
 
 #endif

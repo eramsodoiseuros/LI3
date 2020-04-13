@@ -54,7 +54,7 @@ Cliente iniciar_cliente(){
 	return c;
 }
 
-//
+// Função que
 void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP){
 	c->comprou_in[0]++;
 	c->comprou_in[filial]++;
@@ -68,7 +68,7 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
     c->size_comprados++;
 }
 
-//
+// Função que
 void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP){
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -78,7 +78,7 @@ void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int 
 	search_update(c->tabela_cliente[index[0]][index[1]], nID, 'c', cliente, filial, mes, preco, unidades, produto, NP);
 }
 
-//
+// Função que
 RC iniciar_RC(){
 	RC c = malloc(sizeof(struct registos_cliente));
 
@@ -89,7 +89,7 @@ RC iniciar_RC(){
 	return c;
 }
 
-//
+// Função que
 int cliente_comprou(RC c, char* cliente, int x){
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -101,7 +101,7 @@ int cliente_comprou(RC c, char* cliente, int x){
 	return c2->comprou_in[x];
 }
 
-//
+// Função que
 int c_quantos_comprou(RC c, char* cliente){
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -114,7 +114,7 @@ int c_quantos_comprou(RC c, char* cliente){
 }
 
 /*
-
+// Função que
 int c_vezes_comprou (RC c, char* cliente, int m, int f){
 	int nID = num_(produto,2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
@@ -124,11 +124,13 @@ int c_vezes_comprou (RC c, char* cliente, int m, int f){
 
 	return c2->vezes_comprou[m-1][f-1];
 */
+
+// Função que
 int comprou(Cliente c){
 	return (c->comprou_in[0] == 0);
 }
 
-//
+// Função que
 int c_nao_comprou(RC c){
 	int r = 0;
 

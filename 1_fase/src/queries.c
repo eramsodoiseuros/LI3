@@ -73,13 +73,9 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 ///////////////////////////////////////////////////////////
 // QUERY 2
 
-String* query_2(Produtos* p, char letra, int tamanho){
+Lista_Strings query_2(Produtos* p, char letra){
 
-	String* lista = malloc(sizeof(String)*tamanho);
-
-	for(int i = 0; i < tamanho; i++){
-		lista[i] = NULL;
-	}
+	Lista_Strings lista = iniciar_lista();
 
 	lista_produtos(*p, letra, lista);
 
@@ -190,7 +186,7 @@ void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
 // QUERY 4
 /*
 
-String* query_4 (Filial* f,Produtos* pr, int add[1]) {
+Lista_Strings query_4 (Filial* f,Produtos* pr, int add[1]) {
 	return lista_Nvendidos(f,*pr,add);
 }
 
@@ -212,11 +208,6 @@ void query_6(Filial* f, int c[1], int p[1]){
 	c[0] = c_nao_comprou(clientes);
 	p[0] = p_nao_vendeu(produtos);
 }
-
-///////////////////////////////////////////////////////////
-// QUERY 6
-
-//void query_6(){}
 
 ///////////////////////////////////////////////////////////
 // QUERY 7

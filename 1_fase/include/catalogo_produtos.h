@@ -38,13 +38,13 @@ Produtos iniciar_produtos(int* num, Filial f);
  *	Função que cria uma lista de produtos validos
  *	@param estrutura com os produtos, a letra dos produtos pretendidos e a estrutura a preencher
  */
-void lista_produtos(Produtos p, char letra, String* lista);
+void lista_produtos(Produtos p, char letra, Lista_Strings lista);
 
 /**
  *	Função que cria uma lista de produtos validos
  *	@param estrutura com os produtos e a estrutura a preencher
  */
-void lista_total_produtos(Produtos p, String* lista);
+void lista_total_produtos(Produtos p, Lista_Strings lista);
 
 /**
  *	Função que devolve o numero de produtos com uma determinada letra

@@ -2,6 +2,7 @@
 #include "../include/registos_cliente.h"
 #include "../include/registos_produto.h"
 
+
 struct arvore{
 	int valor;             // valor para se poder gerir
     void* info;            // info que realmente se guarda
@@ -10,13 +11,11 @@ struct arvore{
 };
 
 
-struct string{
-    char* id_produto;
+struct lista_strings{
+    int in_use;
+    int free_space;
+    char** lista;
 };
-
-char* getString (String s){
-    return s->id_produto;
-}
 
 
 //Função strdup criada para evitar warnings
@@ -28,14 +27,50 @@ char* sdup(const char *s){
     return (char *) memcpy (novo, s, tamanho);
 }
 
-// Função que
-String iniciar_string(char* id){
-    String s = malloc(sizeof(String));
+// Função que transforma uma substring num numero
+int num_(char string[], int index){
+    return atoi(string+index);
+}
 
-    s->id_produto = sdup(id);
+//////////////////////////////////////////////////
+// STRINGS
+
+// Função que inicia uma Lista de Strings
+Lista_Strings iniciar_lista(){
+    Lista_Strings s = (Lista_Strings) malloc(sizeof(struct lista_strings));
     
+    s->in_use = 0;
+    s->free_space = 200;
+    s->lista = (char**) malloc(sizeof(char*) * s->free_space);
+
     return s;
 }
+
+// Função que verifica se a Lista está cheia, aloca memória se estiver
+void is_full(Lista_Strings s){
+
+    if(s->in_use >= s->free_space){
+        s->free_space += 500;
+        s->lista = realloc(s->lista, sizeof(char*) * s->free_space);
+    }
+}
+
+//Função que insere uma string no fim do array Strings (alocando memória se necessário)
+void add_lista(Lista_Strings s, char* c){
+    is_full(s);
+    s->lista[s->in_use++] = sdup(c);
+}
+
+char* get_elem(Lista_Strings s, int i){
+    return s->lista[i];
+}
+
+void delete_lista(Lista_Strings s){
+    free(s);
+}
+
+//////////////////////////////////////////////////
+// AVL
 
 //Função que devolve o lado esquerdo de uma arvore
 AVL esq(AVL t){
@@ -160,6 +195,10 @@ AVL insert_tree(AVL a, int val, char* id, char tipo){
     return a;
 } 
 
+
+/////////////////////////////////////////////////////
+// SEARCH_FUNTIONS
+
 // Função que procura um elemento numa arvore binaria
 int search_tree(AVL a, int id){
 	int r;
@@ -231,6 +270,21 @@ int search_n(AVL a, char tipo){
 }
 
 // Função que
+int search_c(AVL a, int* lista){
+    int r = 0;
+
+    if(a == NULL) r = 0;
+    else{
+        if(comprou(a->info))
+            r++; 
+        r += search_n(a->esq,'c');
+        r += search_n(a->dir,'c');
+    }
+
+    return r;
+}
+
+// Função que
 void* search_info(AVL a, int id){
     void* r = NULL;
 
@@ -248,7 +302,3 @@ void* search_info(AVL a, int id){
     return r;
 }
 
-// Função que transforma uma substring num numero
-int num_(char string[], int index){
-	return atoi(string+index);
-}

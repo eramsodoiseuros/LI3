@@ -45,7 +45,7 @@ int escolhe_file(){
 }
 
 // Função que
-void navegador(String* lista, int tamanho){
+void navegador(Lista_Strings lista, int tamanho){
 
 	int val = 1, exit = 0;
 	char* scanS = malloc(sizeof(char)*buffsize);
@@ -53,6 +53,7 @@ void navegador(String* lista, int tamanho){
 	int pag = 1, i = 0, count = 0;
 
 	while(exit!=1){
+		printf("pag_%d_tamanho_%d\n",pag, tamanho );
 
 		if(scanout==0 || pag>(tamanho/10) || pag<0 || val==0 || lista==NULL){
 			val=1;
@@ -60,12 +61,12 @@ void navegador(String* lista, int tamanho){
 		}
 		else{
 
-			if(lista != NULL || pag < (tamanho/10))
+			if(lista || pag < (tamanho/10))
 			printf("%s************ Página %d ************%s\n",KBLU,(pag), RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize; i++){
-				printf("%s \n",getString(lista[i]));
+				printf("%s \n", get_elem(lista,i));
 				count++;
 			}
 			count = 0;
@@ -185,12 +186,12 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	char* cliente=malloc(sizeof(char)*buffsize);
 	char letra;
-	String* lista;
+	Lista_Strings lista;
 	int v[1]; v[0] = 0;
 	int aux_c[1], aux_p[1];
 	aux_c[0] = 0; aux_p[0] = 0;
 	double f[1]; f[0] = 0;
-	int s[1];
+	//int s[1];
 	
 	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
 	if(scanf("%s", inpt)){
@@ -209,7 +210,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				inicio = clock();
 
 				tamanho = get_size(*p, letra);
-			    lista = query_2(p, letra, tamanho);
+			    lista = query_2(p, letra);
 
 			    fim = clock();
 				navegador(lista, tamanho);

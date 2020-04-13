@@ -8,6 +8,12 @@ struct registos_produto{
 	AVL tabela_produto[LETRAS][LETRAS][HASHNUMBER];
 };
 
+/*
+struct clientes_de{
+	
+};
+*/
+
 struct produto{
     int vendido_in[5];
     int vezes_comprado[12][3];

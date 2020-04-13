@@ -80,7 +80,6 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 		if(valida_produto(linha)){
 			l1 = insert_produto(p, linha);
 			p->size[l1]++;
-
 			f_produto(f, linha);
 			i1++;
 		}
@@ -92,13 +91,17 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	fclose(file);
 }
 
+//
+int get_size(Produtos p, char l){
+    return p->size[l-'A'];
+}
+
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
 Produtos iniciar_produtos(int* num, Filial f){
 	Produtos p = malloc(sizeof(struct produtos));
 	int valores[2];
 
 	for (int i = 0; i < LETRAS; i++){
-		p->size[i] = 0;
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
 				p->tabela_produtos[i][j][k] = NULL;
@@ -112,44 +115,33 @@ Produtos iniciar_produtos(int* num, Filial f){
 }
 
 // Função que
-int get_size(Produtos p, char l){
-	return p->size[l-'A'];
-}
+void print_simples(Lista_Strings lista, AVL a){
 
-// Função que
-int print_simples(String* lista, AVL a, int pos){
-	int num = 0;
 	if(a){
-		num += print_simples(lista,esq(a),pos+num);
+		print_simples(lista,esq(a));
 		if(valor(a)){
-			lista[pos+num] = iniciar_string(codigo(a));
-			num++;
+			add_lista(lista, codigo(a));
 		}
-		num += print_simples(lista,dir(a),pos+num);
+		print_simples(lista,dir(a));
 	}
-
-	return num;
 }
 
 // Função que
-void lista_produtos(Produtos p, char letra, String* lista){
-	int r = 0;
-
+void lista_produtos(Produtos p, char letra, Lista_Strings lista){
 	int l1  = letra - 'A';
 
 	for(int l2 = 0; l2 < LETRAS; l2++)
 		for(int h = 0; h < HASHNUMBER; h++)
-			r += print_simples(lista,p->tabela_produtos[l1][l2][h], r);
+			print_simples(lista,p->tabela_produtos[l1][l2][h]);
 }
 
 // Função que
-void lista_total_produtos(Produtos p, String* lista){
-	int r = 0;
+void lista_total_produtos(Produtos p, Lista_Strings lista){
 
 	for (int l1 = 0; l1 < LETRAS; l1++)
 		for(int l2 = 0; l2 < LETRAS; l2++)
 			for(int h = 0; h < HASHNUMBER; h++)
-				r += print_simples(lista,p->tabela_produtos[l1][l2][h], r);
+				print_simples(lista,p->tabela_produtos[l1][l2][h]);
 }
 
 // Função que liberta o espaço alocado para a estrutura

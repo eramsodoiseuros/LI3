@@ -85,12 +85,14 @@ Lista_Strings query_2(Produtos* p, char letra){
 ///////////////////////////////////////////////////////////
 // QUERY 3
 
-void query_3 (Faturacao* f, Filial* f2, Produtos* pr, char* produto, int mes, int vendasT[1], int vendasP[1], int vendasN[1], int filial){
+void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], int vendasP[1], int vendasN[1], int filial){
 
 
-      
+    //Falta faturaçao do produto por filial 
     RP p = get_produtos(*f2);
-    
+    vendasT[0] = 0; 
+    vendasP[0] = 0;
+	vendasN[0] = 0; 
 
 		if(filial == 4){
 			for (int i = 1; i < 4; ++i)

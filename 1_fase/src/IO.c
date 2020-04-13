@@ -53,8 +53,7 @@ void navegador(Lista_Strings lista, int tamanho){
 	int pag = 1, i = 0, count = 0;
 
 	while(exit!=1){
-		printf("pag_%d_tamanho_%d\n",pag, tamanho );
-
+		
 		if(scanout==0 || pag>(tamanho/10) || pag<0 || val==0 || lista==NULL){
 			val=1;
 			printf("Página inválida ou não existente\n");
@@ -256,6 +255,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int vendasT[1];
     int vendasP[1];
     int vendasN [1];
+    vendasT[0] = 0, vendasN[0]=0,vendasP[0]=0;
 
 	for (int mes = 0; mes < 12; ++mes){
 		for(int filial = 0; filial<3; filial++){
@@ -283,6 +283,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 
 			    fim = clock();
 				navegador(lista, tamanho);
+				free(lista);
 				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
 				printf("CPUTIME: %f\n",cpu_time_used);
 
@@ -293,7 +294,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
     			produto = produto_(p);
     			m1 = mes_();
     			filial = filial_();
-				query_3(f2,f1,p,produto,m1,vendasT,vendasP,vendasN,filial);
+				query_3(f2,f1,produto,m1,vendasT,vendasP,vendasN,filial);
 
 				printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN[0] );
 				printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP[0] );
@@ -309,8 +310,13 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			//case 5:
 			
 			case 6:
+				inicio = clock();
 				query_6(f1,aux_c,aux_p);
-				printf("c_%d_p_%d\n",aux_c[0],aux_p[0]);
+				fim = clock();
+				printf("%sClientes que não compraram:%s %d\n",KBLU,RST,aux_c[0]);
+				printf("%sProdutos que não foram comprados:%s %d\n",KBLU,RST,aux_p[0]);
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
 				break;
 
 			case 7:
@@ -352,7 +358,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				*/
 
 				case 10:
-					cliente = sdup(cliente_());
+					cliente = sdup(cliente_(c));
 					m1 = mes_();
 	
 					//query_10();

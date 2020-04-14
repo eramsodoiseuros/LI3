@@ -82,46 +82,69 @@ int query_2(Produtos* p, char letra, Lista_Strings s){
 ///////////////////////////////////////////////////////////
 // QUERY 3
 
-void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], int vendasP[1], int vendasN[1], int filial){
+void query_3 (Filial* f2, char* produto, int mes, int vendas[3], int faturado[3], int filial){
 
 
     //Falta faturaçao do produto por filial 
     RP p = get_produtos(*f2);
-    vendasT[0] = 0; 
-    vendasP[0] = 0;
-	vendasN[0] = 0; 
+   for (int j = 0; j < 3; ++j)
+    {
+    	vendas[j]=0;
+    } 
+
+    for (int k = 0; k < 3; ++k)
+    {
+    	faturado[k]=0;
+    }
 
 		if(filial == 4){
 			for (int i = 1; i < 4; ++i){
 						
-			vendasT[0] += p_vezes_comprado(p,produto,mes,i);
-			vendasP[0] += p_NP_vezes(p,produto,'P', i,mes);
-			vendasN[0] += p_NP_vezes(p,produto,'N', i,mes);
+			vendas[0] += p_vezes_comprado(p,produto,mes,i);
+			vendas[2] += p_NP_vezes(p,produto,'P', i,mes);
+			vendas[1] += p_NP_vezes(p,produto,'N', i,mes);
+
+			faturado[0] += p_faturado_in(p,produto,mes,i,'N') + p_faturado_in(p,produto,mes,i,'P');
+			faturado[1] += p_faturado_in(p,produto,mes,i,'N');
+			faturado[2] += p_faturado_in(p,produto,mes,i,'P');
 			}
 
 		}
 
 		if(filial == 1){
 			
-			vendasT[0] = p_vezes_comprado(p,produto,mes,0);
-			vendasP[0] = p_NP_vezes(p,produto,'P', 0,mes);
-			vendasN[0] = p_NP_vezes(p,produto,'N', 0,mes);
+			vendas[0] = p_vezes_comprado(p,produto,mes,0);
+			vendas[2] = p_NP_vezes(p,produto,'P', 0,mes);
+			vendas[1] = p_NP_vezes(p,produto,'N', 0,mes);
+
+			faturado[0] = p_faturado_in(p,produto,mes,0,'N') + p_faturado_in(p,produto,mes,0,'P');
+			faturado[1] = p_faturado_in(p,produto,mes,0,'N');
+			faturado[2] = p_faturado_in(p,produto,mes,0,'P');
 			
 		}
 
 		if(filial == 2){
-			vendasT[0] = p_vezes_comprado(p,produto,mes,1);
-			vendasP[0] = p_NP_vezes(p,produto,'P', 1,mes);
-			vendasN[0] = p_NP_vezes(p,produto,'N', 1,mes);
+			vendas[0] = p_vezes_comprado(p,produto,mes,1);
+			vendas[2] = p_NP_vezes(p,produto,'P', 1,mes);
+			vendas[1] = p_NP_vezes(p,produto,'N', 1,mes);
+
+			faturado[0] = p_faturado_in(p,produto,mes,1,'N') + p_faturado_in(p,produto,mes,1,'P');
+			faturado[1] = p_faturado_in(p,produto,mes,1,'N');
+			faturado[2] = p_faturado_in(p,produto,mes,1,'P');
 			
 
 		}
 
 		if(filial == 3){
 			
-			vendasT[0] = p_vezes_comprado(p,produto,mes,2);
-			vendasP[0] = p_NP_vezes(p,produto,'P', 2,mes);
-			vendasN[0] = p_NP_vezes(p,produto,'N', 2,mes);
+			vendas[0] = p_vezes_comprado(p,produto,mes,2);
+			vendas[2] = p_NP_vezes(p,produto,'P', 2,mes);
+			vendas[1] = p_NP_vezes(p,produto,'N', 2,mes);
+
+
+			faturado[0] = p_faturado_in(p,produto,mes,2,'N') + p_faturado_in(p,produto,mes,2,'P');
+			faturado[1] = p_faturado_in(p,produto,mes,2,'N');
+			faturado[2] = p_faturado_in(p,produto,mes,2,'P');
 		}
 }
 

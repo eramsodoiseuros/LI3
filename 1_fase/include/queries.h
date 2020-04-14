@@ -45,7 +45,7 @@ Lista_Strings query_2(Produtos* p, char letra);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_3(Faturacao* f, Filial* f2, Produtos* p);
+void query_3(Faturacao* f, Filial* f2,  char* produto, int mes, int vendasT[1], int vendasP[1], int vendasN[1], int filial);
 
 /**
  *	Determinar a lista ordenada dos códigos dos produtos (e o seu número total) que ninguém comprou.
@@ -81,7 +81,7 @@ void query_6(Filial* f, int c[1], int p[1]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_7();
+void query_7(Filial* f, Clientes* c, char* cliente, int vendas[12][3]);
 
 /**
  *	Dado um intervalo fechado de meses, por exemplo [1..3], determinar o total de vendas (nº de registos de venda) registadas nesse intervalo e o total facturado;

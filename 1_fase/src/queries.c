@@ -85,113 +85,59 @@ Lista_Strings query_2(Produtos* p, char letra){
 ///////////////////////////////////////////////////////////
 // QUERY 3
 
-void query_3 (Faturacao* f, Filial* f2, Produtos* pr){
+void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], int vendasP[1], int vendasN[1], int filial){
 
-    int vendas = 0;
-    int vendasP = 0;
-    int vendasN = 0;
-    //double fat_fil = 0;
-    //int exit = 0;
 
-    char* inpt = malloc(sizeof(char)*buffsize);
-    int mes=1;
-    int filial=1;
-    char produto[7];
-
+    //Falta faturaçao do produto por filial 
     RP p = get_produtos(*f2);
-
-    printf("%sInsira um produto: %s\n",KBLU,RST);
-    if(scanf("%s",produto)){
-    	while(search_P(*pr, produto)==0){
-	    	printf("%sProduto Invalido%s\n",KRED,RST);
-	    	if(scanf("%s",produto));
-	    }
-    }
-	
-    printf("%sInsira um mes: %s\n",KBLU,RST);
-
-    if(scanf("%s",inpt)){
-		mes=atoi(inpt);
-
-		while(mes<=0 || mes>12){
-			printf("%sMês Invalido%s\n",KRED,RST);
-			if(scanf("%s",inpt));
-			mes=atoi(inpt);
-		}
-	}
-
-	printf("%sInsira uma filial [1..3] ou [4] para valores globais: %s\n",KBLU,RST);
-	
-	if(scanf("%s",inpt)){
-		filial=atoi(inpt);
-
-		while(filial<=0 || filial>4){
-			printf("%sOpção Invalida%s\n",KRED,RST);
-			if(scanf("%s",inpt));
-			filial=atoi(inpt);
-		}
+    vendasT[0] = 0; 
+    vendasP[0] = 0;
+	vendasN[0] = 0; 
 
 		if(filial == 4){
-			for (int i = 0; i < 3; ++i)
+			for (int i = 1; i < 4; ++i)
 			{
 						
-			vendas += p_vezes_comprado(p,produto,mes,i);
-			vendasP += p_NP_vezes(p,produto,'P', i,mes);
-			vendasN += p_NP_vezes(p,produto,'N', i,mes);
+			vendasT[0] += p_vezes_comprado(p,produto,mes,i);
+			vendasP[0] += p_NP_vezes(p,produto,'P', i,mes);
+			vendasN[0] += p_NP_vezes(p,produto,'N', i,mes);
 			}
 
-			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
-			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
-			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 
 		if(filial == 1){
 			
-			vendas = p_vezes_comprado(p,produto,mes,0);
-			vendasP = p_NP_vezes(p,produto,'P', 0,mes);
-			vendasN = p_NP_vezes(p,produto,'N', 0,mes);
+			vendasT[0] = p_vezes_comprado(p,produto,mes,0);
+			vendasP[0] = p_NP_vezes(p,produto,'P', 0,mes);
+			vendasN[0] = p_NP_vezes(p,produto,'N', 0,mes);
 			
-
-			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
-			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
-			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 
 		if(filial == 2){
-			vendas = p_vezes_comprado(p,produto,mes,1);
-			vendasP = p_NP_vezes(p,produto,'P', 1,mes);
-			vendasN = p_NP_vezes(p,produto,'N', 1,mes);
+			vendasT[0] = p_vezes_comprado(p,produto,mes,1);
+			vendasP[0] = p_NP_vezes(p,produto,'P', 1,mes);
+			vendasN[0] = p_NP_vezes(p,produto,'N', 1,mes);
 			
 
-			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
-			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
-			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
 		}
 
 		if(filial == 3){
 			
-			vendas = p_vezes_comprado(p,produto,mes,2);
-			vendasP = p_NP_vezes(p,produto,'P', 2,mes);
-			vendasN = p_NP_vezes(p,produto,'N', 2,mes);
-			
-
-			printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN );
-			printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP );
-			printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendas );
+			vendasT[0] = p_vezes_comprado(p,produto,mes,2);
+			vendasP[0] = p_NP_vezes(p,produto,'P', 2,mes);
+			vendasN[0] = p_NP_vezes(p,produto,'N', 2,mes);
 		}
-	}
 }
+
 
 ///////////////////////////////////////////////////////////
 // QUERY 4
-/*
 
-Lista_Strings query_4 (Filial* f,Produtos* pr, int add[1]) {
+
+/*Lista_Strings query_4 (Filial* f,Produtos* pr, int add[1]) {
 	return lista_Nvendidos(f,*pr,add);
 }
-
 */
-
 ///////////////////////////////////////////////////////////
 // QUERY 5
 
@@ -213,39 +159,22 @@ void query_6(Filial* f, int c[1], int p[1]){
 
 ///////////////////////////////////////////////////////////
 // QUERY 7
+void query_7 (Filial* f, Clientes* c, char* cliente, int vendas[12][3]){
 
-void query_7 (){
-	char* cliente=malloc(sizeof(char)*buffsize);
-	int filial = 1;
-	int vendas = 0;
-	// String*int validstr = 0;
-	printf("%sInsira um cliente: %s\n",KBLU,RST);
-	if(scanf("%s",cliente));
 	
-	while (valida_cliente(cliente)==0) {
-		printf("%sCliente Invalido%s\n",KRED,RST);
-		if(scanf("%s",cliente));
-	}
+	RC cl = get_clientes(*f);
+	
+	for (int mes = 0; mes < 12; ++mes){
+		for(int filial = 0; filial<3; filial++){
+		vendas[mes][filial] = c_vezes_comprou(cl,cliente,mes,filial);
 
-	printf("%s#############################################################\n",KBLU);
-	printf("%s##                                                         ##\n",KBLU);
-	printf("%s##%s                           %s                        %s##\n",KBLU,RST,cliente,KBLU);
-	printf("%s##                                                         ##\n",KBLU);
-	printf("%s#############################################################\n",KBLU);
-	printf("%s##                     ##                ##                ##\n",KBLU);
-	printf("%s##%s       Filial        %s##%s       Mês      %s##%s     Vendas     %s##\n",KBLU,RST,KBLU,RST,KBLU,RST,KBLU);
-	printf("%s##                     ##                ##                ##\n",KBLU);
-	printf("%s#############################################################\n",KBLU);
 
-	for(filial = 1; filial<4; filial++){
-		for (int mes = 1; mes < 13; ++mes){
-		//vendas = n_vendas(cliente,filial,mes);
-		printf("%s##                     ##                ##                ##\n",KBLU);
-		printf("%s##%s        %d            %s##%s        %d       %s##%s      %d        %s##\n",KBLU,RST,filial,KBLU,RST,mes,KBLU,RST,vendas,KBLU);
-		printf("%s#############################################################%s\n",KBLU,RST);
+
 		}
 	}
+
 }
+
 
 ///////////////////////////////////////////////////////////
 // QUERY 8
@@ -264,6 +193,7 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 	f[0] = faturado;
 }
 
+
 ///////////////////////////////////////////////////////////
 // QUERY 9
 
@@ -271,6 +201,7 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 
 ///////////////////////////////////////////////////////////
 // QUERY 10
+
 
 /*
 
@@ -284,9 +215,9 @@ String* query_10(char* cliente, int mes, Clientes* c, Filial* f, Produtos* p, in
 		//if(c_comprou_p()==1) comprado += c_vezes_comprouP(cl,pl,cliente,mes,i);
 			}
 
-}
+}*/
 
-*/
+
 
 ///////////////////////////////////////////////////////////
 // QUERY 11

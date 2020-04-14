@@ -135,16 +135,9 @@ void lista_produtos(Produtos p, char letra, Lista_Strings lista){
 			print_simples(lista,p->tabela_produtos[l1][l2][h]);
 }
 
-// Função que
-void lista_total_produtos(Produtos p, Lista_Strings lista){
-
-	for (int l1 = 0; l1 < LETRAS; l1++)
-		for(int l2 = 0; l2 < LETRAS; l2++)
-			for(int h = 0; h < HASHNUMBER; h++)
-				print_simples(lista,p->tabela_produtos[l1][l2][h]);
-}
-
 // Função que liberta o espaço alocado para a estrutura
 void free_produtos(Produtos p){
 	free(p);
 }
+
+

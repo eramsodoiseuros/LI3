@@ -112,6 +112,7 @@ int c_quantos_comprou(RC c, char* cliente){
 	return c2->size_comprados;
 }
 
+
 // Função que
 int c_vezes_comprou(RC c, char* cliente, int m, int f){
 	int nID = num_(cliente,1);
@@ -122,6 +123,7 @@ int c_vezes_comprou(RC c, char* cliente, int m, int f){
 
 	return c2->vezes_comprou[m][f];
 }
+
 
 // Função que
 int comprou(Cliente c){

@@ -30,6 +30,8 @@ int search_C(Clientes c, char* id);
  */
 int valida_cliente(char* id);
 
+int indentifica_c(char* id, char* c);
+
 /**
  *	Função que inicializa as estruturas, escreve na posição 0 e 1 do array
  *	@param o array para escrever e a estrutura clientes

@@ -11,7 +11,10 @@
 #include "catalogo_clientes.h"
 #include "filial.h"
 #include "faturacao.h"
+#include "AVL.h"
 
+
+void search_9(char* path, Clientes c, char* id_produto, int filial, Lista_Strings N, Lista_Strings P);
 
 /**
  *	Função que preenche as estruturas Filial e Faturação, escreve na posição 4 e 5 do array

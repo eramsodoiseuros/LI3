@@ -240,7 +240,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	//char* cliente = malloc(sizeof(char)*buffsize);
 	char letra;
-	Lista_Strings lista;
+	Lista_Strings lista, N, P;
 	int v[1]; v[0] = 0;
 	int aux_c[1], aux_p[1];
 	aux_c[0] = 0; aux_p[0] = 0;
@@ -381,11 +381,30 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				}
 				break;
 
-				/*	
-				case 9:
-					query_9();
-					break;
-				*/
+				
+			case 9:
+				inpt = produto_(p);
+				filial = filial_();
+
+				inicio = clock();
+			
+				N = iniciar_lista();
+				P = iniciar_lista();
+
+				query_9(c, inpt, filial, N, P);
+
+				fim = clock();
+
+				navegador(N, size_lista(N));
+				navegador(P, size_lista(P));
+
+				delete_lista(N);
+				delete_lista(P);
+
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
+				
+				break;
 
 				case 10:
 					inpt = sdup(cliente_(c));

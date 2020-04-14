@@ -75,6 +75,11 @@ int valida_cliente(char * id){
 	return r;
 }
 
+//
+int indentifica_c(char* id, char* c){
+	return !strcmp(id,c);
+}
+
 // Função que lê de um ficheiro de clientes
 void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	char linha[6];

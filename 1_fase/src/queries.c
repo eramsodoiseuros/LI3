@@ -197,7 +197,6 @@ void query_7 (Filial* f, Clientes* c, char* cliente, int vendas[12][3]){
 
 }
 
-
 ///////////////////////////////////////////////////////////
 // QUERY 8
 
@@ -215,11 +214,12 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 	f[0] = faturado;
 }
 
-
 ///////////////////////////////////////////////////////////
 // QUERY 9
 
-//void query_9(){}
+void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Strings P){
+	search_9("../Vendas_1M.txt", *c, produto, filial, N, P);
+}
 
 ///////////////////////////////////////////////////////////
 // QUERY 10

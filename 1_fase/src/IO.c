@@ -198,12 +198,6 @@ int filial_(){
 }
 
 
-
-
-
-
-
-
 void faz_tabela7 (char* cliente, int vendas[12][3]){
 
 	int venda_tot = 0;
@@ -300,12 +294,13 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP[0] );
 				printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendasT[0] );
 				break;
-			/*	
+				
 			case 4:
-					//lista = query_4(f1,p,s);
-					//navegador(lista,s[0]);
+					lista = query_4(f1,p);
+					tamanho = size_lista(lista);
+					navegador(lista,tamanho);
 					break;
-			*/
+			
 
 			//case 5:
 			

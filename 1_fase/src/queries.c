@@ -134,10 +134,30 @@ void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], 
 // QUERY 4
 
 
-/*Lista_Strings query_4 (Filial* f,Produtos* pr, int add[1]) {
-	return lista_Nvendidos(f,*pr,add);
+Lista_Strings query_4 (Filial* f, Produtos pr) {
+	RP p = get_produtos(*f);
+	Lista_Strings listaProd = iniciar_lista();
+	Lista_Strings s = iniciar_lista();
+	
+	
+	for(int l1 = 0; l1 < 26; l1++)
+		for(int l2 = 0; l2 < 26; l2++)
+			for(int h = 0; h < 599; h++)
+				print_simples(listaProd,pr->tabela_produtos[l1][l2][h]);
+
+
+	for ( int i = 0; i < size_lista(listaProd); ++i)
+	{
+		if (produto_vendido(p,get_elem(listaProd,i),0)==0){
+				add_lista(s,get_elem(listaProd,i));
+				
+		}		
+	
+	}
+	return s;
 }
-*/
+
+
 ///////////////////////////////////////////////////////////
 // QUERY 5
 

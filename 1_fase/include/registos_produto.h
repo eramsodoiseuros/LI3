@@ -23,6 +23,9 @@ Produto iniciar_produto();
  */
 int insert_p(RP p, char* id);
 
+
+
+
 /**
  *	Função que 
  *	@param 
@@ -78,18 +81,7 @@ int vendeu_todas(Produto p);
  *	Função que 
  *	@param 
  */
-//int conta_produtos();
 
-/**
- *	Função que 
- *	@param 
- */
-//String* lista_Nvendidos(Filial* f,Produtos pr, int add[1]);
 
-/**
- *	Função que 
- *	@param 
- */
-//int conta_String (String* s);
 
 #endif

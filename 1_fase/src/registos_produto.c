@@ -16,7 +16,7 @@ struct clientes_de{
 struct produto{
     int vendido_in[5];
     int vezes_comprado[12][3];
-    int faturado_in[12][3];
+    int faturado_in[12][3][2];
     int vezes_N[12][3];
     int vezes_P[12][3];
     // void* lista_comprado[12];
@@ -60,7 +60,8 @@ Produto iniciar_produto(){
 	
 	for(int m = 0; m < 12; m++)
 		for(int i = 0; i < 3; i++)
-			p->faturado_in[m][i] = 0;
+			for(int t = 0; t < 2; t++)
+				p->faturado_in[m][i][t] = 0;
 	
 	for(int m = 0; m < 12; m++)
 		for(int i = 0; i < 3; i++)
@@ -84,7 +85,11 @@ void update_registo_p(Produto p, int filial, int mes, double preco, int unidades
 
 	p->vezes_comprado[mes-1][filial-1]++;
 
-	p->faturado_in[mes-1][filial-1] += unidades*preco;
+	if(NP == 'N')
+		p->faturado_in[mes-1][filial-1][0] += unidades*preco;
+	
+	if(NP == 'P')
+		p->faturado_in[mes-1][filial-1][1] += unidades*preco;
 
 	if(NP == 'N')
 		p->vezes_N[mes-1][filial-1]++;
@@ -136,14 +141,19 @@ int p_vezes_comprado(RP p, char* produto, int m, int f){
 }
 
 // Função que
-int p_faturado_in(RP p, char* produto, int m, int f){
-	int nID = num_(produto,2);
+int p_faturado_in(RP p, char* produto, int m, int f, char NP){
+	int nID = num_(produto,2), c = 42;
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_p(index,produto);
 
 	Produto p2 = search_info(p->tabela_produto[index[0]][index[1]][index[2]], nID);
+	
+	if(NP == 'N')
+		c = 0;
+	if(NP = 'P')
+		c = 1;
 
-	return p2->faturado_in[m-1][f-1];
+	return p2->faturado_in[m-1][f-1][c];
 }
 
 // Função que

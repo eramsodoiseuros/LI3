@@ -10,12 +10,6 @@ struct filial{
 	RC clientes;
 };
 
-// Função que dado os parametros de uma venda dá update na estrutura filial
-void update_filial(Filial f1, int filial, int mes, double preco, int unidades, char NP, char* produto, char* cliente){
-	int i = 0;
-	i++;
-}
-
 // Função que inicia a estrutura filial com os respetivos valores a zero
 Filial iniciar_filial(){
 	Filial f = malloc(sizeof(struct filial));
@@ -38,11 +32,6 @@ void f_produto(Filial f, char* id){
 // Função que
 void f_cliente(Filial f, char* id){
 	insert_c(f->clientes, id);
-}
-
-// Função que verifica se um cliente já comprou numa filial
-int comprou_in(char* id, Filial f, int filial){
-	return 0;
 }
 
 // Função que

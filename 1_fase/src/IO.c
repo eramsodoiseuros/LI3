@@ -116,7 +116,7 @@ char letra_(){
 int mes_(){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int mes = 0;
-	printf("%sInsira um Mês: %s\n",KBLU,RST);
+	printf("%sInsira um Mês [1...12]: %s\n",KBLU,RST);
 
 	if(scanf("%s", inpt)){
 		mes = atoi(inpt);
@@ -354,7 +354,6 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 
 			case 8:
 				while(decisao){
-					printf("%sInsira os meses que deseja consultar [1..12]:%s",KBLU,RST);
 					m1 = mes_();
 					printf("%sAté: %s\n",KBLU,RST);
 					m2 = mes_();

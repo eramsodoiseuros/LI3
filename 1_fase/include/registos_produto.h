@@ -58,7 +58,7 @@ int produto_vendido(RP p, char* produto, int x);
 int p_vezes_comprado(RP p, char* produto, int m, int f);
 
 // Função que
-int p_faturado_in(RP p, char* produto, int m, int f);
+int p_faturado_in(RP p, char* produto, int m, int f, char NP);
 
 /**
  *	Função que 

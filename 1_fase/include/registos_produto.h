@@ -71,6 +71,9 @@ int vendeu(Produto p);
  */
 int p_nao_vendeu(RP p);
 
+// Função que
+int vendeu_todas(Produto p);
+
 /**
  *	Função que 
  *	@param 

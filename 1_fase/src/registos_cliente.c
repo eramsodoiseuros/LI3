@@ -1,5 +1,4 @@
 #include "../include/registos_cliente.h"
-#include "../include/AVL.h"
 
 #define LETRAS 26
 #define HASHNUMBER 599
@@ -114,7 +113,7 @@ int c_quantos_comprou(RC c, char* cliente){
 }
 
 // Função que
-int c_vezes_comprou (RC c, char* cliente, int m, int f){
+int c_vezes_comprou(RC c, char* cliente, int m, int f){
 	int nID = num_(cliente,1);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
 	hF_c(index,cliente);
@@ -137,10 +136,11 @@ int comprou_tudo(Cliente c){
 // Função que
 Lista_Strings c_comprou_tudo(RC c){
 	Lista_Strings lista = malloc(sizeof(Lista_Strings));
+	char l1 = 'A';
 
 	for (int i = 0; i < LETRAS; i++)
 		for(int k = 0; k < HASHNUMBER; k++)
-			i++;//search_c(c->tabela_cliente[i][k], lista);
+			search_c(c->tabela_cliente[i][k], lista, l1+i);
 
 	return lista;
 }

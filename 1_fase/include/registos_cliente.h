@@ -7,6 +7,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "AVL.h"
 
 typedef struct registos_cliente* RC;
 typedef struct cliente* Cliente;
@@ -60,6 +61,12 @@ int c_quantos_comprou(RC c, char* cliente);
  *	@param 
  */
 int comprou(Cliente c);
+
+// Função que
+int comprou_tudo(Cliente c);
+
+// Função que
+Lista_Strings c_comprou_tudo(RC c);
 
 /**
  *	Função que 

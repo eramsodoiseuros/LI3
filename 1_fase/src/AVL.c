@@ -270,18 +270,33 @@ int search_n(AVL a, char tipo){
 }
 
 // Função que
-int search_c(AVL a, int* lista){
-    int r = 0;
+void search_c(AVL a, Lista_Strings lista, char l1){
 
-    if(a == NULL) r = 0;
+    if(a == NULL);
     else{
-        if(comprou(a->info))
-            r++; 
-        r += search_n(a->esq,'c');
-        r += search_n(a->dir,'c');
+        if(comprou_tudo(a->info)){
+            char* s = malloc(sizeof(char*));
+            sprintf(s,"%c%d", l1, a->valor);
+            add_lista(lista, s); 
+        }
+        search_c(a->esq, lista, l1);
+        search_c(a->dir, lista, l1);
     }
+}
 
-    return r;
+// Função que
+void search_p(AVL a, Lista_Strings lista, char l1, char l2){
+
+    if(a == NULL);
+    else{
+        if(vendeu_todas(a->info)){
+            char* s = malloc(sizeof(char*));
+            sprintf(s,"%c%c%d", l1, l2, a->valor);
+            add_lista(lista, s); 
+        }
+        search_p(a->esq, lista, l1, l2);
+        search_p(a->dir, lista, l1, l2);
+    }
 }
 
 // Função que

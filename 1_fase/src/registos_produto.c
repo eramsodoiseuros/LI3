@@ -154,6 +154,11 @@ int vendeu(Produto p){
 }
 
 // Função que
+int vendeu_todas(Produto p){
+	return (p->vendeu_in[4] == 1);
+}
+
+// Função que
 int p_nao_vendeu(RP p){
 	int r = 0;
 

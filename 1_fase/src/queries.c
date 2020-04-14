@@ -224,20 +224,9 @@ void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Stri
 ///////////////////////////////////////////////////////////
 // QUERY 10
 
-
-/*
-
-String* query_10(char* cliente, int mes, Clientes* c, Filial* f, Produtos* p, int add[1]){
-	RC cl = get_clientes(*f);
-	String s;
-	int comprado = 0;
-
-	for (int i = 0; i < 3; ++i)
-	{
-		//if(c_comprou_p()==1) comprado += c_vezes_comprouP(cl,pl,cliente,mes,i);
-			}
-
-}*/
+void query_10(Produtos* p, char* cliente, int mes, Lista_Ordenada P){
+	search_10("../Vendas_1M.txt", *p, cliente, mes, P);
+}
 
 
 

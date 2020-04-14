@@ -18,6 +18,14 @@ struct lista_strings{
 };
 
 
+struct lista_ordenada{
+    int in_use;
+    int free_space;
+    char** lista;
+    int* unidades;
+};
+
+
 //Função strdup criada para evitar warnings
 char* sdup(const char *s){
     size_t tamanho = strlen (s) + 1;
@@ -72,6 +80,76 @@ char* get_elem(Lista_Strings s, int i){
 void delete_lista(Lista_Strings s){
     free(s);
 }
+
+
+//////////////////////////////////////////////////
+// STRINGS ORDENADAS
+
+// Função que inicia uma Lista Ordenada
+Lista_Ordenada iniciar_lista_ordenada(){
+    Lista_Ordenada s = (Lista_Ordenada) malloc(sizeof(struct lista_ordenada));
+    
+    s->in_use = 0;
+    s->free_space = 50;
+    s->lista = (char**) malloc(sizeof(char*) * s->free_space);
+    s->unidades = (int*) malloc(sizeof(int) * s->free_space);
+
+    return s;
+}
+
+// Função que verifica se a Lista está cheia, aloca memória se estiver
+void is_full_(Lista_Ordenada s){
+
+    if(s->in_use >= s->free_space){
+        s->free_space += 100;
+        s->lista = realloc(s->lista, sizeof(char*) * s->free_space);
+        s->unidades = realloc(s->lista, sizeof(int) * s->free_space);
+    }
+}
+
+int existe_in(Lista_Ordenada s, char* c, char tipo){
+    int r = -1;
+    if(tipo == 'c'){
+        for(int aux = 0; aux < s->in_use; aux++)
+            if(num_(c, 1) == num_(s->lista[aux], 1))
+                if(c[0] == s->lista[aux][0])
+                    r = aux;
+    }
+    if(tipo == 'p'){
+        for(int aux = 0; aux < s->in_use; aux++)
+            if(num_(c, 2) == num_(s->lista[aux], 2))
+                if(c[0] == s->lista[aux][0])
+                    if(c[1] == s->lista[aux][1])
+                        r = aux;
+    }
+
+    return r;
+}
+
+//Função que insere uma string no fim do array Strings (alocando memória se necessário)
+void add_lista_ordenada(Lista_Ordenada s, char* c, char tipo){
+    int r = 0;
+    is_full_(s);
+    if( (r = existe_in(s,c,tipo)) == -1 )
+        s->lista[s->in_use++] = sdup(c);
+    else{
+        s->lista[r] = sdup(c);
+        s->unidades[r]++;
+    }
+}
+
+int size_lista_ordenada(Lista_Ordenada s){
+    return s->in_use;
+}
+
+char* get_elem_(Lista_Ordenada s, int i){
+    return s->lista[i];
+}
+
+void delete_lista_ordenada(Lista_Ordenada s){
+    free(s);
+}
+
 
 //////////////////////////////////////////////////
 // AVL

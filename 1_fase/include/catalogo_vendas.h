@@ -16,6 +16,8 @@
 
 void search_9(char* path, Clientes c, char* id_produto, int filial, Lista_Strings N, Lista_Strings P);
 
+void search_10(char* path, Produtos p, char* id_cliente, int mes, Lista_Ordenada P);
+
 /**
  *	Função que preenche as estruturas Filial e Faturação, escreve na posição 4 e 5 do array
  *	@param o array a preencher na posição 4 e 5, a estrutura de produtos válidos, a estrutura de clientes válidos,

@@ -104,7 +104,7 @@ void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Stri
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_10();
+void query_10(Produtos* p, char* cliente, int mes, Lista_Ordenada P);
 
 /**
  *	Criar uma lista dos N produtos mais vendidos em todo o ano, indicando o número total de clientes e o número de unidades vendidas, filial a filial;

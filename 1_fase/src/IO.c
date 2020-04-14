@@ -78,7 +78,63 @@ void navegador(Lista_Strings lista, int tamanho){
 
 		if(((tamanho/10)+1) == 1)
 			return;
+
+		printf("%s(D para Proxima página) \n",KBLU);
+		printf("%s(A para Página Anterior) \n",KBLU);
+		printf("%s(E para sair)%s \n",KBLU,RST);
+		printf("Inserir número página: \n");
+
+		scanout = read(0,scanS,buffsize);
+		scanS = strtok(scanS," \n");
+
+		validstr = atoi(scanS);
+		printf("\n");
+
+		if(strcmp(scanS,"e") == 0 || strcmp(scanS,"E") == 0) {exit = 1;}
+		else if((strcmp(scanS,"d") == 0 || strcmp(scanS,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(scanS,"a") == 0 || strcmp(scanS,"A") == 0) && pag>1) pag--;
+		else if(validstr==0) val = 0;
+		else if(validstr!=0) pag = validstr;
+    }
+
+	free(scanS);
+}
+
+// Função que
+void navegador_(Lista_Ordenada lista, int tamanho){
+
+	int val = 1, exit = 0;
+	char* scanS = malloc(sizeof(char)*buffsize);
+	int validstr = 1, scanout = 1;
+	int pag = 1, i = 0, count = 0;
+
+	while(exit!=1){
 		
+		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+			val=1;
+			printf("Página inválida ou não existente\n");
+		}
+		else{
+
+			if(lista || pag < (tamanho/10)+1)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
+	             
+			for(i=(pag*10)-Pagsize; count<Pagsize; i++){
+				if(get_elem_(lista,i)!=NULL){
+					printf("%s \n", get_elem_(lista,i));
+					count++;
+				}
+				else break;			
+			}
+			count = 0;
+		}
+
+		printf("\n");
+
+		if(((tamanho/10)+1) == 1)
+			return;
+
 		printf("%s(D para Proxima página) \n",KBLU);
 		printf("%s(A para Página Anterior) \n",KBLU);
 		printf("%s(E para sair)%s \n",KBLU,RST);
@@ -245,6 +301,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	//char* cliente = malloc(sizeof(char)*buffsize);
 	char letra;
 	Lista_Strings lista, N, P;
+	Lista_Ordenada P_;
 	int v[1]; v[0] = 0;
 	int aux_c[1], aux_p[1];
 	aux_c[0] = 0; aux_p[0] = 0;
@@ -391,7 +448,10 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				filial = filial_();
 
 				inicio = clock();
-			
+
+				lista = iniciar_lista();
+				delete_lista(lista);
+
 				N = iniciar_lista();
 				P = iniciar_lista();
 
@@ -413,22 +473,34 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				
 				break;
 
-				case 10:
-					inpt = sdup(cliente_(c));
-					m1 = mes_();
-	
-					//query_10();
-					break;
-				/*	
-				case 11:
-					query_10();
-					break;
-				*/
-				/*
-				case 12:
-					query_10();
-					break;
-				*/
+			case 10:
+				inpt = sdup(cliente_(c));
+				m1 = mes_();
+
+				inicio = clock();
+
+				P_ = iniciar_lista_ordenada();
+				query_10(p, inpt, m1, P_);
+
+				fim = clock();
+
+				if(size_lista_ordenada(P_) > 0)
+					navegador_(P_, size_lista_ordenada(P_));
+				delete_lista_ordenada(P_);
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
+
+				break;
+			/*	
+			case 11:
+				query_11();
+				break;
+			*/
+			/*
+			case 12:
+				query_12();
+				break;
+			*/
 		}
 	}
 	else{

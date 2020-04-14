@@ -1,5 +1,4 @@
 #include "../include/registos_produto.h"
-#include "../include/AVL.h"
 
 #define LETRAS 26
 #define HASHNUMBER 151
@@ -155,8 +154,20 @@ int vendeu(Produto p){
 }
 
 // Função que
-int vendeu_todas(Produto p){
-	return (p->vendeu_in[4] == 1);
+int vendeu_in(Produto p, int x){
+	return (p->vendido_in[x]);
+}
+
+Lista_Strings p_vendeu_todas(RP p, int x){
+	Lista_Strings lista = malloc(sizeof(Lista_Strings));
+	char l1 = 'A', l2 = 'A';
+
+	for (int i = 0; i < LETRAS; i++)
+		for (int j = 0; j < LETRAS; j++)
+			for(int k = 0; k < HASHNUMBER; k++)
+				search_p(p->tabela_produto[i][j][k], lista, l1+i, l2+i, x);
+
+	return lista;
 }
 
 // Função que

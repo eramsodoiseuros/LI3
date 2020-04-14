@@ -73,13 +73,12 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 ///////////////////////////////////////////////////////////
 // QUERY 2
 
-Lista_Strings query_2(Produtos* p, char letra){
+int query_2(Produtos* p, char letra, Lista_Strings s){
+	delete_lista(s);
+	s = iniciar_lista();
+	lista_produtos(*p, letra, s);
 
-	Lista_Strings lista = iniciar_lista();
-
-	lista_produtos(*p, letra, lista);
-
-	return lista;
+	return size_lista(s);
 }
 
 ///////////////////////////////////////////////////////////
@@ -133,36 +132,24 @@ void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], 
 ///////////////////////////////////////////////////////////
 // QUERY 4
 
+int query_4 (Filial* f, Lista_Strings s, int filial) {
+	delete_lista(s);
+	s = iniciar_lista();
+	s = p_vendeu_todas(get_produtos(*f), filial);
 
-Lista_Strings query_4 (Filial* f, Produtos pr) {
-	RP p = get_produtos(*f);
-	Lista_Strings listaProd = iniciar_lista();
-	Lista_Strings s = iniciar_lista();
-	
-	
-	for(int l1 = 0; l1 < 26; l1++)
-		for(int l2 = 0; l2 < 26; l2++)
-			for(int h = 0; h < 599; h++)
-				print_simples(listaProd,pr->tabela_produtos[l1][l2][h]);
-
-
-	for ( int i = 0; i < size_lista(listaProd); ++i)
-	{
-		if (produto_vendido(p,get_elem(listaProd,i),0)==0){
-				add_lista(s,get_elem(listaProd,i));
-				
-		}		
-	
-	}
-	return s;
+	return size_lista(s);
 }
 
 
 ///////////////////////////////////////////////////////////
 // QUERY 5
 
-void query_5(Filial* f, Lista_Strings s){
-	
+int query_5(Filial* f, Lista_Strings s){
+	delete_lista(s);
+	s = iniciar_lista();
+	s = c_comprou_tudo(get_clientes(*f));
+
+	return size_lista(s);
 }
 
 ///////////////////////////////////////////////////////////

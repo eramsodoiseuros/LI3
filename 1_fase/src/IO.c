@@ -147,7 +147,7 @@ int deseja_sair(){
 	return decisao;
 }
 
-
+//
 char* produto_(Produtos* pr){
 	char* produto = malloc(sizeof(char)*buffsize);
 
@@ -159,10 +159,11 @@ char* produto_(Produtos* pr){
 			produto = produto_(pr);
 		}
     }
-    return produto;
 
+    return produto;
 }
 
+//
 char* cliente_(Clientes* c){
 	char* cliente = malloc(sizeof(char)*buffsize);
 
@@ -173,8 +174,8 @@ char* cliente_(Clientes* c){
 			cliente = cliente_(c);
 		}
     }
-    return cliente;
 
+    return cliente;
 }
 
 int filial_(){
@@ -190,15 +191,14 @@ int filial_(){
 			if(scanf("%s",inpt));
 			filial=atoi(inpt);
 		}
-
-
 	}
+
 	free(inpt);
 	return filial;
 }
 
 
-void faz_tabela7 (char* cliente, int vendas[12][3]){
+void faz_tabela7(char* cliente, int vendas[12][3]){
 
 	int venda_tot = 0;
 
@@ -212,7 +212,6 @@ void faz_tabela7 (char* cliente, int vendas[12][3]){
 	printf("%s##                     ##                          ##                       ##                        ##                       ##\n",KBLU);
 	printf("%s#################################################################################################################################\n",KBLU);
 
-	
 		for (int mes = 0; mes < 12; ++mes){
 			for (int i = 0; i < 3; ++i)
 			{
@@ -272,19 +271,18 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				letra = letra_();
 				inicio = clock();
 
-				tamanho = get_size(*p, letra);
-			    lista = query_2(p, letra);
+			    tamanho = query_2(p, letra, lista);
 
 			    fim = clock();
+
 				navegador(lista, tamanho);
-				free(lista);
+				delete_lista(lista);
+
 				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
 				printf("CPUTIME: %f\n",cpu_time_used);
-
 				break;
 
 			case 3:
-
     			produto = produto_(p);
     			m1 = mes_();
     			filial = filial_();
@@ -296,22 +294,47 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 				
 			case 4:
-					lista = query_4(f1,p);
-					tamanho = size_lista(lista);
-					navegador(lista,tamanho);
-					break;
-			
-
-			//case 5:
-			
-			case 6:
 				inicio = clock();
-				query_6(f1,aux_c,aux_p);
+
+				tamanho = query_4(f1,lista, 4);
+
 				fim = clock();
-				printf("%sClientes que não compraram:%s %d\n",KBLU,RST,aux_c[0]);
-				printf("%sProdutos que não foram comprados:%s %d\n",KBLU,RST,aux_p[0]);
+				
+				navegador(lista, tamanho);
+				delete_lista(lista);
+				
 				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
 				printf("CPUTIME: %f\n",cpu_time_used);
+				break;
+			
+			case 5:
+				inicio = clock();
+
+				tamanho = query_5(f1,lista);
+
+				fim = clock();
+				
+				navegador(lista, tamanho);
+				delete_lista(lista);
+				
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
+
+				break;
+
+			case 6:
+				inicio = clock();
+				
+				query_6(f1,aux_c,aux_p);
+				
+				fim = clock();
+				
+				printf("%sClientes que não compraram:%s %d\n",KBLU,RST,aux_c[0]);
+				printf("%sProdutos que não foram comprados:%s %d\n",KBLU,RST,aux_p[0]);
+				
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
+
 				break;
 
 			case 7:

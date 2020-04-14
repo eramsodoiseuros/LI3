@@ -134,6 +134,6 @@ int search_n(AVL a, char tipo);
 void search_c(AVL a, Lista_Strings lista, char l1);
 
 // Função que
-void search_p(AVL a, Lista_Strings lista, char l1, char l2);
+void search_p(AVL a, Lista_Strings lista, char l1, char l2, int x);
 
 #endif

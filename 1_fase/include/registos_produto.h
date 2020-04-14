@@ -7,6 +7,7 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "AVL.h"
 
 typedef struct registos_produto* RP;
 typedef struct produto* Produto;
@@ -77,10 +78,14 @@ int p_nao_vendeu(RP p);
 // Função que
 int vendeu_todas(Produto p);
 
+//
+Lista_Strings p_vendeu_todas(RP p, int x);
+
 /**
  *	Função que 
  *	@param 
  */
+int vendeu_in(Produto p, int x);
 
 
 

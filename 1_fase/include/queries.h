@@ -35,7 +35,7 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 
  *	@param os Produtos existentes e a Letra pretendida
 */
-Lista_Strings query_2(Produtos* p, char letra);
+int query_2(Produtos* p, char letra, Lista_Strings s);
 
 /**
  *	Dado um mês e um código de produto, ambos válidos, determinar e apresentar o número total de vendas (nº de registos de venda)
@@ -54,7 +54,7 @@ void query_3(Faturacao* f, Filial* f2,  char* produto, int mes, int vendasT[1], 
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-Lista_Strings query_4 (Filial* f, Produtos pr);
+int query_4(Filial* f, Lista_Strings s, int filial);
 
 /**
  *	Determinar a lista ordenada de códigos de clientes que realizaram compras em todas as filiais;
@@ -62,7 +62,7 @@ Lista_Strings query_4 (Filial* f, Produtos pr);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_5();
+int query_5(Filial* f, Lista_Strings s);
 
 /**
  *	Determinar o número de clientes registados que não realizaram compras bem como o número de produtos que ninguém comprou.

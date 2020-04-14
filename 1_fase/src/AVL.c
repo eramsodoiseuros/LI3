@@ -289,17 +289,17 @@ void search_c(AVL a, Lista_Strings lista, char l1){
 }
 
 // Função que
-void search_p(AVL a, Lista_Strings lista, char l1, char l2){
+void search_p(AVL a, Lista_Strings lista, char l1, char l2, int x){
 
     if(a == NULL);
     else{
-        if(vendeu_todas(a->info)){
+        if(vendeu_in(a->info, x)){
             char* s = malloc(sizeof(char*));
             sprintf(s,"%c%c%d", l1, l2, a->valor);
             add_lista(lista, s); 
         }
-        search_p(a->esq, lista, l1, l2);
-        search_p(a->dir, lista, l1, l2);
+        search_p(a->esq, lista, l1, l2, x);
+        search_p(a->dir, lista, l1, l2, x);
     }
 }
 

@@ -72,7 +72,6 @@ int query_5(Filial* f, Lista_Strings s);
 */
 void query_6(Filial* f, int c[1], int p[1]);
 
-
 /**
  *	Dado um código de cliente, criar uma tabela com o número total de produtos comprados (ou seja a soma das quantidades de todas as vendas do produto),
  	mês a mês (para meses em que não comprou a entrada deverá ficar a 0).
@@ -97,7 +96,7 @@ void query_8(Faturacao* f1, int m1, int m2, int v[1] , double f[1]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_9();
+void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Strings P);
 
 /**
  *	Dado um código de cliente e um mês, determinar a lista de códigos de produtos que mais comprou por quantidade e não por facturação), por ordem descendente;

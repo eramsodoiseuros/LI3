@@ -28,6 +28,8 @@ int search_P(Produtos p, char* id);
  */
 int valida_produto(char * id);
 
+int indentifica_p(char* id, char* p);
+
 /**
  *	Função que inicializa as estruturas, escreve na posição 2 e 3 do array
  *	@param o array para escrever e a estrutura produtos

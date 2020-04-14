@@ -64,6 +64,11 @@ int valida_produto(char* id){
 	return r;
 }
 
+//
+int indentifica_p(char* id, char* p){
+	return !strcmp(id,p);
+}
+
 // Função que lê de um ficheiro de produtos
 void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	char linha[7];

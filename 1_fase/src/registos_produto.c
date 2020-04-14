@@ -150,7 +150,7 @@ int p_faturado_in(RP p, char* produto, int m, int f, char NP){
 	
 	if(NP == 'N')
 		c = 0;
-	if(NP = 'P')
+	if(NP == 'P')
 		c = 1;
 
 	return p2->faturado_in[m-1][f-1][c];

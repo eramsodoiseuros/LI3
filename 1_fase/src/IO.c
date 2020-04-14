@@ -245,10 +245,8 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int filial=0;
 	char* produto=malloc(sizeof(char)*buffsize);
 	int vendas[12][3];
-	int vendasT[1];
-    int vendasP[1];
-    int vendasN [1];
-    vendasT[0] = 0, vendasN[0]=0,vendasP[0]=0;
+	int vendasProd[3];
+   	int faturado[3];
 
 	for (int mes = 0; mes < 12; ++mes){
 		for(int filial = 0; filial<3; filial++){
@@ -287,11 +285,20 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
     			produto = produto_(p);
     			m1 = mes_();
     			filial = filial_();
-				query_3(f2,f1,produto,m1,vendasT,vendasP,vendasN,filial);
+    			inicio = clock();
+				query_3(f1,produto,m1,vendasProd,faturado,filial);
+				fim = clock();
 
-				printf("A totalidade de vendas em todas as filiais desse produto com preço normal nesse mês é:  %d\n",vendasN[0] );
-				printf("A totalidade de vendas em todas as filiais desse produto em promoção nesse mês é:  %d\n",vendasP[0] );
-				printf("A totalidade de vendas em todas as filiais desse produto nesse mês é:  %d\n",vendasT[0] );
+				printf("%sA totalidade de vendas em todas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
+				printf("%sA totalidade de vendas em todas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
+				printf("%sA totalidade de vendas em todas desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[0] );
+				printf("\n");
+				printf("%sO total faturado desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[1] );
+				printf("%sO total faturado desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[2] );
+				printf("%sO total faturado desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[0] );
+				printf("\n");
+				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+				printf("CPUTIME: %f\n",cpu_time_used);
 				break;
 				
 			case 4:

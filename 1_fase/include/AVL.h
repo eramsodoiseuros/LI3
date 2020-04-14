@@ -49,6 +49,8 @@ void add_lista(Lista_Strings s, char* c);
  */
 char* get_elem(Lista_Strings s, int i);
 
+int size_lista(Lista_Strings s);
+
 /**
  *	Função que 
  *	@param 

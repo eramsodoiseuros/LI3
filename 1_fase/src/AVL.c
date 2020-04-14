@@ -61,6 +61,10 @@ void add_lista(Lista_Strings s, char* c){
     s->lista[s->in_use++] = sdup(c);
 }
 
+int size_lista(Lista_Strings s){
+    return s->in_use;
+}
+
 char* get_elem(Lista_Strings s, int i){
     return s->lista[i];
 }

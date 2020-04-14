@@ -54,7 +54,7 @@ void query_3(Faturacao* f, Filial* f2,  char* produto, int mes, int vendasT[1], 
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-Lista_Strings query_4 (Filial* f, Produtos* pr, int add[1]);
+Lista_Strings query_4 (Filial* f, Produtos pr);
 
 /**
  *	Determinar a lista ordenada de códigos de clientes que realizaram compras em todas as filiais;

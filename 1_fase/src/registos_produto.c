@@ -36,6 +36,7 @@ void hF_p(int index[3], char value[]){
 	index[2] = c;
 }
 
+
 // Função que insere um index, de tipologia Produto, numa estrutura de dados
 int insert_p(RP p, char* id){
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
@@ -165,58 +166,9 @@ int p_nao_vendeu(RP p){
 	return r;
 }
 
-/*
 
-// Função que
-int conta_produtos(){
-	int r = 0;
 
-	for (int l1 = 0; l1 < LETRAS; l1++)
-		for(int l2 = 0; l2 < LETRAS; l2++)
-			for(int h = 0; h < HASHNUMBER; h++)
-				r ++;
 
-	return r;
-}
 
-// Função que
-String* lista_Nvendidos(Filial* f, Produtos pr, int add[1]){
-	RP p = get_produtos(*f);
-	int i = 0, nProd = conta_produtos();
-	String* listaProd = malloc(sizeof(String)*nProd);
-	add[0] = 0;
 
-	for(int l = 0; l < nProd; l++)
-		listaProd[l] = NULL;
-	
-	for (int j = 0; j < nProd; ++j){
-		lista_total_produtos(pr,listaProd);
-		if (produto_vendido(p,listaProd->id_produto,0)==0) i++;
-	}
 
-	for(int k = 0; k < nProd; k++)
-		listaProd[k] = NULL;
-
-	String* s = malloc(sizeof(String)*i);
-
-	for (int j = 0; j < nProd; ++j){
-		if (produto_vendido(p,listaProd->id_produto,0)==0 || add[0]<i){
-			s->id_produto = listaProd->id_produto;
-			add[0]++;
-		}		
-	}
-
-	return s;
-}
-
-// Função que
-int conta_String (String* s) {
-
-	int r = 0;
-	while(s[r]!=NULL){
-		r++;
-	}
-	return r;
-}
-
-*/

@@ -60,8 +60,8 @@ void navegador(Lista_Strings lista, int tamanho){
 		}
 		else{
 
-			if(lista || pag < (tamanho/10))
-			printf("%s************ Página %d ************%s\n",KBLU,(pag), RST);
+			if(lista || pag < (tamanho/10)+1)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize; i++){
@@ -83,9 +83,9 @@ void navegador(Lista_Strings lista, int tamanho){
 		validstr = atoi(scanS);
 		printf("\n");
 
-		if(strcmp(scanS,"e") == 0) {exit = 1;}
-		else if(strcmp(scanS,"d") == 0 && pag<((tamanho/10)+1)) pag++;
-		else if(strcmp(scanS,"a") == 0 && pag>1) pag--;
+		if(strcmp(scanS,"e") == 0 || strcmp(scanS,"E") == 0) {exit = 1;}
+		else if((strcmp(scanS,"d") == 0 || strcmp(scanS,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(scanS,"a") == 0 || strcmp(scanS,"A") == 0) && pag>1) pag--;
 		else if(validstr==0) val = 0;
 		else if(validstr!=0) pag = validstr;
     }
@@ -231,19 +231,18 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	clock_t inicio, fim;
 	double cpu_time_used;
 
-	int tarefa, tamanho = 0;
+	int tarefa, tamanho, filial = 0;
 	int m1, m2, decisao = 1;
 
 	char* inpt = malloc(sizeof(char)*buffsize);
-	char* cliente = malloc(sizeof(char)*buffsize);
+	//char* cliente = malloc(sizeof(char)*buffsize);
 	char letra;
 	Lista_Strings lista;
 	int v[1]; v[0] = 0;
 	int aux_c[1], aux_p[1];
 	aux_c[0] = 0; aux_p[0] = 0;
 	double f[1]; f[0] = 0;
-	int filial=0;
-	char* produto=malloc(sizeof(char)*buffsize);
+	//char* produto=malloc(sizeof(char)*buffsize);
 	int vendas[12][3];
 	int vendasProd[3];
    	int faturado[3];
@@ -282,11 +281,11 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 
 			case 3:
-    			produto = produto_(p);
+    			inpt = produto_(p);
     			m1 = mes_();
     			filial = filial_();
     			inicio = clock();
-				query_3(f1,produto,m1,vendasProd,faturado,filial);
+				query_3(f1,inpt,m1,vendasProd,faturado,filial);
 				fim = clock();
 
 				printf("%sA totalidade de vendas em todas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
@@ -349,11 +348,11 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				break;
 
 			case 7:
-				cliente = cliente_(c);
+				inpt = cliente_(c);
 				inicio = clock();
-				query_7(f1,c,cliente,vendas);
+				query_7(f1,c,inpt,vendas);
 				fim = clock();
-				faz_tabela7(cliente,vendas);
+				faz_tabela7(inpt,vendas);
 				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
 				printf("CPUTIME: %f\n",cpu_time_used);
 
@@ -386,7 +385,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				*/
 
 				case 10:
-					cliente = sdup(cliente_(c));
+					inpt = sdup(cliente_(c));
 					m1 = mes_();
 	
 					//query_10();
@@ -409,7 +408,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	}
 
 	free(inpt);
-	free(cliente);
+	
 }
 
 // Função que

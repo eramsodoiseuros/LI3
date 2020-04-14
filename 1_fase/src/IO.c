@@ -75,6 +75,10 @@ void navegador(Lista_Strings lista, int tamanho){
 		}
 
 		printf("\n");
+
+		if(((tamanho/10)+1) == 1)
+			return;
+		
 		printf("%s(D para Proxima página) \n",KBLU);
 		printf("%s(A para Página Anterior) \n",KBLU);
 		printf("%s(E para sair)%s \n",KBLU,RST);
@@ -394,9 +398,12 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				query_9(c, inpt, filial, N, P);
 
 				fim = clock();
-
-				navegador(N, size_lista(N));
-				navegador(P, size_lista(P));
+				if(size_lista(N) > 0)
+					navegador(N, size_lista(N));
+				else printf("ha 0 clientes que compraram %s do tipo N\n", inpt);
+				if(size_lista(P) > 0)
+					navegador(P, size_lista(P));
+				else printf("ha 0 clientes que compraram %s do tipo P\n", inpt);
 
 				delete_lista(N);
 				delete_lista(P);

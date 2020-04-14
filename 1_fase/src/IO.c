@@ -65,8 +65,11 @@ void navegador(Lista_Strings lista, int tamanho){
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize; i++){
-				printf("%s \n", get_elem(lista,i));
-				count++;
+				if(get_elem(lista,i)!=NULL){
+					printf("%s \n", get_elem(lista,i));
+					count++;
+				}
+				else break;			
 			}
 			count = 0;
 		}

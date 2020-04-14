@@ -112,7 +112,6 @@ int c_quantos_comprou(RC c, char* cliente){
 	return c2->size_comprados;
 }
 
-
 // Função que
 int c_vezes_comprou(RC c, char* cliente, int m, int f){
 	int nID = num_(cliente,1);
@@ -124,7 +123,6 @@ int c_vezes_comprou(RC c, char* cliente, int m, int f){
 	return c2->vezes_comprou[m][f];
 }
 
-
 // Função que
 int comprou(Cliente c){
 	return (c->comprou_in[0] == 0);
@@ -132,19 +130,16 @@ int comprou(Cliente c){
 
 // Função que
 int comprou_tudo(Cliente c){
-	return (c->comprou_in[4] == 1);
+	return (c->comprou_in[4]);
 }
 
 // Função que
-Lista_Strings c_comprou_tudo(RC c){
-	Lista_Strings lista = malloc(sizeof(Lista_Strings));
+void c_comprou_tudo(RC c, Lista_Strings lista){
 	char l1 = 'A';
 
 	for (int i = 0; i < LETRAS; i++)
 		for(int k = 0; k < HASHNUMBER; k++)
 			search_c(c->tabela_cliente[i][k], lista, l1+i);
-
-	return lista;
 }
 
 // Função que

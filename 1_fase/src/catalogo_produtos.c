@@ -67,7 +67,7 @@ int valida_produto(char* id){
 // Função que lê de um ficheiro de produtos
 void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	char linha[7];
-	int l1 = 0, i1 = 0, i2 = 0;
+	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
 	
 	if(file == NULL){
@@ -78,8 +78,7 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 
 	while( fgets(linha, 7, file) ){
 		if(valida_produto(linha)){
-			l1 = insert_produto(p, linha);
-			p->size[l1]++;
+			insert_produto(p, linha);
 			f_produto(f, linha);
 			i1++;
 		}
@@ -89,11 +88,6 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	num[0] = i1;
 	num[1] = i2; 
 	fclose(file);
-}
-
-//
-int get_size(Produtos p, char l){
-    return p->size[l-'A'];
 }
 
 //Função que inicializa as estruturas, escreve na posição 2 e 3 do array
@@ -132,7 +126,7 @@ void lista_produtos(Produtos p, char letra, Lista_Strings lista){
 
 	for(int l2 = 0; l2 < LETRAS; l2++)
 		for(int h = 0; h < HASHNUMBER; h++)
-			print_simples(lista,p->tabela_produtos[l1][l2][h]);
+			print_simples(lista, p->tabela_produtos[l1][l2][h]);
 }
 
 // Função que liberta o espaço alocado para a estrutura

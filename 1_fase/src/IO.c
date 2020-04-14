@@ -54,7 +54,7 @@ void navegador(Lista_Strings lista, int tamanho){
 
 	while(exit!=1){
 		
-		if(scanout==0 || pag>(tamanho/10) || pag<0 || val==0 || lista==NULL){
+		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
 			val=1;
 			printf("Página inválida ou não existente\n");
 		}
@@ -235,7 +235,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	int m1, m2, decisao = 1;
 
 	char* inpt = malloc(sizeof(char)*buffsize);
-	char* cliente=malloc(sizeof(char)*buffsize);
+	char* cliente = malloc(sizeof(char)*buffsize);
 	char letra;
 	Lista_Strings lista;
 	int v[1]; v[0] = 0;
@@ -271,6 +271,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 				letra = letra_();
 				inicio = clock();
 
+				lista = iniciar_lista();
 			    tamanho = query_2(p, letra, lista);
 
 			    fim = clock();
@@ -296,7 +297,9 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			case 4:
 				inicio = clock();
 
-				tamanho = query_4(f1,lista, 4);
+				filial = filial_();
+				lista = iniciar_lista();
+				tamanho = query_4(f1, lista, filial);
 
 				fim = clock();
 				
@@ -310,6 +313,7 @@ void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 			case 5:
 				inicio = clock();
 
+				lista = iniciar_lista();
 				tamanho = query_5(f1,lista);
 
 				fim = clock();

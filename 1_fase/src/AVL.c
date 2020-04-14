@@ -40,7 +40,7 @@ Lista_Strings iniciar_lista(){
     Lista_Strings s = (Lista_Strings) malloc(sizeof(struct lista_strings));
     
     s->in_use = 0;
-    s->free_space = 200;
+    s->free_space = 1000;
     s->lista = (char**) malloc(sizeof(char*) * s->free_space);
 
     return s;
@@ -279,7 +279,7 @@ void search_c(AVL a, Lista_Strings lista, char l1){
     if(a == NULL);
     else{
         if(comprou_tudo(a->info)){
-            char* s = malloc(sizeof(char*));
+            char* s = malloc(sizeof(char)*6);
             sprintf(s,"%c%d", l1, a->valor);
             add_lista(lista, s); 
         }
@@ -294,9 +294,9 @@ void search_p(AVL a, Lista_Strings lista, char l1, char l2, int x){
     if(a == NULL);
     else{
         if(vendeu_in(a->info, x)){
-            char* s = malloc(sizeof(char*));
+            char* s = malloc(sizeof(char)*7);
             sprintf(s,"%c%c%d", l1, l2, a->valor);
-            add_lista(lista, s); 
+            add_lista(lista, s);
         }
         search_p(a->esq, lista, l1, l2, x);
         search_p(a->dir, lista, l1, l2, x);

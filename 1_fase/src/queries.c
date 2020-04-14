@@ -74,8 +74,6 @@ void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], in
 // QUERY 2
 
 int query_2(Produtos* p, char letra, Lista_Strings s){
-	delete_lista(s);
-	s = iniciar_lista();
 	lista_produtos(*p, letra, s);
 
 	return size_lista(s);
@@ -94,8 +92,7 @@ void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], 
 	vendasN[0] = 0; 
 
 		if(filial == 4){
-			for (int i = 1; i < 4; ++i)
-			{
+			for (int i = 1; i < 4; ++i){
 						
 			vendasT[0] += p_vezes_comprado(p,produto,mes,i);
 			vendasP[0] += p_NP_vezes(p,produto,'P', i,mes);
@@ -133,9 +130,7 @@ void query_3 (Faturacao* f, Filial* f2, char* produto, int mes, int vendasT[1], 
 // QUERY 4
 
 int query_4 (Filial* f, Lista_Strings s, int filial) {
-	delete_lista(s);
-	s = iniciar_lista();
-	s = p_vendeu_todas(get_produtos(*f), filial);
+	p_vendeu_todas(get_produtos(*f), s, filial);
 
 	return size_lista(s);
 }
@@ -145,9 +140,7 @@ int query_4 (Filial* f, Lista_Strings s, int filial) {
 // QUERY 5
 
 int query_5(Filial* f, Lista_Strings s){
-	delete_lista(s);
-	s = iniciar_lista();
-	s = c_comprou_tudo(get_clientes(*f));
+	c_comprou_tudo(get_clientes(*f), s);
 
 	return size_lista(s);
 }

@@ -68,7 +68,7 @@ int comprou(Cliente c);
 int comprou_tudo(Cliente c);
 
 // Função que
-Lista_Strings c_comprou_tudo(RC c);
+void c_comprou_tudo(RC c, Lista_Strings s);
 
 /**
  *	Função que 

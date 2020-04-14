@@ -57,6 +57,9 @@ int produto_vendido(RP p, char* produto, int x);
  */
 int p_vezes_comprado(RP p, char* produto, int m, int f);
 
+// Função que
+int p_faturado_in(RP p, char* produto, int m, int f);
+
 /**
  *	Função que 
  *	@param 
@@ -79,7 +82,7 @@ int p_nao_vendeu(RP p);
 int vendeu_todas(Produto p);
 
 //
-Lista_Strings p_vendeu_todas(RP p, int x);
+void p_vendeu_todas(RP p, Lista_Strings lista, int x);
 
 /**
  *	Função que 

@@ -183,7 +183,7 @@ int vendeu(Produto p){
 
 // Função que
 int vendeu_in(Produto p, int x){
-	return (p->vendido_in[0] == 0);
+	return (p->vendido_in[x] == 0);
 }
 
 void p_vendeu_todas(RP p, Lista_Strings lista, int x){

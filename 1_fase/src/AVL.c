@@ -81,7 +81,14 @@ char* get_elem(Lista_Strings s, int i){
 
 //
 void delete_lista(Lista_Strings s){
+
+    for (int i = 0; i < s->in_use; ++i)
+    {
+    free(s->lista[i]);
+    
+    }
     free(s);
+
 }
 
 
@@ -164,6 +171,13 @@ int get_unit(Lista_Ordenada s, int i){
 
 //
 void delete_lista_ordenada(Lista_Ordenada s){
+    
+    for (int i = 0; i < s->in_use; ++i)
+    {
+    free(s->lista[i]);
+    
+    }
+    free(s->unidades);
     free(s);
 }
 

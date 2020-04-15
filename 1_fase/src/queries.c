@@ -152,7 +152,9 @@ void query_3 (Filial* f2, char* produto, int mes, int vendas[3], int faturado[3]
 // QUERY 4
 
 int query_4 (Filial* f, Lista_Strings s, int filial) {
-	p_vendeu_todas(get_produtos(*f), s, filial);
+	if(filial == 4)
+		p_vendeu_todas(get_produtos(*f), s, 0);
+	else p_vendeu_todas(get_produtos(*f), s, filial);
 
 	return size_lista(s);
 }

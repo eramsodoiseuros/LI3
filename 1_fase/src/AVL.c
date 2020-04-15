@@ -146,6 +146,10 @@ char* get_elem_(Lista_Ordenada s, int i){
     return s->lista[i];
 }
 
+int get_unit(Lista_Ordenada s, int i){
+    return s->unidade[i];
+}
+
 void delete_lista_ordenada(Lista_Ordenada s){
     free(s);
 }

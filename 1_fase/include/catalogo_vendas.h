@@ -13,9 +13,16 @@
 #include "faturacao.h"
 #include "AVL.h"
 
-
+/**
+ *	Função que 
+ *	@param 
+ */
 void search_9(char* path, Clientes c, char* id_produto, int filial, Lista_Strings N, Lista_Strings P);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 void search_10(char* path, Produtos p, char* id_cliente, int mes, Lista_Ordenada P);
 
 /**

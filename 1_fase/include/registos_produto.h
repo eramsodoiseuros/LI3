@@ -18,14 +18,12 @@ typedef struct produto* Produto;
  *	@param o produto
  */
 Produto iniciar_produto();
+
 /**
  *	Função que insere um index, de tipologia Produto, numa estrutura de dados
  *	@param 
  */
 int insert_p(RP p, char* id);
-
-
-
 
 /**
  *	Função que 
@@ -57,7 +55,10 @@ int produto_vendido(RP p, char* produto, int x);
  */
 int p_vezes_comprado(RP p, char* produto, int m, int f);
 
-// Função que
+/**
+ *	Função que 
+ *	@param 
+ */
 int p_faturado_in(RP p, char* produto, int m, int f, char NP);
 
 /**
@@ -78,10 +79,16 @@ int vendeu(Produto p);
  */
 int p_nao_vendeu(RP p);
 
-// Função que
+/**
+ *	Função que 
+ *	@param 
+ */
 int vendeu_todas(Produto p);
 
-//
+/**
+ *	Função que 
+ *	@param 
+ */
 void p_vendeu_todas(RP p, Lista_Strings lista, int x);
 
 /**

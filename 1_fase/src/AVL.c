@@ -69,14 +69,17 @@ void add_lista(Lista_Strings s, char* c){
     s->lista[s->in_use++] = sdup(c);
 }
 
+//
 int size_lista(Lista_Strings s){
     return s->in_use;
 }
 
+//
 char* get_elem(Lista_Strings s, int i){
     return s->lista[i];
 }
 
+//
 void delete_lista(Lista_Strings s){
     free(s);
 }
@@ -107,14 +110,17 @@ void is_full_(Lista_Ordenada s){
     }
 }
 
+//
 int existe_in(Lista_Ordenada s, char* c, char tipo){
     int r = -1;
+
     if(tipo == 'c'){
         for(int aux = 0; aux < s->in_use; aux++)
             if(num_(c, 1) == num_(s->lista[aux], 1))
                 if(c[0] == s->lista[aux][0])
                     r = aux;
     }
+
     if(tipo == 'p'){
         for(int aux = 0; aux < s->in_use; aux++)
             if(num_(c, 2) == num_(s->lista[aux], 2))
@@ -128,11 +134,12 @@ int existe_in(Lista_Ordenada s, char* c, char tipo){
 
 //Função que insere uma string no fim do array Strings (alocando memória se necessário)
 void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
-    int r = 0;
+    int r = 0, aux = 0;
     is_full_(s);
     if( (r = existe_in(s,c,tipo)) == -1 ){
-        s->lista[s->in_use++] = sdup(c);
-        s->unidades[s->in_use] = unidades;
+        aux = s->in_use++;
+        s->lista[aux] = sdup(c);
+        s->unidades[aux] = unidades;
     }
     else{
         s->lista[r] = sdup(c);
@@ -140,22 +147,78 @@ void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
     }
 }
 
+//
 int size_lista_ordenada(Lista_Ordenada s){
     return s->in_use;
 }
 
+//
 char* get_elem_(Lista_Ordenada s, int i){
     return s->lista[i];
 }
 
+//
 int get_unit(Lista_Ordenada s, int i){
     return s->unidades[i];
 }
 
+//
 void delete_lista_ordenada(Lista_Ordenada s){
     free(s);
 }
 
+///////////////////////////////////////////////////////////
+// ALGORITMO DE ORDENAÇÃO
+
+void swap(Lista_Ordenada s, int a, int b){
+    char* aux = sdup(s->lista[a]);
+    int aux2 = s->unidades[a];
+
+    s->lista[a] = sdup(s->lista[b]);
+    s->unidades[a] = s->unidades[b];
+
+    s->lista[b] = aux;
+    s->unidades[b] = aux2;
+}
+
+//
+void heapify(Lista_Ordenada s, int n, int i){
+    int smallest = i; // Initialize smallest as root 
+    int l = 2*i + 1; // left = 2*i + 1 
+    int r = 2*i + 2; // right = 2*i + 2 
+  
+    // If left child is smaller than root 
+    if (l < n && s->unidades[l] < s->unidades[smallest])
+        smallest = l;
+  
+    // If right child is smaller than smallest so far 
+    if (r < n && s->unidades[r] < s->unidades[smallest])
+        smallest = r;
+  
+    // If smallest is not root 
+    if (smallest != i){
+        swap(s, i, smallest);
+  
+        // Recursively heapify the affected sub-tree 
+        heapify(s, n, smallest);
+    }
+}
+  
+// main function to do heap sort 
+void heapSort(Lista_Ordenada s){
+    // Build heap (rearrange array) 
+    for (int i = s->in_use / 2 - 1; i >= 0; i--)
+        heapify(s, s->in_use, i);
+  
+    // One by one extract an element from heap 
+    for (int i = s->in_use - 1; i > 0; i--){
+        // Move current root to end 
+        swap(s, 0, i);
+  
+        // call max heapify on the reduced heap 
+        heapify(s, i, 0);
+    }
+}
 
 //////////////////////////////////////////////////
 // AVL

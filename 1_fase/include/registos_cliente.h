@@ -54,7 +54,10 @@ int cliente_comprou(RC c, char* cliente, int x);
  */
 int c_quantos_comprou(RC c, char* cliente);
 
-
+/**
+ *	Função que 
+ *	@param 
+ */
 int c_vezes_comprou(RC c, char* cliente, int m, int f);
 
 
@@ -64,10 +67,16 @@ int c_vezes_comprou(RC c, char* cliente, int m, int f);
  */
 int comprou(Cliente c);
 
-// Função que
+/**
+ *	Função que 
+ *	@param 
+ */
 int comprou_tudo(Cliente c);
 
-// Função que
+/**
+ *	Função que 
+ *	@param 
+ */
 void c_comprou_tudo(RC c, Lista_Strings s);
 
 /**

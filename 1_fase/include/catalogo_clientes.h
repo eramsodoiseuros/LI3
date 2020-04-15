@@ -30,6 +30,10 @@ int search_C(Clientes c, char* id);
  */
 int valida_cliente(char* id);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 int indentifica_c(char* id, char* c);
 
 /**

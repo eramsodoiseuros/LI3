@@ -28,6 +28,10 @@ int search_P(Produtos p, char* id);
  */
 int valida_produto(char * id);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 int indentifica_p(char* id, char* p);
 
 /**

@@ -120,7 +120,7 @@ int valida_c(char* linha, Produtos p, char* id_cliente, int mes, Lista_Ordenada 
 						if( tokens[3][0] == 'N' || tokens[3][0] == 'P')
 							if( atoi(tokens[6]) <= 3 && atoi(tokens[6]) >= 1 )
 								if( search_P(p, tokens[0]) ) // clientes
-									add_lista_ordenada(P, tokens[0], tokens[2], 'p');
+									add_lista_ordenada(P, tokens[0], atoi(tokens[2]), 'p');
 	return r;
 }
 
@@ -160,6 +160,8 @@ void search_10(char* path, Produtos p, char* id_cliente, int mes, Lista_Ordenada
 		valida_c(linha, p, id_cliente, mes, P);
 	}
 
+	heapSort(P);
+	
 	fclose(file);
 }
 

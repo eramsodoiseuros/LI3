@@ -50,6 +50,10 @@ void add_lista(Lista_Strings s, char* c);
  */
 char* get_elem(Lista_Strings s, int i);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 int size_lista(Lista_Strings s);
 
 /**
@@ -80,8 +84,16 @@ void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo);
  */
 char* get_elem_(Lista_Ordenada s, int i);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 int get_unit(Lista_Ordenada s, int i);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 int size_lista_ordenada(Lista_Ordenada s);
 
 /**
@@ -90,6 +102,15 @@ int size_lista_ordenada(Lista_Ordenada s);
  */
 void delete_lista_ordenada(Lista_Ordenada s);
 
+
+///////////////////////////////////////////////////////////
+// ALGORITMO DE ORDENAÇÃO
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void heapSort(Lista_Ordenada s);
 
 ///////////////////////////////////////////////////////////
 // AVL
@@ -164,10 +185,16 @@ void* search_info(AVL a, int id);
  */
 int search_n(AVL a, char tipo);
 
-// Função que
+/**
+ *	Função que 
+ *	@param 
+ */
 void search_c(AVL a, Lista_Strings lista, char l1);
 
-// Função que
+/**
+ *	Função que 
+ *	@param 
+ */
 void search_p(AVL a, Lista_Strings lista, char l1, char l2, int x);
 
 #endif

@@ -2,71 +2,109 @@
 #include "../include/AVL.h"
 
 ///////////////////////////////////////////////////////////
+// SGV
+
+struct sgv {
+	Clientes* c;
+ 	Produtos* p; 
+	Filial* f1;
+ 	Faturacao* f2;
+};
+
+SGV iniciar_sgv (){
+
+	SGV s = malloc(sizeof(struct sgv));
+	s->c = NULL;
+	s->p = NULL;
+	s->f1 = NULL;
+	s->f2 = NULL;
+
+	return s;
+}
+
+
+Clientes* get_clientesS (SGV s){
+	return s->c;
+}
+
+Produtos* get_produtosS (SGV s){
+	return s->p;
+}
+
+Filial* get_filial (SGV s){
+	return s->f1;
+}
+
+Faturacao* get_faturacao (SGV s){
+	return s->f2;
+}
+
+///////////////////////////////////////////////////////////
 // QUERY 1
 
-void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], int r){
+void query_1(SGV s, int num[6], int r){
 
 	if(r == 1){
-		free_clientes(*c);
+		free_clientes(s->c);
 		
-		*f1 = iniciar_filial();
-		*c = iniciar_clientes(num,*f1);
+		s->f1 = iniciar_filial();
+		s->c = iniciar_clientes(num,s->f1);
 	}
 	
 	if(r == 2){
-		free_produtos(*p);
+		free_produtos(s->p);
 
-		*f1 = iniciar_filial();
-		*p = iniciar_produtos(num,*f1);
+		s->f1 = iniciar_filial();
+		s->p = iniciar_produtos(num,s->f1);
 	}
 
 	if (r == 3){
-		free_clientes(*c);
-		free_produtos(*p);
+		free_clientes(s->c);
+		free_produtos(s->p);
 
-		*f1 = iniciar_filial();
-		*c 	= iniciar_clientes(num,*f1);
-		*p 	= iniciar_produtos(num,*f1);
-		*f2 = iniciar_faturacao();
-		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
+		s->f1 = iniciar_filial();
+		s->c 	= iniciar_clientes(num,s->f1);
+		s->p 	= iniciar_produtos(num,s->f1);
+		s->f2 = iniciar_faturacao();
+		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_1M.txt");
 	}
 
 	if(r == 4){
-		free_clientes(*c);
-		free_produtos(*p);
+		free_clientes(s->c);
+		free_produtos(s->p);
 		
-		*f1 = iniciar_filial();
-		*c 	= iniciar_clientes(num,*f1);
-		*p 	= iniciar_produtos(num,*f1);
-		*f2 = iniciar_faturacao();
-		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_3M.txt");
+		s->f1 = iniciar_filial();
+		s->c 	= iniciar_clientes(num,s->f1);
+		s->p 	= iniciar_produtos(num,s->f1);
+		s->f2 = iniciar_faturacao();
+		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_3M.txt");
 	}
 
 	if(r == 5){
-		free_clientes(*c);
-		free_produtos(*p);
+		free_clientes(s->c);
+		free_produtos(s->p);
 		
-		*f1 = iniciar_filial();
-		*c 	= iniciar_clientes(num,*f1);
-		*p 	= iniciar_produtos(num,*f1);
-		*f2 = iniciar_faturacao();
-		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_5M.txt");
+		s->f1 = iniciar_filial();
+		s->c 	= iniciar_clientes(num,s->f1);
+		s->p 	= iniciar_produtos(num,s->f1);
+		s->f2 = iniciar_faturacao();
+		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_5M.txt");
 	}
 
 	if(r == 6){
-		free_produtos(*p);
+		free_produtos(s->p);
 
-		*p 	= iniciar_produtos(num,*f1);
-		*f2 = iniciar_faturacao();
-		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
+		s->p 	= iniciar_produtos(num,s->f1);
+		s->f2 = iniciar_faturacao();
+		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_1M.txt");
 	}
 
 	if(r == 7){
-		free_clientes(*c);
+		free_clientes(s->c);
 
-		*c = iniciar_clientes(num,*f1);
-		*f2 = iniciar_faturacao();
-		init_Vendas(num, *p, *c, *f1, *f2, "../Vendas_1M.txt");
+		s->c = iniciar_clientes(num,s->f1);
+		s->f2 = iniciar_faturacao();
+		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_1M.txt");
 	}
 }
 

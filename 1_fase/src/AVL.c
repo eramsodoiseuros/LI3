@@ -28,9 +28,9 @@ struct lista_ordenada{
 struct lista_n_maiores{
     int N;
     int in_use;
-    char* lista[N];
-    int unidades[N];
-}
+    char** lista;
+    int* unidades;
+};
 
 
 // Função strdup criada para evitar warnings
@@ -194,7 +194,7 @@ void delete_lista_ordenada(Lista_Ordenada s){
 
 // Função que inicia uma Lista Ordenada
 Lista_N_Maiores iniciar_nm(int size){
-    Lista_N_Maiores s = (Lista_Ordenada) malloc(sizeof(struct Lista_n_maiores));
+    Lista_N_Maiores s = (Lista_N_Maiores) malloc(sizeof(struct lista_n_maiores));
     
     s->in_use = 0;
     s->N = size;
@@ -205,29 +205,26 @@ Lista_N_Maiores iniciar_nm(int size){
 }
 
 // Função que verifica se a Lista está cheia, aloca memória se estiver
-void is_Full(Lista_N_Maiores s){
+int is_Full(Lista_N_Maiores s){
 
     if(s->in_use >= s->N){
         // SORT
         // compare com last
-        return;
+        return 1;
     }
+    return 0;
 }
 
-struct lista_n_maiores{
-    int N;
-    int in_use;
-    char* lista[N];
-    int unidades[N];
-}
 
 // Função que insere uma string no fim do array Strings (alocando memória se necessário)
 void add_nm(Lista_N_Maiores s, char* c, int unidades, char tipo){
     
+    int aux = 0;
     if(is_Full(s));
     else{
-        s->lista[r] = sdup(c);
-        s->unidades[r] += unidades;
+        aux = s->in_use++;
+        s->lista[aux] = sdup(c);
+        s->unidades[aux] += unidades;
     }
 }
 

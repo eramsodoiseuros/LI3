@@ -16,8 +16,26 @@
 #include "catalogo_clientes.h"
 #include "catalogo_produtos.h"
 
-
 #define buffsize 200
+
+
+typedef struct sgv* SGV;
+
+SGV iniciar_sgv ();
+
+Clientes* get_clientesS (SGV s);
+
+Produtos* get_produtosS (SGV s);
+
+Filial* get_filial (SGV s);
+
+Faturacao* get_faturacao (SGV s);
+
+
+
+
+
+
 
 
 /**
@@ -28,7 +46,7 @@
 
  *	@param estrutura clientes a preencher, estrutura produtos a preencher, array de valores a preencher, inteiro que verifica as ações a tomar
  */
-void query_1(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2, int num[6], int r);
+void query_1(SGV s, int num[6], int r);
 
 /**
  * 	Determinar a lista e o nº total de produtos cujo código se inicia por uma dada letra (maiúscula);

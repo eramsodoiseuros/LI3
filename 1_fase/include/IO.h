@@ -28,6 +28,6 @@
  *	Função que 
  *	@param 
  */
-void menu(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2);
+void menu(SGV s);
 
 #endif

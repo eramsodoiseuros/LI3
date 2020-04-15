@@ -80,6 +80,8 @@ void add_lista_ordenada(Lista_Ordenada s, char* c, char tipo);
  */
 char* get_elem_(Lista_Ordenada s, int i);
 
+int get_unit(Lista_Ordenada s, int i);
+
 int size_lista_ordenada(Lista_Ordenada s);
 
 /**

@@ -25,8 +25,15 @@ struct lista_ordenada{
     int* unidades;
 };
 
+struct lista_n_maiores{
+    int N;
+    int in_use;
+    char* lista[N];
+    int unidades[N];
+}
 
-//Função strdup criada para evitar warnings
+
+// Função strdup criada para evitar warnings
 char* sdup(const char *s){
     size_t tamanho = strlen (s) + 1;
     void *novo = malloc(tamanho);
@@ -63,23 +70,23 @@ void is_full(Lista_Strings s){
     }
 }
 
-//Função que insere uma string no fim do array Strings (alocando memória se necessário)
+// Função que insere uma string no fim do array Strings (alocando memória se necessário)
 void add_lista(Lista_Strings s, char* c){
     is_full(s);
     s->lista[s->in_use++] = sdup(c);
 }
 
-//
+// Função que
 int size_lista(Lista_Strings s){
     return s->in_use;
 }
 
-//
+// Função que
 char* get_elem(Lista_Strings s, int i){
     return s->lista[i];
 }
 
-//
+// Função que
 void delete_lista(Lista_Strings s){
 
     for (int i = 0; i < s->in_use; ++i)
@@ -117,7 +124,7 @@ void is_full_(Lista_Ordenada s){
     }
 }
 
-//
+// Função que
 int existe_in(Lista_Ordenada s, char* c, char tipo){
     int r = -1;
 
@@ -139,7 +146,7 @@ int existe_in(Lista_Ordenada s, char* c, char tipo){
     return r;
 }
 
-//Função que insere uma string no fim do array Strings (alocando memória se necessário)
+// Função que insere uma string no fim do array Strings (alocando memória se necessário)
 void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
     int r = 0, aux = 0;
     is_full_(s);
@@ -150,26 +157,26 @@ void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
     }
     else{
         s->lista[r] = sdup(c);
-        s->unidades[r]+=unidades;
+        s->unidades[r] += unidades;
     }
 }
 
-//
+// Função que
 int size_lista_ordenada(Lista_Ordenada s){
     return s->in_use;
 }
 
-//
+// Função que
 char* get_elem_(Lista_Ordenada s, int i){
     return s->lista[i];
 }
 
-//
+// Função que
 int get_unit(Lista_Ordenada s, int i){
     return s->unidades[i];
 }
 
-//
+// Função que
 void delete_lista_ordenada(Lista_Ordenada s){
     
     for (int i = 0; i < s->in_use; ++i)
@@ -181,8 +188,66 @@ void delete_lista_ordenada(Lista_Ordenada s){
     free(s);
 }
 
+
+//////////////////////////////////////////////////
+// LISTA DE N MAIORES
+
+// Função que inicia uma Lista Ordenada
+Lista_N_Maiores iniciar_nm(int size){
+    Lista_N_Maiores s = (Lista_Ordenada) malloc(sizeof(struct Lista_n_maiores));
+    
+    s->in_use = 0;
+    s->N = size;
+    s->lista = (char**) malloc(sizeof(char*) * size);
+    s->unidades = (int*) malloc(sizeof(int) * size);
+
+    return s;
+}
+
+// Função que verifica se a Lista está cheia, aloca memória se estiver
+void is_Full(Lista_N_Maiores s){
+
+    if(s->in_use >= s->N){
+        // SORT
+        // compare com last
+        return;
+    }
+}
+
+struct lista_n_maiores{
+    int N;
+    int in_use;
+    char* lista[N];
+    int unidades[N];
+}
+
+// Função que insere uma string no fim do array Strings (alocando memória se necessário)
+void add_nm(Lista_N_Maiores s, char* c, int unidades, char tipo){
+    
+    if(is_Full(s));
+    else{
+        s->lista[r] = sdup(c);
+        s->unidades[r] += unidades;
+    }
+}
+
+// Função que
+char* get_elem_nm(Lista_N_Maiores s, int i){
+    return s->lista[i];
+}
+
+// Função que
+int get_unit_nm(Lista_N_Maiores s, int i){
+    return s->unidades[i];
+}
+
+// Função que
+void delete_lista_nm(Lista_N_Maiores s){
+    free(s);
+}
+
 ///////////////////////////////////////////////////////////
-// ALGORITMO DE ORDENAÇÃO
+// ALGORITMO DE ORDENAÇÃO das listas ordenadas por ordem decrescente
 
 void swap(Lista_Ordenada s, int a, int b){
     char* aux = sdup(s->lista[a]);
@@ -237,22 +302,22 @@ void heapSort(Lista_Ordenada s){
 //////////////////////////////////////////////////
 // AVL
 
-//Função que devolve o lado esquerdo de uma arvore
+// Função que devolve o lado esquerdo de uma arvore
 AVL esq(AVL t){
     return t->esq;
 }
 
-//Função que devolve o lado direito de uma arvore
+// Função que devolve o lado direito de uma arvore
 AVL dir(AVL t){
     return t->dir;
 }
 
-//Função que devolve o valor de uma arvore
+// Função que devolve o valor de uma arvore
 int valor(AVL t){
     return t->valor;
 }
 
-//Função que devolve a string de uma arvore
+// Função que devolve a string de uma arvore
 char* codigo(AVL t){
     return (char*) t->info;
 }

@@ -14,7 +14,6 @@
 
 typedef struct clientes* Clientes;
 
-void load_(Clientes* c, char* path, int num[2]);
 
 /**
  *	Função que verifica se um id existe na estrutura

@@ -14,6 +14,8 @@ typedef struct lista_strings* Lista_Strings;
 
 typedef struct lista_ordenada* Lista_Ordenada;
 
+typedef struct lista_n_maiores* Lista_N_Maiores;
+
 /**
  *	Função strdup criada para evitar warnings
  *	@param string 

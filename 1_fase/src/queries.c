@@ -235,7 +235,16 @@ void query_10(Produtos* p, char* cliente, int mes, Lista_Ordenada P){
 ///////////////////////////////////////////////////////////
 // QUERY 11
 
-//void query_11(){}
+/*
+
+Criar uma lista dos N produtos mais vendidos em todo o ano, indicando o número total de clientes e o número de unidades vendidas, filial a filial;
+
+*/
+
+void query_11(Filial* f, int N){
+	Lista_N_Maiores s = iniciar_nm(N);
+
+}
 
 ///////////////////////////////////////////////////////////
 // QUERY 12

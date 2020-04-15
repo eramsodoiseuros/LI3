@@ -23,20 +23,13 @@ typedef struct sgv* SGV;
 
 SGV iniciar_sgv ();
 
-Clientes* get_clientesS (SGV s);
+Clientes get_clientes_(SGV s);
 
-Produtos* get_produtosS (SGV s);
+Produtos get_produtos_(SGV s);
 
-Filial* get_filial (SGV s);
+Filial get_filial_(SGV s);
 
-Faturacao* get_faturacao (SGV s);
-
-
-
-
-
-
-
+Faturacao get_faturacao_(SGV s);
 
 /**
  * 	Lê e inicializa os valores das estruturas através dos ficheiros
@@ -53,7 +46,7 @@ void query_1(SGV s, int num[6], int r);
 
  *	@param os Produtos existentes e a Letra pretendida
 */
-int query_2(Produtos* p, char letra, Lista_Strings s);
+int query_2(SGV s, char letra, Lista_Strings ls);
 
 /**
  *	Dado um mês e um código de produto, ambos válidos, determinar e apresentar o número total de vendas (nº de registos de venda)
@@ -63,7 +56,7 @@ int query_2(Produtos* p, char letra, Lista_Strings s);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_3 (Filial* f2, char* produto, int mes, int vendas[3], int faturado[3], int filial);
+void query_3 (SGV s, char* produto, int mes, int vendas[3], int faturado[3], int filial);
 
 /**
  *	Determinar a lista ordenada dos códigos dos produtos (e o seu número total) que ninguém comprou.
@@ -72,7 +65,7 @@ void query_3 (Filial* f2, char* produto, int mes, int vendas[3], int faturado[3]
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-int query_4(Filial* f, Lista_Strings s, int filial);
+int query_4(SGV s, Lista_Strings ls, int filial);
 
 /**
  *	Determinar a lista ordenada de códigos de clientes que realizaram compras em todas as filiais;
@@ -80,7 +73,7 @@ int query_4(Filial* f, Lista_Strings s, int filial);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-int query_5(Filial* f, Lista_Strings s);
+int query_5(SGV s, Lista_Strings ls);
 
 /**
  *	Determinar o número de clientes registados que não realizaram compras bem como o número de produtos que ninguém comprou.
@@ -88,7 +81,7 @@ int query_5(Filial* f, Lista_Strings s);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_6(Filial* f, int c[1], int p[1]);
+void query_6(SGV s, int c[1], int p[1]);
 
 /**
  *	Dado um código de cliente, criar uma tabela com o número total de produtos comprados (ou seja a soma das quantidades de todas as vendas do produto),
@@ -98,7 +91,7 @@ void query_6(Filial* f, int c[1], int p[1]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_7(Filial* f, Clientes* c, char* cliente, int vendas[12][3]);
+void query_7(SGV s, char* cliente, int vendas[12][3]);
 
 /**
  *	Dado um intervalo fechado de meses, por exemplo [1..3], determinar o total de vendas (nº de registos de venda) registadas nesse intervalo e o total facturado;
@@ -106,7 +99,7 @@ void query_7(Filial* f, Clientes* c, char* cliente, int vendas[12][3]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_8(Faturacao* f1, int m1, int m2, int v[1] , double f[1]);
+void query_8(SGV s, int m1, int m2, int v[1] , double f[1]);
 
 /**
  *	Dado um código de produto e uma filial, determinar os códigos (e número total) dos clientes que o compraram, distinguindo entre compra N e compra P;
@@ -114,7 +107,7 @@ void query_8(Faturacao* f1, int m1, int m2, int v[1] , double f[1]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Strings P);
+void query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P);
 
 /**
  *	Dado um código de cliente e um mês, determinar a lista de códigos de produtos que mais comprou por quantidade e não por facturação), por ordem descendente;
@@ -122,7 +115,7 @@ void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Stri
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_10(Produtos* p, char* cliente, int mes, Lista_Ordenada P);
+void query_10(SGV s, char* cliente, int mes, Lista_Ordenada P);
 
 /**
  *	Criar uma lista dos N produtos mais vendidos em todo o ano, indicando o número total de clientes e o número de unidades vendidas, filial a filial;

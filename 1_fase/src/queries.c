@@ -5,15 +5,16 @@
 // SGV
 
 struct sgv {
-	Clientes* c;
- 	Produtos* p; 
-	Filial* f1;
- 	Faturacao* f2;
+	Clientes c;
+ 	Produtos p; 
+	Filial f1;
+ 	Faturacao f2;
 };
 
 SGV iniciar_sgv (){
 
 	SGV s = malloc(sizeof(struct sgv));
+
 	s->c = NULL;
 	s->p = NULL;
 	s->f1 = NULL;
@@ -23,19 +24,19 @@ SGV iniciar_sgv (){
 }
 
 
-Clientes* get_clientesS (SGV s){
+Clientes get_clientes_(SGV s){
 	return s->c;
 }
 
-Produtos* get_produtosS (SGV s){
+Produtos get_produtos_(SGV s){
 	return s->p;
 }
 
-Filial* get_filial (SGV s){
+Filial get_filial_(SGV s){
 	return s->f1;
 }
 
-Faturacao* get_faturacao (SGV s){
+Faturacao get_faturacao_(SGV s){
 	return s->f2;
 }
 
@@ -45,63 +46,46 @@ Faturacao* get_faturacao (SGV s){
 void query_1(SGV s, int num[6], int r){
 
 	if(r == 1){
-		free_clientes(s->c);
-		
 		s->f1 = iniciar_filial();
 		s->c = iniciar_clientes(num,s->f1);
 	}
 	
 	if(r == 2){
-		free_produtos(s->p);
-
 		s->f1 = iniciar_filial();
 		s->p = iniciar_produtos(num,s->f1);
 	}
 
 	if (r == 3){
-		free_clientes(s->c);
-		free_produtos(s->p);
-
 		s->f1 = iniciar_filial();
-		s->c 	= iniciar_clientes(num,s->f1);
-		s->p 	= iniciar_produtos(num,s->f1);
+		s->c = iniciar_clientes(num,s->f1);
+		s->p = iniciar_produtos(num,s->f1);
 		s->f2 = iniciar_faturacao();
 		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_1M.txt");
 	}
 
 	if(r == 4){
-		free_clientes(s->c);
-		free_produtos(s->p);
-		
 		s->f1 = iniciar_filial();
-		s->c 	= iniciar_clientes(num,s->f1);
-		s->p 	= iniciar_produtos(num,s->f1);
+		s->c = iniciar_clientes(num,s->f1);
+		s->p = iniciar_produtos(num,s->f1);
 		s->f2 = iniciar_faturacao();
 		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_3M.txt");
 	}
 
 	if(r == 5){
-		free_clientes(s->c);
-		free_produtos(s->p);
-		
 		s->f1 = iniciar_filial();
-		s->c 	= iniciar_clientes(num,s->f1);
-		s->p 	= iniciar_produtos(num,s->f1);
+		s->c = iniciar_clientes(num,s->f1);
+		s->p = iniciar_produtos(num,s->f1);
 		s->f2 = iniciar_faturacao();
 		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_5M.txt");
 	}
 
 	if(r == 6){
-		free_produtos(s->p);
-
-		s->p 	= iniciar_produtos(num,s->f1);
+		s->p = iniciar_produtos(num,s->f1);
 		s->f2 = iniciar_faturacao();
 		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_1M.txt");
 	}
 
 	if(r == 7){
-		free_clientes(s->c);
-
 		s->c = iniciar_clientes(num,s->f1);
 		s->f2 = iniciar_faturacao();
 		init_Vendas(num, s->p, s->c, s->f1, s->f2, "../Vendas_1M.txt");
@@ -111,19 +95,20 @@ void query_1(SGV s, int num[6], int r){
 ///////////////////////////////////////////////////////////
 // QUERY 2
 
-int query_2(Produtos* p, char letra, Lista_Strings s){
-	lista_produtos(*p, letra, s);
+int query_2(SGV s, char letra, Lista_Strings ls){
+	lista_produtos(s->p, letra, ls);
 
-	return size_lista(s);
+	return size_lista(ls);
 }
 
 ///////////////////////////////////////////////////////////
 // QUERY 3
 
-void query_3 (Filial* f2, char* produto, int mes, int vendas[3], int faturado[3], int filial){
+void query_3(SGV s, char* produto, int mes, int vendas[3], int faturado[3], int filial){
 
 
-   RP p = get_produtos(*f2);
+   RP p = get_produtos(s->f1);
+
    for (int j = 0; j < 3; ++j)
     {
     	vendas[j]=0;
@@ -189,31 +174,31 @@ void query_3 (Filial* f2, char* produto, int mes, int vendas[3], int faturado[3]
 ///////////////////////////////////////////////////////////
 // QUERY 4
 
-int query_4 (Filial* f, Lista_Strings s, int filial) {
+int query_4(SGV s, Lista_Strings ls, int filial) {
 	if(filial == 4)
-		p_vendeu_todas(get_produtos(*f), s, 0);
-	else p_vendeu_todas(get_produtos(*f), s, filial);
+		p_vendeu_todas(get_produtos(s->f1), ls, 0);
+	else p_vendeu_todas(get_produtos(s->f1), ls, filial);
 
-	return size_lista(s);
+	return size_lista(ls);
 }
 
 
 ///////////////////////////////////////////////////////////
 // QUERY 5
 
-int query_5(Filial* f, Lista_Strings s){
-	c_comprou_tudo(get_clientes(*f), s);
+int query_5(SGV s, Lista_Strings ls){
+	c_comprou_tudo(get_clientes(s->f1), ls);
 
-	return size_lista(s);
+	return size_lista(ls);
 }
 
 ///////////////////////////////////////////////////////////
 // QUERY 6
 
-void query_6(Filial* f, int c[1], int p[1]){
+void query_6(SGV s, int c[1], int p[1]){
 
-	RP produtos = get_produtos(*f);
-	RC clientes = get_clientes(*f);
+	RP produtos = get_produtos(s->f1);
+	RC clientes = get_clientes(s->f1);
 
 	c[0] = c_nao_comprou(clientes);
 	p[0] = p_nao_vendeu(produtos);
@@ -221,34 +206,30 @@ void query_6(Filial* f, int c[1], int p[1]){
 
 ///////////////////////////////////////////////////////////
 // QUERY 7
-void query_7 (Filial* f, Clientes* c, char* cliente, int vendas[12][3]){
+void query_7(SGV s, char* cliente, int vendas[12][3]){
 
 	
-	RC cl = get_clientes(*f);
+	RC cl = get_clientes(s->f1);
 	
 	for (int mes = 0; mes < 12; ++mes){
 		for(int filial = 0; filial<3; filial++){
-		vendas[mes][filial] = c_vezes_comprou(cl,cliente,mes,filial);
-
-
-
+			vendas[mes][filial] = c_vezes_comprou(cl,cliente,mes,filial);
 		}
 	}
-
 }
 
 ///////////////////////////////////////////////////////////
 // QUERY 8
 
-void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
+void query_8 (SGV s, int mes1, int mes2, int v[1] , double f[1]){
 	int vendas = 0;
 	double faturado = 0;
 
 	for(int i = mes1; i<=mes2; i++)
-		vendas += numero_vendas(*f1,i);
+		vendas += numero_vendas(s->f2,i);
 
 	for(int i = mes1; i<=mes2; i++)
-		faturado += faturado_mes(*f1,i);
+		faturado += faturado_mes(s->f2,i);
 
 	v[0] = vendas;
 	f[0] = faturado;
@@ -257,15 +238,15 @@ void query_8 (Faturacao* f1, int mes1, int mes2, int v[1] , double f[1]){
 ///////////////////////////////////////////////////////////
 // QUERY 9
 
-void query_9(Clientes* c, char* produto, int filial, Lista_Strings N, Lista_Strings P){
-	search_9("../Vendas_1M.txt", *c, produto, filial, N, P);
+void query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P){
+	search_9("../Vendas_1M.txt", s->c, produto, filial, N, P);
 }
 
 ///////////////////////////////////////////////////////////
 // QUERY 10
 
-void query_10(Produtos* p, char* cliente, int mes, Lista_Ordenada P){
-	search_10("../Vendas_1M.txt", *p, cliente, mes, P);
+void query_10(SGV s, char* cliente, int mes, Lista_Ordenada P){
+	search_10("../Vendas_1M.txt", s->p, cliente, mes, P);
 }
 
 

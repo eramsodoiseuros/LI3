@@ -3,20 +3,13 @@
 #include "../include/registos_produto.h"
 
 struct filial{
-	int n_clientes[4];
-	int n_PC; // número de produtos comprados
-
 	RP produtos;
 	RC clientes;
 };
 
 // Função que inicia a estrutura filial com os respetivos valores a zero
 Filial iniciar_filial(){
-	Filial f = malloc(sizeof(struct filial));
-
-	for(int i = 0; i < 4; i++)
-		f->n_clientes[i] = 0;
-	f->n_PC = 0;
+	Filial f = (Filial) malloc(sizeof(struct filial));
 
 	f->produtos = iniciar_RP();
 	f->clientes = iniciar_RC();

@@ -24,7 +24,7 @@ void print_menu(){
 // Função que
 int escolhe_file(){
 	int r=1;
-	char* inpt=malloc(sizeof(char)*buffsize);
+	char* inpt = malloc(sizeof(char)*buffsize);
 	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], Vendas_3M [4], Vendas_5M [5]\n\t->  ");
 	
 	if(scanf("%s", inpt)){
@@ -122,7 +122,7 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
 				if(get_elem_(lista,i)!=NULL){
-					printf("%s \t %d \n", get_elem_(lista,i),get_unit(lista,i));
+					printf("%s \t %d \n", get_elem_(lista,i), get_unit(lista,i));
 					count++;
 				}
 				else break;			
@@ -211,15 +211,15 @@ int deseja_sair(){
 }
 
 //
-char* produto_(Produtos* pr){
+char* produto_(Produtos p){
 	char* produto = malloc(sizeof(char)*buffsize);
 
 	printf("%sInsira um produto: %s\n",KBLU,RST);
     if(scanf("%s",produto)){
    	
-   		while(search_P(*pr, produto)==0){
+   		while(search_P(p, produto)==0){
 			printf("%sProduto Invalido%s\n",KRED,RST);
-			produto = produto_(pr);
+			produto = produto_(p);
 		}
     }
 
@@ -227,12 +227,12 @@ char* produto_(Produtos* pr){
 }
 
 //
-char* cliente_(Clientes* c){
+char* cliente_(Clientes c){
 	char* cliente = malloc(sizeof(char)*buffsize);
 
 	printf("%sInsira um cliente: %s\n",KBLU,RST);
     if(scanf("%s",cliente)){
-    	while(search_C(*c, cliente)==0){
+    	while(search_C(c, cliente)==0){
 		printf("%sCliente Invalido%s\n",KRED,RST);
 			cliente = cliente_(c);
 		}
@@ -260,7 +260,7 @@ int filial_(){
 	return filial;
 }
 
-
+//
 void faz_tabela7(char* cliente, int vendas[12][3]){
 
 	int venda_tot = 0;
@@ -287,287 +287,255 @@ void faz_tabela7(char* cliente, int vendas[12][3]){
 		}
 }
 
-
-
-
+//
 void load_query2 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		char letra;
-  		int tamanho;
-  		Lista_Strings lista;
+	clock_t inicio, fim;
+  	double cpu_time_used;
+  	char letra;
+  	int tamanho;
+  	Lista_Strings lista;
 
-  		Produtos* p = get_produtosS(s);
+	letra = letra_();
 
+	inicio = clock();
 
-		letra = letra_();
-		inicio = clock();
+	lista = iniciar_lista();
+	tamanho = query_2(s, letra, lista);
 
-		lista = iniciar_lista();
-		tamanho = query_2(p, letra, lista);
+	fim = clock();
 
-		fim = clock();
+	navegador(lista, tamanho);
+	delete_lista(lista);
 
-		navegador(lista, tamanho);
-		delete_lista(lista);
-
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
-
-
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
-
+//
 void load_query3 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		int filial;
-  		char* inpt = malloc(sizeof(char)*buffsize);
-  		int m1;
-  		int vendasProd[3];
-   		int faturado[3];
+	clock_t inicio, fim;
+  	double cpu_time_used;
+  	char* inpt = malloc(sizeof(char)*buffsize);
+  	int m1, filial, vendasProd[3], faturado[3];
 
-   		Filial* f1 = get_filial(s);
-   		Produtos* p = get_produtosS(s);
+   	Produtos p = get_produtos_(s);
 
-		inpt = produto_(p);
-    	m1 = mes_();
-    	filial = filial_();
-    	inicio = clock();
-		query_3(f1,inpt,m1,vendasProd,faturado,filial);
-		fim = clock();
+	inpt = produto_(p);
+    m1 = mes_();
+    filial = filial_();
+    
+    inicio = clock();
+	
+	query_3(s, inpt, m1, vendasProd, faturado, filial);
+	
+	fim = clock();
 
-		printf("%sA totalidade de vendas em todas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
-		printf("%sA totalidade de vendas em todas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
-		printf("%sA totalidade de vendas em todas desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[0] );
-		printf("\n");
-		printf("%sO total faturado desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[1] );
-		printf("%sO total faturado desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[2] );
-		printf("%sO total faturado desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[0] );
-		printf("\n");
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
+	printf("%sA totalidade de vendas em todas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
+	printf("%sA totalidade de vendas em todas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
+	printf("%sA totalidade de vendas em todas desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[0] );
+	printf("\n");
+	printf("%sO total faturado desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[1] );
+	printf("%sO total faturado desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[2] );
+	printf("%sO total faturado desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[0] );
+	printf("\n");
 
-
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
-
+//
 void load_query4 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		int filial;
-  		Lista_Strings lista;
-  		int tamanho;
+	clock_t inicio, fim;
+	double cpu_time_used;
 
-		filial = filial_();
-		inicio = clock();
-  		
-  		Filial* f1 = get_filial(s);
+	int filial, tamanho;
+	Lista_Strings lista;
+
+
+	filial = filial_();
+	inicio = clock();
 		
-		lista = iniciar_lista();
-		tamanho = query_4(f1, lista, filial);
+	lista = iniciar_lista();
+	tamanho = query_4(s, lista, filial);
 
-		fim = clock();
+	fim = clock();
 			
-		navegador(lista, tamanho);
-		delete_lista(lista);
+	navegador(lista, tamanho);
+	delete_lista(lista);
 				
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
-
-
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n", cpu_time_used);
 }
 
-
+//
 void load_query5 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		Lista_Strings lista;
-  		int tamanho;
+	clock_t inicio, fim;
+  	double cpu_time_used;
 
-		inicio = clock();
-  		Filial* f1 = get_filial(s);
+  	Lista_Strings lista;
+  	int tamanho;
 
-		lista = iniciar_lista();
-		tamanho = query_5(f1,lista);
+	inicio = clock();
 
-		fim = clock();
+	lista = iniciar_lista();
+	tamanho = query_5(s,lista);
+
+	fim = clock();
 				
-		navegador(lista, tamanho);
-		delete_lista(lista);
+	navegador(lista, tamanho);
+	delete_lista(lista);
 				
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);;
-
-
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
-
+//
 void load_query6 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		int aux_c[1], aux_p[1];
-		aux_c[0] = 0; aux_p[0] = 0;
+	clock_t inicio, fim;
+	double cpu_time_used;
+	int aux_c[1], aux_p[1];
+	aux_c[0] = 0; aux_p[0] = 0;
   		
-		inicio = clock();
-		Filial* f1 = get_filial(s);
+	inicio = clock();
 
-		query_6(f1,aux_c,aux_p);
+	query_6(s,aux_c,aux_p);
 				
-		fim = clock();
+	fim = clock();
 				
-		printf("%sClientes que não compraram:%s %d\n",KBLU,RST,aux_c[0]);
-		printf("%sProdutos que não foram comprados:%s %d\n",KBLU,RST,aux_p[0]);
+	printf("%sClientes que não compraram:%s %d\n",KBLU,RST,aux_c[0]);
+	printf("%sProdutos que não foram comprados:%s %d\n",KBLU,RST,aux_p[0]);
 				
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
-
-
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
-
-
+//
 void load_query7 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		char* inpt = malloc(sizeof(char)*buffsize);
-  		int vendas[12][3];
+	clock_t inicio, fim;
+  	double cpu_time_used;
+  	char* inpt = malloc(sizeof(char)*buffsize);
+	int vendas[12][3];
 
-		for (int mes = 0; mes < 12; ++mes){
-			for(int filial = 0; filial<3; filial++){
-				vendas[mes][filial] = 0;
-			}
+	for (int mes = 0; mes < 12; ++mes){
+		for(int filial = 0; filial<3; filial++){
+			vendas[mes][filial] = 0;
 		}
-		Filial* f1 = get_filial(s);
-		Clientes* c = get_clientesS(s);
+	}
 
-		inpt = cliente_(c);
-		inicio = clock();
-		query_7(f1,c,inpt,vendas);
-		fim = clock();
-		faz_tabela7(inpt,vendas);
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
+	Clientes c = get_clientes_(s);
+	inpt = cliente_(c);
+	
+	inicio = clock();
+	query_7(s,inpt,vendas);
+	fim = clock();
 
-
+	faz_tabela7(inpt,vendas);
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
-
+//
 void load_query8 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		double f[1]; f[0] = 0;
-  		int v[1]; v[0] = 0;
-  		int m1, m2, decisao;
+	clock_t inicio, fim;
+  	double cpu_time_used;
+  	double f[1]; f[0] = 0;
+  	int v[1]; v[0] = 0;
+  	int m1, m2, decisao = 1;
 
-  		Faturacao* f2 = get_faturacao(s);
+	while(decisao){
+		m1 = mes_();
+		printf("%sAté: %s\n",KBLU,RST);
+		m2 = mes_();
 
-		while(decisao){
-				m1 = mes_();
-				printf("%sAté: %s\n",KBLU,RST);
-				m2 = mes_();
+		inicio = clock();
+		query_8(s, m1, m2, v, f);
+		fim = clock();
 
-				inicio = clock();
-				query_8(f2, m1, m2, v, f);
-				fim = clock();
-
-				printf("%sTotal de vendas nesse intervalo é:%s %d\n",KBLU,RST,v[0]);
-				printf("%sE o total faturado nesse intervalo é:%s %f\n",KBLU,RST,f[0]);
-					
-				cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-				printf("CPUTIME: %f\n",cpu_time_used);
-					
-				decisao = deseja_sair();
-				}
-
-
+		printf("%sTotal de vendas nesse intervalo é:%s %d\n",KBLU,RST,v[0]);
+		printf("%sE o total faturado nesse intervalo é:%s %f\n",KBLU,RST,f[0]);
+			
+		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+		printf("CPUTIME: %f\n",cpu_time_used);		
+		decisao = deseja_sair();
+	}
 }
 
-
-
-
+//
 void load_query9 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		int filial;
-  		char* inpt = malloc(sizeof(char)*buffsize);
-  		Lista_Strings N, P;
-  		Produtos* p = get_produtosS(s);
-  		 			
-		inpt = produto_(p);
-		filial = filial_();
-		Clientes* c = get_clientesS(s);
-		inicio = clock();
+	clock_t inicio, fim;
+	double cpu_time_used;
+	int filial;
+	char* inpt = malloc(sizeof(char)*buffsize);
+	Lista_Strings N, P;
+
+	Produtos p = get_produtos_(s);	 			
+	inpt = produto_(p);
+	
+	filial = filial_();
+
+	inicio = clock();
 
 		
-		N = iniciar_lista();
-		P = iniciar_lista();
+	N = iniciar_lista();
+	P = iniciar_lista();
 
-		query_9(c, inpt, filial, N, P);
+	query_9(s, inpt, filial, N, P);
 
-		fim = clock();
-		if(size_lista(N) > 0)
-			navegador(N, size_lista(N));
-		else printf("ha 0 clientes que compraram %s do tipo N\n", inpt);
-			if(size_lista(P) > 0)
-				navegador(P, size_lista(P));
-			else printf("ha 0 clientes que compraram %s do tipo P\n", inpt);
+	fim = clock();
 
-		delete_lista(N);
-		delete_lista(P);
+	if(size_lista(N) > 0)
+		navegador(N, size_lista(N));
+	else printf("ha 0 clientes que compraram %s do tipo N\n", inpt);
 
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
+	if(size_lista(P) > 0)
+		navegador(P, size_lista(P));
+	else printf("ha 0 clientes que compraram %s do tipo P\n", inpt);
 
+	delete_lista(N);
+	delete_lista(P);
 
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
-
-
+//
 void load_query10 (SGV s){
 
-		clock_t inicio, fim;
-  		double cpu_time_used;
-  		int m1;
-  		char* inpt = malloc(sizeof(char)*buffsize);
-  		Lista_Ordenada P;
-  		Produtos* p = get_produtosS(s);
-  		Clientes* c = get_clientesS(s);
+	clock_t inicio, fim;
+	double cpu_time_used;
 
-  		inpt = sdup(cliente_(c));
-		m1 = mes_();
+	int m1;
+	char* inpt = malloc(sizeof(char)*buffsize);
+	Lista_Ordenada P;
 
-		inicio = clock();
+  	Clientes c = get_clientes_(s);
 
-		P = iniciar_lista_ordenada();
-		query_10(p, inpt, m1, P);
+	inpt = cliente_(c);
+	m1 = mes_();
 
-		fim = clock();
+	inicio = clock();
 
-		if(size_lista_ordenada(P) > 0)
-			navegador_(P, size_lista_ordenada(P));
+	P = iniciar_lista_ordenada();
+	query_10(s, inpt, m1, P);
+
+	fim = clock();
+
+	if(size_lista_ordenada(P) > 0)
+		navegador_(P, size_lista_ordenada(P));
 	
-		delete_lista_ordenada(P);
+	delete_lista_ordenada(P);
 		
-		cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
-		printf("CPUTIME: %f\n",cpu_time_used);
-
-
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
 }
-
-
-
-
-
-
 
 
 // Função que escolhe a query a realizar
@@ -583,6 +551,7 @@ void escolhe_query(SGV s){
 			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 1.\n\n");
 			escolhe_query(s);
 		}
+
 		switch(tarefa){
 			case 1:
 				exit(1);
@@ -641,11 +610,10 @@ void escolhe_query(SGV s){
 	}
 
 	free(inpt);
-	
 }
 
 // Função que
-void load_query1 (SGV s){
+void load_query1(SGV s){
 	int r, num[6];
 	
 	clock_t i, f;
@@ -665,6 +633,7 @@ void load_query1 (SGV s){
 
 		query_1(s, num, 6);
 	}
+
 	if(r == 2){
 		i = clock();
 		query_1(s, num, 2);
@@ -677,6 +646,7 @@ void load_query1 (SGV s){
 
 		query_1(s, num, 7);
 	}
+
 	if (r == 3){
 		i = clock();
 		query_1(s, num, 3);
@@ -689,6 +659,7 @@ void load_query1 (SGV s){
 		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
 		printf("CPUTIME: %f\n",cpu_time_used);
 	}
+
 	if(r == 4){
 		i = clock();
 		query_1(s, num, 4);

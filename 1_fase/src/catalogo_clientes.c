@@ -116,7 +116,7 @@ Clientes iniciar_clientes(int* num, Filial f){
 		for(int j = 0; j < HASHNUMBER; j++)
 			c->tabela_clientes[i][j] = NULL;
 
-	load_clientes(c,PATH_C, valores, f);
+	load_clientes(c, PATH_C, valores, f);
 
 	num[0] = valores[0];
 	num[1] = valores[1];
@@ -125,5 +125,9 @@ Clientes iniciar_clientes(int* num, Filial f){
 
 // Função que liberta o espaço alocado para a estrutura
 void free_clientes(Clientes c){
+
+	for (int i = 0; i < LETRAS; i++)
+		for(int j = 0; j < HASHNUMBER; j++)
+			free(c->tabela_clientes[i][j]);
 	free(c);
 }

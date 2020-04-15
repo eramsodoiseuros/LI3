@@ -122,7 +122,7 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize; i++){
 				if(get_elem_(lista,i)!=NULL){
-					printf("%s \n", get_elem_(lista,i));
+					printf("%s \t %d \n", get_elem_(lista,i),get_unit(lista,i));
 					count++;
 				}
 				else break;			

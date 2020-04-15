@@ -127,14 +127,16 @@ int existe_in(Lista_Ordenada s, char* c, char tipo){
 }
 
 //Função que insere uma string no fim do array Strings (alocando memória se necessário)
-void add_lista_ordenada(Lista_Ordenada s, char* c, char tipo){
+void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
     int r = 0;
     is_full_(s);
-    if( (r = existe_in(s,c,tipo)) == -1 )
+    if( (r = existe_in(s,c,tipo)) == -1 ){
         s->lista[s->in_use++] = sdup(c);
+        s->unidades[s->in_use] = unidades;
+    }
     else{
         s->lista[r] = sdup(c);
-        s->unidades[r]++;
+        s->unidades[r]+=unidades;
     }
 }
 
@@ -147,7 +149,7 @@ char* get_elem_(Lista_Ordenada s, int i){
 }
 
 int get_unit(Lista_Ordenada s, int i){
-    return s->unidade[i];
+    return s->unidades[i];
 }
 
 void delete_lista_ordenada(Lista_Ordenada s){

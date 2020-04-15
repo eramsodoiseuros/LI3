@@ -71,7 +71,7 @@ Lista_Ordenada iniciar_lista_ordenada();
  *	Função que insere uma string no fim do array Strings
  *	@param estrutura lista e a string a adicionar
  */
-void add_lista_ordenada(Lista_Ordenada s, char* c, char tipo);
+void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo);
 
 /**
  *	Função que devolve uma string numa dada posição da lista

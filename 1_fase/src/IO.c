@@ -289,6 +289,9 @@ void faz_tabela7(char* cliente, int vendas[12][3]){
 
 
 
+
+
+
 // Função que escolhe a query a realizar
 void escolhe_query(Clientes* c, Produtos* p, Filial* f1, Faturacao* f2){
 	clock_t inicio, fim;

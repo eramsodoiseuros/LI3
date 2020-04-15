@@ -120,7 +120,7 @@ int valida_c(char* linha, Produtos p, char* id_cliente, int mes, Lista_Ordenada 
 						if( tokens[3][0] == 'N' || tokens[3][0] == 'P')
 							if( atoi(tokens[6]) <= 3 && atoi(tokens[6]) >= 1 )
 								if( search_P(p, tokens[0]) ) // clientes
-									add_lista_ordenada(P, tokens[0], 'p');
+									add_lista_ordenada(P, tokens[0], tokens[2], 'p');
 	return r;
 }
 

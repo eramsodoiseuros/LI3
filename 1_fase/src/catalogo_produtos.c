@@ -74,12 +74,6 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
 	
-	if(file == NULL){
-	  	printf("Error! You tried to read an empty file.");
-	  	fclose(file); 
-		_exit(0);
-	}
-
 	while( fgets(linha, 7, file) ){
 		if(valida_produto(linha)){
 			insert_produto(p, linha);
@@ -88,6 +82,7 @@ void load_produtos(Produtos p, char* path, int num[2], Filial f){
 		}
 		i2++;
 	}
+
 
 	num[0] = i1;
 	num[1] = i2; 

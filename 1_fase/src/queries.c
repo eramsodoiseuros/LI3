@@ -45,6 +45,8 @@ Faturacao get_faturacao_(SGV s){
 
 void query_1(SGV s, int num[6], int r){
 
+
+
 	if(r == 1){
 		s->f1 = iniciar_filial();
 		s->c = iniciar_clientes(num,s->f1);

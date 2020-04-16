@@ -89,26 +89,22 @@ void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
 	
-	if(file == NULL){
-      	printf("Error! You tried to read an empty file.");   
-      	fclose(file);
-     	_exit(0);            
-    }
-
 	while(fgets(linha, 6, file)){
 		if(valida_cliente(linha)){
 			insert_cliente(c,linha);
-
 			f_cliente(f, linha);
 			i1++;
 		}
 		i2++;
 	}
+	
 
 	num[0] = i1;
 	num[1] = i2;
 	fclose(file);
+
 }
+
 
 // Função que inicializa as estruturas, escreve na posição 0 e 1 do array
 Clientes iniciar_clientes(int* num, Filial f){

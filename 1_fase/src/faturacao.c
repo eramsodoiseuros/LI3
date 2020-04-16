@@ -61,16 +61,3 @@ Faturacao iniciar_faturacao(){
 
 	return f1;
 }
-
-// Função que
-void print_fat(Faturacao f1){
-
-	for(int m = 0; m < 12; m++)
-		for(int f = 0; f < 4; f++)
-			printf("\nfaturado em %d e %d: _%f_", m, f, f1->tabela_faturacao[m][f]);
-	
-	for(int m = 0; m < 12; m++)
-		printf("\nvendas em %d: _%d_", m, f1->tabela_vendas[m]);
-
-	printf("\n\ttotal: _%f_\n", f1->total_faturado);
-}

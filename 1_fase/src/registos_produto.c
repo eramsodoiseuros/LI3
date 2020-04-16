@@ -131,9 +131,10 @@ int produto_vendido(RP p, char* produto, int x){
 
 // Função que
 int p_vezes_comprado(RP p, char* produto, int m, int f){
-	int nID = num_(produto,2);
+	int nID = num_(produto, 2);
 	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
-	hF_p(index,produto);
+
+	hF_p(index, produto);
 
 	Produto p2 = search_info(p->tabela_produto[index[0]][index[1]][index[2]], nID);
 

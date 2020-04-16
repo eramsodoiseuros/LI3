@@ -331,10 +331,11 @@ void load_query3 (SGV s){
 	query_3(s, inpt, m1, vendasProd, faturado, filial);
 	
 	fim = clock();
-
-	printf("%sA totalidade de vendas em todas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
-	printf("%sA totalidade de vendas em todas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
-	printf("%sA totalidade de vendas em todas desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[0] );
+	
+	printf("\n");
+	printf("%sA totalidade de vendas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
+	printf("%sA totalidade de vendas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
+	printf("%sA totalidade de vendas desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[0] );
 	printf("\n");
 	printf("%sO total faturado desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[1] );
 	printf("%sO total faturado desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[2] );

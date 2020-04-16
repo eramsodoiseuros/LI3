@@ -46,6 +46,9 @@ int search_C(Clientes c, char* id){
 	int r = 0, nID = num_(id,1);
 	int index[2]; index[0] = 0, index[1] = 0;
 
+	if(id[0] >  'Z' || id[0] < 'A')
+		return 0;
+
 	hF_clientes(index,id);
 
 	r = search_tree(c->tabela_clientes[index[0]][index[1]], nID);

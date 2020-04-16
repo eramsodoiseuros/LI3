@@ -109,65 +109,35 @@ void query_3(SGV s, char* produto, int mes, int vendas[3], int faturado[3], int 
 
    RP p = get_produtos(s->f1);
 
-   for (int j = 0; j < 3; ++j)
-    {
-    	vendas[j]=0;
-    } 
+	for (int j = 0; j < 3; j++){
+		vendas[j] = 0;
+	}
 
-    for (int k = 0; k < 3; ++k)
-    {
-    	faturado[k]=0;
-    }
+	for (int k = 0; k < 3; k++){
+		faturado[k] = 0;
+	}
 
-		if(filial == 4){
-			for (int i = 1; i < 4; ++i){
-						
-			vendas[0] += p_vezes_comprado(p,produto,mes,i);
-			vendas[2] += p_NP_vezes(p,produto,'P', i,mes);
-			vendas[1] += p_NP_vezes(p,produto,'N', i,mes);
-
-			faturado[0] += p_faturado_in(p,produto,mes,i,'N') + p_faturado_in(p,produto,mes,i,'P');
-			faturado[1] += p_faturado_in(p,produto,mes,i,'N');
-			faturado[2] += p_faturado_in(p,produto,mes,i,'P');
-			}
-
-		}
-
-		if(filial == 1){
+	if(filial == 4){
+		for (int i = 1; i <= 3; i++){
 			
-			vendas[0] = p_vezes_comprado(p,produto,mes,0);
-			vendas[2] = p_NP_vezes(p,produto,'P', 0,mes);
-			vendas[1] = p_NP_vezes(p,produto,'N', 0,mes);
+			vendas[0] += p_vezes_comprado(p, produto, mes, i);
+			vendas[1] += p_NP_vezes(p, produto,'N', i, mes);
+			vendas[2] += p_NP_vezes(p, produto,'P', i, mes);
 
-			faturado[0] = p_faturado_in(p,produto,mes,0,'N') + p_faturado_in(p,produto,mes,0,'P');
-			faturado[1] = p_faturado_in(p,produto,mes,0,'N');
-			faturado[2] = p_faturado_in(p,produto,mes,0,'P');
-			
+			faturado[1] += p_faturado_in(p, produto, mes, i, 'N');
+			faturado[2] += p_faturado_in(p, produto, mes, i, 'P');
+			faturado[0] += faturado[1] + faturado[2];
 		}
+	}
+	else{
+		vendas[0] = p_vezes_comprado(p, produto, mes, filial);
+		vendas[1] = p_NP_vezes(p, produto, 'N', filial, mes);
+		vendas[2] = p_NP_vezes(p, produto, 'P', filial, mes);
 
-		if(filial == 2){
-			vendas[0] = p_vezes_comprado(p,produto,mes,1);
-			vendas[2] = p_NP_vezes(p,produto,'P', 1,mes);
-			vendas[1] = p_NP_vezes(p,produto,'N', 1,mes);
-
-			faturado[0] = p_faturado_in(p,produto,mes,1,'N') + p_faturado_in(p,produto,mes,1,'P');
-			faturado[1] = p_faturado_in(p,produto,mes,1,'N');
-			faturado[2] = p_faturado_in(p,produto,mes,1,'P');
-			
-
-		}
-
-		if(filial == 3){
-			
-			vendas[0] = p_vezes_comprado(p,produto,mes,2);
-			vendas[2] = p_NP_vezes(p,produto,'P', 2,mes);
-			vendas[1] = p_NP_vezes(p,produto,'N', 2,mes);
-
-
-			faturado[0] = p_faturado_in(p,produto,mes,2,'N') + p_faturado_in(p,produto,mes,2,'P');
-			faturado[1] = p_faturado_in(p,produto,mes,2,'N');
-			faturado[2] = p_faturado_in(p,produto,mes,2,'P');
-		}
+		faturado[1] = p_faturado_in(p, produto, mes, filial, 'N');
+		faturado[2] = p_faturado_in(p, produto, mes, filial, 'P');
+		faturado[0] = faturado[1] + faturado[2];	
+	}
 }
 
 
@@ -261,7 +231,7 @@ Criar uma lista dos N produtos mais vendidos em todo o ano, indicando o número 
 */
 
 void query_11(Filial* f, int N){
-	Lista_N_Maiores s = iniciar_nm(N);
+	//Lista_N_Maiores s = iniciar_nm(N);
 
 }
 

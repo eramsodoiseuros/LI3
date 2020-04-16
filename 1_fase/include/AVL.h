@@ -37,7 +37,7 @@ int num_(char string[], int index);
  *	Função que 
  *	@param 
  */
-Lista_Strings iniciar_lista();
+Lista_Strings iniciar_lista(int size);
 
 /**
  *	Função que insere uma string no fim do array Strings
@@ -71,7 +71,7 @@ void delete_lista(Lista_Strings s);
  *	Função que 
  *	@param 
  */
-Lista_Ordenada iniciar_lista_ordenada();
+Lista_Ordenada iniciar_lista_ordenada(int size);
 
 /**
  *	Função que insere uma string no fim do array Strings

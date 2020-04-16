@@ -300,7 +300,7 @@ void load_query2 (SGV s){
 
 	inicio = clock();
 
-	lista = iniciar_lista();
+	lista = iniciar_lista(700);
 	tamanho = query_2(s, letra, lista);
 
 	fim = clock();
@@ -331,7 +331,7 @@ void load_query3 (SGV s){
 	query_3(s, inpt, m1, vendasProd, faturado, filial);
 	
 	fim = clock();
-	
+
 	printf("\n");
 	printf("%sA totalidade de vendas desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[1] );
 	printf("%sA totalidade de vendas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
@@ -359,7 +359,7 @@ void load_query4 (SGV s){
 	filial = filial_();
 	inicio = clock();
 		
-	lista = iniciar_lista();
+	lista = iniciar_lista(1000);
 	tamanho = query_4(s, lista, filial);
 
 	fim = clock();
@@ -382,7 +382,7 @@ void load_query5 (SGV s){
 
 	inicio = clock();
 
-	lista = iniciar_lista();
+	lista = iniciar_lista(1500);
 	tamanho = query_5(s,lista);
 
 	fim = clock();
@@ -484,9 +484,8 @@ void load_query9 (SGV s){
 
 	inicio = clock();
 
-		
-	N = iniciar_lista();
-	P = iniciar_lista();
+	N = iniciar_lista(5);
+	P = iniciar_lista(5);
 
 	query_9(s, inpt, filial, N, P);
 
@@ -524,13 +523,14 @@ void load_query10 (SGV s){
 
 	inicio = clock();
 
-	P = iniciar_lista_ordenada();
+	P = iniciar_lista_ordenada(10);
 	query_10(s, inpt, m1, P);
 
 	fim = clock();
 
 	if(size_lista_ordenada(P) > 0)
 		navegador_(P, size_lista_ordenada(P));
+	else printf("ha 0 produtos comprados por %s no mes %d\n", inpt, m1);
 	
 	delete_lista_ordenada(P);
 		

@@ -47,124 +47,6 @@ int validaVenda(char* linha, Produtos p, Clientes c){
 	return r;
 }
 
-//
-int valida_p(char* linha, Clientes c, char* id, int filial, Lista_Strings N, Lista_Strings P){
-	int r = 0, i = 0;
-	char* tokens[7];
-
-	i = toktok(linha, tokens);
-
-	if(i == 7)
-		if(indentifica_p(tokens[0], id))
-			if(atoi(tokens[6]) == filial)
-				if( atof(tokens[1]) <= 999.99 && atof(tokens[1]) >= 0.0 )
-					if( atoi(tokens[2]) <= 200 && atoi(tokens[2]) >= 1 )
-						if( tokens[3][0] == 'N')
-							if( atoi(tokens[5]) <= 12 && atoi(tokens[5]) >= 1 )
-								if( search_C(c, tokens[4]) ) // clientes
-									add_lista(N, tokens[4]);
-
-	if(i == 7)
-		if(indentifica_p(tokens[0], id))
-			if(atoi(tokens[6]) == filial)
-				if( atof(tokens[1]) <= 999.99 && atof(tokens[1]) >= 0.0 )
-					if( atoi(tokens[2]) <= 200 && atoi(tokens[2]) >= 1 )
-						if( tokens[3][0] == 'P')
-							if( atoi(tokens[5]) <= 12 && atoi(tokens[5]) >= 1 )
-								if( search_C(c, tokens[4]) ) // clientes
-									add_lista(P, tokens[4]);
-
-	return r;
-}
-
-//
-int valida_p_4(char* linha, Clientes c, char* id, Lista_Strings N, Lista_Strings P){
-	int r = 0, i = 0;
-	char* tokens[7];
-
-	i = toktok(linha, tokens);
-
-	if(i == 7)
-		if(indentifica_p(tokens[0], id))
-			if( atof(tokens[1]) <= 999.99 && atof(tokens[1]) >= 0.0 )
-				if( atoi(tokens[2]) <= 200 && atoi(tokens[2]) >= 1 )
-					if( tokens[3][0] == 'N')
-						if( atoi(tokens[5]) <= 12 && atoi(tokens[5]) >= 1 )
-							if( search_C(c, tokens[4]) ) // clientes
-								add_lista(N, tokens[4]);
-
-	if(i == 7)
-		if(indentifica_p(tokens[0], id))
-			if( atof(tokens[1]) <= 999.99 && atof(tokens[1]) >= 0.0 )
-				if( atoi(tokens[2]) <= 200 && atoi(tokens[2]) >= 1 )
-					if( tokens[3][0] == 'P')
-						if( atoi(tokens[5]) <= 12 && atoi(tokens[5]) >= 1 )
-							if( search_C(c, tokens[4]) ) // clientes
-								add_lista(P, tokens[4]);
-
-	return r;
-}
-
-//
-int valida_c(char* linha, Produtos p, char* id_cliente, int mes, Lista_Ordenada P){
-	int r = 0, i = 0;
-	char* tokens[7];
-
-	i = toktok(linha, tokens);
-
-	if(i == 7)
-		if(indentifica_c(tokens[4], id_cliente))
-			if(atoi(tokens[5]) == mes)
-				if( atof(tokens[1]) <= 999.99 && atof(tokens[1]) >= 0.0 )
-					if( atoi(tokens[2]) <= 200 && atoi(tokens[2]) >= 1 )
-						if( tokens[3][0] == 'N' || tokens[3][0] == 'P')
-							if( atoi(tokens[6]) <= 3 && atoi(tokens[6]) >= 1 )
-								if( search_P(p, tokens[0]) ) // clientes
-									add_lista_ordenada(P, tokens[0], atoi(tokens[2]), 'p');
-	return r;
-}
-
-void search_9(char* path, Clientes c, char* id_produto, int filial, Lista_Strings N, Lista_Strings P){
-	char linha[32];
-
-	FILE* file = fopen(path , "r");
-
-	if(file == NULL){
-		printf("Error! You tried to read an empty file.");
-		fclose(file);
-		_exit(0);
-	}
-
-	while( fgets(linha, 32, file) ){
-		if(filial == 4){
-			valida_p_4(linha, c, id_produto, N, P);
-		}
-		else valida_p(linha, c, id_produto, filial, N, P);
-	}
-
-	fclose(file);
-}
-
-void search_10(char* path, Produtos p, char* id_cliente, int mes, Lista_Ordenada P){
-	char linha[32];
-
-	FILE* file = fopen(path , "r");
-
-	if(file == NULL){
-		printf("Error! You tried to read an empty file.");
-		fclose(file);
-		_exit(0);
-	}
-
-	while( fgets(linha, 32, file) ){
-		valida_c(linha, p, id_cliente, mes, P);
-	}
-
-	heapSort(P);
-	
-	fclose(file);
-}
-
 // Função que lê de um ficheiro de vendas
 void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, int num[2]){
 	char linha[32], *original = malloc(sizeof(char)*32);
@@ -198,6 +80,7 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 
 			update_cliente(get_clientes(f1), tokens[4], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[0], tokens[3][0]);
 			update_produto(get_produtos(f1), tokens[0], atoi(tokens[6]), atoi(tokens[5]), atof(tokens[1]), atoi(tokens[2]), tokens[4], tokens[3][0]);
+
 			i1++;		
 		}
 		i2++;

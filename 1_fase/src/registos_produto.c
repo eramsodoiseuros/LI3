@@ -7,11 +7,6 @@ struct registos_produto{
 	AVL tabela_produto[LETRAS][LETRAS][HASHNUMBER];
 };
 
-/*
-struct clientes_de{
-	
-};
-*/
 
 struct produto{
     int vendido_in[5];
@@ -19,7 +14,8 @@ struct produto{
     int faturado_in[12][3][2];
     int vezes_N[12][3];
     int vezes_P[12][3];
-    // void* lista_comprado[12];
+    Lista_Strings N[4];
+    Lista_Strings P[4];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -71,6 +67,12 @@ Produto iniciar_produto(){
 		for(int i = 0; i < 3; i++)
 			p->vezes_P[m][i] = 0;
 
+	for(int i = 0; i < 4; i++)
+		p->N[i] = NULL;
+	
+	for(int i = 0; i < 4; i++)
+		p->P[i] = NULL;
+
 	return p;
 }
 
@@ -91,10 +93,28 @@ void update_registo_p(Produto p, int filial, int mes, double preco, int unidades
 	if(NP == 'P')
 		p->faturado_in[mes-1][filial-1][1] += unidades*preco;
 
-	if(NP == 'N')
+	if(NP == 'N'){
+		if(!p->N[filial])
+			p->N[filial] = iniciar_lista(5);
+		add_lista(p->N[filial], cliente);
+
+		if(!p->N[0])
+			p->N[0] = iniciar_lista(5);
+		add_lista(p->N[0], cliente);
+
 		p->vezes_N[mes-1][filial-1]++;
-	if (NP == 'P')
+	}
+	if (NP == 'P'){
+		if(!p->P[filial])
+			p->P[filial] = iniciar_lista(5);
+		add_lista(p->P[filial], cliente);
+
+		if(!p->P[0])
+			p->P[0] = iniciar_lista(5);
+		add_lista(p->P[0], cliente);
+
 		p->vezes_P[mes-1][filial-1]++;
+	}
 }
 
 // Função que
@@ -204,6 +224,70 @@ int p_nao_vendeu(RP p){
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
 				r += search_n(p->tabela_produto[i][j][k], 'p');
+
+	return r;
+}
+
+int get_lista_NP(RP rp, char* produto, char NP, int filial, Lista_Strings X){
+	int nID = num_(produto, 2);
+	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
+	int r = 0;
+
+	hF_p(index, produto);
+
+	Produto p = search_info(rp->tabela_produto[index[0]][index[1]][index[2]], nID);
+
+	if(NP == 'N'){
+		if(filial != 4){
+			if(!p->N[filial]){
+				return 0;
+			}
+			else{
+				r = size_lista(p->N[filial]);
+				for(int i = 0; i < r; i++){
+					add_lista(X, get_elem(p->N[filial], i));
+				}
+			}
+		}
+
+		else{
+			if(!p->N[0]){
+				return 0;
+			}
+			else{
+				r = size_lista(p->N[0]);
+				for(int i = 0; i < r; i++){
+					add_lista(X, get_elem(p->N[0], i));
+				}
+			}
+		}
+	}
+
+	if(NP == 'P'){
+		if(filial != 4){
+			if(!p->P[filial]){
+				return 0;
+			}
+			else{
+				r = size_lista(p->P[filial]);
+				for(int i = 0; i < r; i++){
+					add_lista(X, get_elem(p->P[filial], i));
+				}
+			}
+		}
+
+		else{
+			if(!p->P[0]){
+				return 0;
+			}
+			else{
+				r = size_lista(p->P[0]);
+				for(int i = 0; i < r; i++){
+					add_lista(X, get_elem(p->P[0], i));
+				}
+			}
+		}
+	}
 
 	return r;
 }

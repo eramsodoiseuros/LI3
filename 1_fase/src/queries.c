@@ -209,14 +209,23 @@ void query_8 (SGV s, int mes1, int mes2, int v[1] , double f[1]){
 // QUERY 9
 
 void query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P){
-	search_9("../Vendas_1M.txt", s->c, produto, filial, N, P);
+
+	RP produtos = get_produtos(s->f1);
+	
+	get_lista_NP(produtos, produto, 'N', filial, N);
+	get_lista_NP(produtos, produto, 'P', filial, P);
 }
 
 ///////////////////////////////////////////////////////////
 // QUERY 10
 
 void query_10(SGV s, char* cliente, int mes, Lista_Ordenada P){
-	search_10("../Vendas_1M.txt", s->p, cliente, mes, P);
+	
+	RC clientes = get_clientes(s->f1);
+
+	get_lista_P(clientes, cliente, mes, P);
+	
+	heapSort(P);
 }
 
 

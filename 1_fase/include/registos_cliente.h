@@ -85,5 +85,11 @@ void c_comprou_tudo(RC c, Lista_Strings s);
  */
 int c_nao_comprou(RC c);
 
+/**
+ *	Função que 
+ *	@param 
+ */
+void get_lista_P(RC rc, char* cliente, int mes, Lista_Ordenada X);
+
 
 #endif

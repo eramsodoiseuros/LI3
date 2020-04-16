@@ -13,6 +13,7 @@ struct arvore{
 
 struct lista_strings{
     int in_use;
+    int size;
     int free_space;
     char** lista;
 };
@@ -20,6 +21,7 @@ struct lista_strings{
 
 struct lista_ordenada{
     int in_use;
+    int size;
     int free_space;
     char** lista;
     int* unidades;
@@ -51,11 +53,12 @@ int num_(char string[], int index){
 // STRINGS
 
 // Função que inicia uma Lista de Strings
-Lista_Strings iniciar_lista(){
+Lista_Strings iniciar_lista(int size){
     Lista_Strings s = (Lista_Strings) malloc(sizeof(struct lista_strings));
     
     s->in_use = 0;
-    s->free_space = 1000;
+    s->size = size;
+    s->free_space = size;
     s->lista = (char**) malloc(sizeof(char*) * s->free_space);
 
     return s;
@@ -65,7 +68,7 @@ Lista_Strings iniciar_lista(){
 void is_full(Lista_Strings s){
 
     if(s->in_use >= s->free_space){
-        s->free_space += 500;
+        s->free_space += s->size;
         s->lista = realloc(s->lista, sizeof(char*) * s->free_space);
     }
 }
@@ -89,13 +92,11 @@ char* get_elem(Lista_Strings s, int i){
 // Função que
 void delete_lista(Lista_Strings s){
 
-    for (int i = 0; i < s->in_use; ++i)
-    {
-    free(s->lista[i]);
-    
+    for (int i = 0; i < s->in_use; ++i){
+        free(s->lista[i]);
     }
-    free(s);
 
+    free(s);
 }
 
 
@@ -103,13 +104,14 @@ void delete_lista(Lista_Strings s){
 // STRINGS ORDENADAS
 
 // Função que inicia uma Lista Ordenada
-Lista_Ordenada iniciar_lista_ordenada(){
+Lista_Ordenada iniciar_lista_ordenada(int size){
     Lista_Ordenada s = (Lista_Ordenada) malloc(sizeof(struct lista_ordenada));
     
-    s->in_use = 0;
-    s->free_space = 50;
-    s->lista = (char**) malloc(sizeof(char*) * s->free_space);
-    s->unidades = (int*) malloc(sizeof(int) * s->free_space);
+    s->in_use = -1;
+    s->size = size;
+    s->free_space = size;
+    s->lista = (char**) malloc(sizeof(char*) * size);
+    s->unidades = (int*) malloc(sizeof(int) * size);
 
     return s;
 }
@@ -118,7 +120,7 @@ Lista_Ordenada iniciar_lista_ordenada(){
 void is_full_(Lista_Ordenada s){
 
     if(s->in_use >= s->free_space){
-        s->free_space += 100;
+        s->free_space += s->size;
         s->lista = realloc(s->lista, sizeof(char*) * s->free_space);
         s->unidades = realloc(s->lista, sizeof(int) * s->free_space);
     }
@@ -129,7 +131,7 @@ int existe_in(Lista_Ordenada s, char* c, char tipo){
     int r = -1;
 
     if(tipo == 'c'){
-        for(int aux = 0; aux < s->in_use; aux++)
+        for(int aux = 1; aux < s->in_use; aux++)
             if(num_(c, 1) == num_(s->lista[aux], 1))
                 if(c[0] == s->lista[aux][0])
                     r = aux;
@@ -137,9 +139,9 @@ int existe_in(Lista_Ordenada s, char* c, char tipo){
 
     if(tipo == 'p'){
         for(int aux = 0; aux < s->in_use; aux++)
-            if(num_(c, 2) == num_(s->lista[aux], 2))
-                if(c[0] == s->lista[aux][0])
-                    if(c[1] == s->lista[aux][1])
+            if(c[0] == s->lista[aux][0])
+                if(c[1] == s->lista[aux][1])
+                    if(num_(c, 2) == num_(s->lista[aux], 2))
                         r = aux;
     }
 
@@ -150,7 +152,11 @@ int existe_in(Lista_Ordenada s, char* c, char tipo){
 void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
     int r = 0, aux = 0;
     is_full_(s);
-    if( (r = existe_in(s,c,tipo)) == -1 ){
+    if(s->in_use == 0){
+        s->lista[0] = sdup(c);
+        s->unidades[0] = unidades;
+    }
+    else if(existe_in(s, c, tipo)){
         aux = s->in_use++;
         s->lista[aux] = sdup(c);
         s->unidades[aux] = unidades;
@@ -536,8 +542,8 @@ void* search_info(AVL a, int id){
             r = a->info;
         }
         else{
-            if(id < a->valor) search_info(a->esq, id);
-            else search_info(a->dir, id);
+            if(id < a->valor) r = search_info(a->esq, id);
+            else r = search_info(a->dir, id);
         }
     }
 

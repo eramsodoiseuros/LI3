@@ -97,6 +97,10 @@ void p_vendeu_todas(RP p, Lista_Strings lista, int x);
  */
 int vendeu_in(Produto p, int x);
 
-
+/**
+ *	Função que 
+ *	@param 
+ */
+int get_lista_NP(RP p, char* produto, char NP, int filial, Lista_Strings X);
 
 #endif

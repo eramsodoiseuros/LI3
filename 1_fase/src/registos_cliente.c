@@ -11,7 +11,8 @@ struct cliente{
     int comprou_in[5];
     int vezes_comprou[12][3];
     int size_comprados;
-    // void* lista_comprados[12]; 
+    
+    Lista_Ordenada P[12];
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -49,6 +50,9 @@ Cliente iniciar_cliente(){
 			c->vezes_comprou[m][i] = 0;
 
 	c->size_comprados = 0;
+	
+	for(int m = 0; m < 12; m++)
+		c->P[m] = NULL;
 
 	return c;
 }
@@ -62,9 +66,12 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
 		c->comprou_in[4] = 1;
 
 	c->vezes_comprou[mes-1][filial-1]++;
-    
-    //if(new_produto(c, cp))
-    c->size_comprados++;
+
+	c->size_comprados++;
+
+	if(!c->P[mes-1])
+		c->P[mes-1] = iniciar_lista_ordenada(10);	
+	add_lista_ordenada(c->P[mes-1], produto, unidades, 'p');
 }
 
 // Função que
@@ -152,3 +159,25 @@ int c_nao_comprou(RC c){
 
 	return r;
 }
+
+//
+void get_lista_P(RC rc, char* cliente, int mes, Lista_Ordenada X){
+	int nID = num_(cliente,1), r = 0;
+	int index[3]; index[0] = 0, index[1] = 0, index[2] = 0;
+
+	hF_c(index,cliente);
+
+	Cliente c = search_info(rc->tabela_cliente[index[0]][index[1]], nID);
+
+	if(!c->P[mes-1]){
+		return;
+	}
+	else{
+		r = size_lista_ordenada(c->P[mes-1]);
+		for(int i = 0; i < r; i++){
+			add_lista_ordenada(X, get_elem_(c->P[mes-1], i), get_unit(c->P[mes-1], i), 'p');
+		}
+	}
+}
+
+

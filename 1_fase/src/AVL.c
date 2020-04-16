@@ -107,7 +107,7 @@ void delete_lista(Lista_Strings s){
 Lista_Ordenada iniciar_lista_ordenada(int size){
     Lista_Ordenada s = (Lista_Ordenada) malloc(sizeof(struct lista_ordenada));
     
-    s->in_use = -1;
+    s->in_use = 0;
     s->size = size;
     s->free_space = size;
     s->lista = (char**) malloc(sizeof(char*) * size);
@@ -122,7 +122,7 @@ void is_full_(Lista_Ordenada s){
     if(s->in_use >= s->free_space){
         s->free_space += s->size;
         s->lista = realloc(s->lista, sizeof(char*) * s->free_space);
-        s->unidades = realloc(s->lista, sizeof(int) * s->free_space);
+        s->unidades = realloc(s->unidades, sizeof(int) * s->free_space);
     }
 }
 
@@ -155,8 +155,9 @@ void add_lista_ordenada(Lista_Ordenada s, char* c, int unidades, char tipo){
     if(s->in_use == 0){
         s->lista[0] = sdup(c);
         s->unidades[0] = unidades;
+        s->in_use++;
     }
-    else if(existe_in(s, c, tipo)){
+    else if( (r = existe_in(s, c, 'p'))  == -1 ){
         aux = s->in_use++;
         s->lista[aux] = sdup(c);
         s->unidades[aux] = unidades;
@@ -185,13 +186,10 @@ int get_unit(Lista_Ordenada s, int i){
 // Função que
 void delete_lista_ordenada(Lista_Ordenada s){
     
-    for (int i = 0; i < s->in_use; ++i)
-    {
-    free(s->lista[i]);
-    
+    for (int i = 0; i < s->in_use; ++i){
+        free(s->lista[i]);
     }
     free(s->unidades);
-    free(s);
 }
 
 

@@ -523,7 +523,8 @@ void load_query10 (SGV s){
 
 	inicio = clock();
 
-	P = iniciar_lista_ordenada(10);
+	P = iniciar_lista_ordenada(25);
+
 	query_10(s, inpt, m1, P);
 
 	fim = clock();

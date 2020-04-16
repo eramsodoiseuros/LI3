@@ -70,7 +70,7 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
 	c->size_comprados++;
 
 	if(!c->P[mes-1])
-		c->P[mes-1] = iniciar_lista_ordenada(10);	
+		c->P[mes-1] = iniciar_lista_ordenada(25);	
 	add_lista_ordenada(c->P[mes-1], produto, unidades, 'p');
 }
 

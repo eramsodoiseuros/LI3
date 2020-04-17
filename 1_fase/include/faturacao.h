@@ -48,9 +48,9 @@ void update_faturacao(Faturacao f1, int filial, int mes, double preco, int unida
 Faturacao iniciar_faturacao();
 
 /**
- *	Função que 
- *	@param 
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param a estrutura a libertar
  */
-void print_fat(Faturacao f1);
+void free_faturacao(Faturacao f);
 
 #endif

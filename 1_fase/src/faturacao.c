@@ -4,8 +4,6 @@ struct faturacao{
 	double tabela_faturacao[12][4]; 
 	int tabela_vendas[12];
 	double total_faturado;
-	// ... unidades_vendidas[3] = {Produto A = 300x , Produto B =  250x ...}
-	// ... numero_clientes[3] = {Produto A = 50 , Produto B =  30 ...}
 };
 
 // Função que devolve o numero de vendas num mês
@@ -62,15 +60,7 @@ Faturacao iniciar_faturacao(){
 	return f1;
 }
 
-// Função que
-void print_fat(Faturacao f1){
-
-	for(int m = 0; m < 12; m++)
-		for(int f = 0; f < 4; f++)
-			printf("\nfaturado em %d e %d: _%f_", m, f, f1->tabela_faturacao[m][f]);
-	
-	for(int m = 0; m < 12; m++)
-		printf("\nvendas em %d: _%d_", m, f1->tabela_vendas[m]);
-
-	printf("\n\ttotal: _%f_\n", f1->total_faturado);
+// Função que liberta o espaço alocado para a estrutura
+void free_faturacao(Faturacao f){
+	free(f);
 }

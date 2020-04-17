@@ -63,11 +63,6 @@ int valida_produto(char* id){
 	return r;
 }
 
-//
-int indentifica_p(char* id, char* p){
-	return !strcmp(id,p);
-}
-
 // Função que lê de um ficheiro de produtos
 void load_produtos(Produtos p, char* path, int num[2], Filial f){
 	char linha[7];
@@ -139,10 +134,6 @@ void free_produtos(Produtos p){
 	for (int i = 0; i < LETRAS; i++){
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
-				free(p->tabela_produtos[i][j][k]);
+				free_AVL(p->tabela_produtos[i][j][k], 'b');
 	}
-
-	free(p);
 }
-
-

@@ -358,6 +358,27 @@ AVL create_nodo(int valor, char* id, char tipo){
     return(new);
 }
 
+// Função que liberta o espaço alocado para a estrutura
+void free_AVL(AVL a, char tipo){
+    free_AVL(a->esq, tipo);
+    free_AVL(a->dir, tipo);
+
+    if(tipo == 'b'){
+        free(a->info);
+        free(a);
+    }
+
+    if(tipo == 'c'){
+        free_cliente(a->info);
+        free(a);
+    }
+
+    if(tipo == 'p'){
+        free_produto(a->info);
+        free(a);
+    }
+}
+
 // Função que balança a arvore para a direita
 AVL rotate_dir(AVL y){
     AVL x = y->esq;

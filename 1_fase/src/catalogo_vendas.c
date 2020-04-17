@@ -55,12 +55,6 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 
 	FILE* file = fopen(path , "r");
 
-	if(file == NULL){
-		printf("Error! You tried to read an empty file.");
-		fclose(file);
-		_exit(0);
-	}
-
 	while( fgets(linha, 32, file) ){
 		strcpy(original, linha);
 		if(validaVenda(linha, p, c)){

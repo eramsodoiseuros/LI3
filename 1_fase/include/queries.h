@@ -23,6 +23,8 @@ typedef struct sgv* SGV;
 
 SGV iniciar_sgv ();
 
+void free_sgv(SGV s);
+
 Clientes get_clientes_(SGV s);
 
 Produtos get_produtos_(SGV s);

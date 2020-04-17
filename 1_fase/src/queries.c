@@ -23,6 +23,13 @@ SGV iniciar_sgv (){
 	return s;
 }
 
+void free_sgv(SGV s){
+	free_clientes(s->c);
+	free_produtos(s->p);
+	free_filial(s->f1);
+	free_faturacao(s->f2);
+}
+
 
 Clientes get_clientes_(SGV s){
 	return s->c;

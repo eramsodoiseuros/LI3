@@ -125,6 +125,12 @@ void heapSort(Lista_Ordenada s);
 AVL create_nodo(int valor, char* id, char tipo);
 
 /**
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param apontador para a estrutura e o tipo da arvore
+ */
+void free_AVL(AVL a, char tipo);
+
+/**
  *	Função que recursivamente insere um valor numa AVL
  *	@param a arvore e um valor a adicionar na arvore, tipo da arvore
  *	@param apontador para a estrutura

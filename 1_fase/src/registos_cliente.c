@@ -57,6 +57,11 @@ Cliente iniciar_cliente(){
 	return c;
 }
 
+// Função que liberta o espaço alocado para a estrutura
+void free_cliente(Cliente c){
+	free(c);
+}
+
 // Função que
 void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades, char* produto, char NP){
 	c->comprou_in[0]++;
@@ -93,6 +98,12 @@ RC iniciar_RC(){
 			c->tabela_cliente[i][k] = NULL;
 
 	return c;
+}
+
+void free_rc(RC c){
+	for (int i = 0; i < LETRAS; i++)
+		for(int j = 0; j < HASHNUMBER; j++)
+			free(c->tabela_cliente[i][j]);
 }
 
 // Função que

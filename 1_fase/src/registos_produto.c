@@ -76,6 +76,11 @@ Produto iniciar_produto(){
 	return p;
 }
 
+// Função que liberta o espaço alocado para a estrutura
+void free_produto(Produto p){
+	free(p);
+}
+
 // Função que
 void update_registo_p(Produto p, int filial, int mes, double preco, int unidades, char* cliente, char NP){
 
@@ -137,6 +142,16 @@ RP iniciar_RP(){
 
 	return p;
 }
+
+void free_rp(RP p){
+	
+	for (int i = 0; i < LETRAS; i++){
+		for (int j = 0; j < LETRAS; j++)
+			for(int k = 0; k < HASHNUMBER; k++)
+				free(p->tabela_produto[i][j][k]);
+	}
+}
+
 
 // Função que
 int produto_vendido(RP p, char* produto, int x){

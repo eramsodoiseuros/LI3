@@ -715,5 +715,6 @@ void menu(SGV s){
 		menu(s);
 	}
 
+	free_sgv(s);
 	free(r);
 }

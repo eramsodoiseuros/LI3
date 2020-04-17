@@ -20,6 +20,12 @@ typedef struct produto* Produto;
 Produto iniciar_produto();
 
 /**
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param apontador para a estrutura Produto
+ */
+void free_produto(Produto p);
+
+/**
  *	Função que insere um index, de tipologia Produto, numa estrutura de dados
  *	@param 
  */
@@ -42,6 +48,8 @@ void update_produto(RP p, char* produto, int filial, int mes, double preco, int 
  *	@param 
  */
 RP iniciar_RP();
+
+void free_rp(RP p);
 
 /**
  *	Função que 

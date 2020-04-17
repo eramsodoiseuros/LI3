@@ -19,6 +19,12 @@ typedef struct cliente* Cliente;
 Cliente iniciar_cliente();
 
 /**
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param apontador para a estrutura Cliente
+ */
+void free_cliente(Cliente c);
+
+/**
  *	Função que insere um index, de tipologia Cliente, numa estrutura de dados
  *	@param estrutura de Registo, string id a inserir
  */
@@ -37,10 +43,16 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
 void update_cliente(RC c, char* cliente, int filial, int mes, double preco, int unidades, char* produto, char NP);
 
 /**
- *	Função que 
- *	@param 
+ *	Função que inicializa os Registos dos Clientes
+ *	@param o registo de clientes
  */
 RC iniciar_RC();
+
+/**
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param apontador para a estrutura Registos de Cliente
+ */
+void free_rc(RC c);
 
 /**
  *	Função que 

@@ -78,22 +78,11 @@ int valida_cliente(char * id){
 	return r;
 }
 
-//
-int indentifica_c(char* id, char* c){
-	return !strcmp(id,c);
-}
-
 // Função que lê de um ficheiro de clientes
 void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	char linha[6];
 	int i1 = 0, i2 = 0;
 	FILE* file = fopen(path , "r");
-	
-	if(file == NULL){
-      	printf("Error! You tried to read an empty file.");   
-      	fclose(file);
-     	_exit(0);            
-    }
 
 	while(fgets(linha, 6, file)){
 		if(valida_cliente(linha)){
@@ -110,7 +99,7 @@ void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	fclose(file);
 }
 
-// Função que inicializa as estruturas, escreve na posição 0 e 1 do array
+// Função que inicializa a estrutura, escreve na posição 0 e 1 do array
 Clientes iniciar_clientes(int* num, Filial f){
 	Clientes c = malloc(sizeof(struct clientes));
 	int valores[2];
@@ -128,9 +117,7 @@ Clientes iniciar_clientes(int* num, Filial f){
 
 // Função que liberta o espaço alocado para a estrutura
 void free_clientes(Clientes c){
-
 	for (int i = 0; i < LETRAS; i++)
 		for(int j = 0; j < HASHNUMBER; j++)
-			free(c->tabela_clientes[i][j]);
-	free(c);
+			free_AVL(c->tabela_clientes[i][j], 'b');
 }

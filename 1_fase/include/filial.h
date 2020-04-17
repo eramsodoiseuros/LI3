@@ -19,28 +19,35 @@ typedef struct filial* Filial;
 Filial iniciar_filial();
 
 /**
- *	Função que 
- *	@param 
+ *	Função que insere um produto nos registos da filial
+ *	@param estrutura filial e o produto a inserir
  */
 void f_produto(Filial f, char* id);
 
 /**
- *	Função que 
- *	@param 
+ *	Função que insere um cliente nos registos da filial
+ *	@param estrutura filial e o cliente a inserir
  */
 void f_cliente(Filial f, char* id);
 
 /**
- *	Função que 
- *	@param 
+ *	Função que devolve um Registo de Produtos presente na estrutura filial
+ *	@param Filial
+ *	@param Registo de Produtos
  */
 RP get_produtos(Filial f);
 
 /**
- *	Função que 
- *	@param 
+ *	Função que devolve um Registo de Clientes presente na estrutura filial
+ *	@param Filial
+ *	@param Registo de Clientes
  */
 RC get_clientes(Filial f);
 
+/**
+ *	Função que liberta o espaço alocado para a estrutura
+ *	@param a estrutura a libertar
+ */
+void free_filial(Filial f);
 
 #endif

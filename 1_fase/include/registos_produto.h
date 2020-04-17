@@ -111,4 +111,16 @@ int vendeu_in(Produto p, int x);
  */
 int get_lista_NP(RP p, char* produto, char NP, int filial, Lista_Strings X);
 
+/**
+ *	Função que 
+ *	@param 
+ */
+int unidades_vendidas(Produto p, int filial);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void query11(int n, RP p, Lista_N LP, int filial);
+
 #endif

@@ -103,7 +103,7 @@ RC iniciar_RC(){
 void free_rc(RC c){
 	for (int i = 0; i < LETRAS; i++)
 		for(int j = 0; j < HASHNUMBER; j++)
-			free(c->tabela_cliente[i][j]);
+			free_AVL(c->tabela_cliente[i][j], 'c');
 }
 
 // Função que

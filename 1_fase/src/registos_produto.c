@@ -11,6 +11,7 @@ struct registos_produto{
 struct produto{
     int vendido_in[5];
     int vezes_comprado[12][3];
+    int unidades_vendidas[3];
     int faturado_in[12][3][2];
     int vezes_N[12][3];
     int vezes_P[12][3];
@@ -44,11 +45,14 @@ int insert_p(RP p, char* id){
 }
 
 // Função que
-Produto iniciar_produto(){
+Produto iniciar_produto(int pos){
 	Produto p = malloc(sizeof(struct produto));
 
 	for(int i = 0; i < 5; i++)
 		p->vendido_in[i] = 0;
+	
+	for(int i = 0; i < 3; i++)
+		p->unidades_vendidas[i] = 0;
 
 	for(int m = 0; m < 12; m++)
 		for(int i = 0; i < 3; i++)
@@ -89,6 +93,8 @@ void update_registo_p(Produto p, int filial, int mes, double preco, int unidades
 
 	if(p->vendido_in[1] && p->vendido_in[2] && p->vendido_in[3])
 		p->vendido_in[4] = 1;
+
+	p->unidades_vendidas[filial-1] += unidades;
 
 	p->vezes_comprado[mes-1][filial-1]++;
 
@@ -148,7 +154,7 @@ void free_rp(RP p){
 	for (int i = 0; i < LETRAS; i++){
 		for (int j = 0; j < LETRAS; j++)
 			for(int k = 0; k < HASHNUMBER; k++)
-				free(p->tabela_produto[i][j][k]);
+				free_AVL(p->tabela_produto[i][j][k], 'p');
 	}
 }
 
@@ -305,4 +311,20 @@ int get_lista_NP(RP rp, char* produto, char NP, int filial, Lista_Strings X){
 	}
 
 	return r;
+}
+
+//
+int unidades_vendidas(Produto p, int filial){
+	return p->unidades_vendidas[filial-1];
+}
+
+
+
+//
+void query11(int n, RP p, Lista_N LP, int filial){
+
+	for (int i = 0; i < LETRAS; i++)
+		for (int j = 0; j < LETRAS; j++)
+			for(int k = 0; k < HASHNUMBER; k++)
+				search_u(p->tabela_produto[i][j][k], i, j, 'p', filial, LP, n);
 }

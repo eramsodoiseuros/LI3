@@ -27,11 +27,12 @@ struct lista_ordenada{
     int* unidades;
 };
 
-struct lista_n_maiores{
+struct lista_n{
     int N;
     int in_use;
     char** lista;
     int* unidades;
+    int* n_clientes;
 };
 
 
@@ -197,53 +198,46 @@ void delete_lista_ordenada(Lista_Ordenada s){
 // LISTA DE N MAIORES
 
 // Função que inicia uma Lista Ordenada
-Lista_N_Maiores iniciar_nm(int size){
-    Lista_N_Maiores s = (Lista_N_Maiores) malloc(sizeof(struct lista_n_maiores));
+Lista_N iniciar_nm(int size){
+    Lista_N s = (Lista_N) malloc(sizeof(struct lista_n));
     
     s->in_use = 0;
     s->N = size;
     s->lista = (char**) malloc(sizeof(char*) * size);
     s->unidades = (int*) malloc(sizeof(int) * size);
+    s->n_clientes = (int*) malloc(sizeof(int) * size);
 
     return s;
 }
 
-// Função que verifica se a Lista está cheia, aloca memória se estiver
-int is_Full(Lista_N_Maiores s){
-
-    if(s->in_use >= s->N){
-        // SORT
-        // compare com last
-        return 1;
+void preenche_nm(Lista_N s){
+    for(int i = 0; i < s->N; i++){
+        s->lista[i] = "__";
+        s->unidades[i] = 0;
+        s->n_clientes[i] = 0;
     }
-    return 0;
 }
 
-
-// Função que insere uma string no fim do array Strings (alocando memória se necessário)
-void add_nm(Lista_N_Maiores s, char* c, int unidades, char tipo){
-    
-    int aux = 0;
-    if(is_Full(s));
-    else{
-        aux = s->in_use++;
-        s->lista[aux] = sdup(c);
-        s->unidades[aux] += unidades;
-    }
+void set_n_clientes(Lista_N s, int i, int num){
+    s->n_clientes[i] = num;
 }
 
 // Função que
-char* get_elem_nm(Lista_N_Maiores s, int i){
+char* get_elem_nm(Lista_N s, int i){
     return s->lista[i];
 }
 
 // Função que
-int get_unit_nm(Lista_N_Maiores s, int i){
+int get_unit_nm(Lista_N s, int i){
     return s->unidades[i];
 }
 
+int get_n_clientes(Lista_N s, int i){
+    return s->n_clientes[i];
+}
+
 // Função que
-void delete_lista_nm(Lista_N_Maiores s){
+void delete_lista_nm(Lista_N s){
     free(s);
 }
 
@@ -569,3 +563,36 @@ void* search_info(AVL a, int id){
     return r;
 }
 
+
+void maior_que(int a, int valor, char l1, char l2, Lista_N lista, int size){
+    int r = 0;
+    char* s = malloc(sizeof(char)*7);
+    sprintf(s,"%c%c%d", l1, l2, valor);
+
+    char* aux = malloc(sizeof(char)*7);
+    for(int i = 0; i < size; i++)
+        if(a > lista->unidades[i]){
+            r = lista->unidades[i];
+            aux = sdup(lista->lista[i]);
+            lista->unidades[i] = a;
+            lista->lista[i] = sdup(s);
+            a = r;
+            s = sdup(aux);
+        }
+
+    free(aux);
+}
+
+// Função que
+void search_u(AVL a, int l1, int l2, char tipo, int filial, Lista_N maiores, int n){
+    char a1 = l1+'A', b2 = l2+'A';
+
+    if(tipo == 'p'){
+        if(a == NULL);
+        else{
+            maior_que(unidades_vendidas(a->info, filial), a->valor, a1, b2, maiores, n);
+            search_u(a->esq, l1, l2, 'p', filial, maiores, n);
+            search_u(a->dir, l1, l2, 'p', filial, maiores, n);
+        }
+    }
+}

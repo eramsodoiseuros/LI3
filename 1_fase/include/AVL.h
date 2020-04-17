@@ -14,7 +14,7 @@ typedef struct lista_strings* Lista_Strings;
 
 typedef struct lista_ordenada* Lista_Ordenada;
 
-typedef struct lista_n_maiores* Lista_N_Maiores;
+typedef struct lista_n* Lista_N;
 
 /**
  *	Função strdup criada para evitar warnings
@@ -104,6 +104,41 @@ int size_lista_ordenada(Lista_Ordenada s);
  */
 void delete_lista_ordenada(Lista_Ordenada s);
 
+//////////////////////////////////////////////////
+// LISTA DE N MAIORES
+
+/**
+ *	Função que 
+ *	@param 
+ */
+Lista_N iniciar_nm(int size);
+
+void preenche_nm(Lista_N);
+void set_n_clientes(Lista_N s, int i, int num);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+char* get_elem_nm(Lista_N s, int i);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int get_unit_nm(Lista_N s, int i);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int get_n_clientes(Lista_N s, int i);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void delete_lista_nm(Lista_N s);
 
 ///////////////////////////////////////////////////////////
 // ALGORITMO DE ORDENAÇÃO
@@ -204,5 +239,7 @@ void search_c(AVL a, Lista_Strings lista, char l1);
  *	@param 
  */
 void search_p(AVL a, Lista_Strings lista, char l1, char l2, int x);
+
+void search_u(AVL a, int l1, int l2, char tipo, int filial, Lista_N maiores, int n);
 
 #endif

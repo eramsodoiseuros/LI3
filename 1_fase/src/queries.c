@@ -217,12 +217,15 @@ void query_8 (SGV s, int mes1, int mes2, int v[1] , double f[1]){
 ///////////////////////////////////////////////////////////
 // QUERY 9
 
-void query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P){
+int query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P){
+	int r = 0;
 
 	RP produtos = get_produtos(s->f1);
 	
-	get_lista_NP(produtos, produto, 'N', filial, N);
-	get_lista_NP(produtos, produto, 'P', filial, P);
+	r+= get_lista_NP(produtos, produto, 'N', filial, N);
+	r+= get_lista_NP(produtos, produto, 'P', filial, P);
+
+	return r;
 }
 
 ///////////////////////////////////////////////////////////
@@ -244,13 +247,46 @@ void query_10(SGV s, char* cliente, int mes, Lista_Ordenada P){
 
 /*
 
-Criar uma lista dos N produtos mais vendidos em todo o ano, indicando o número total de clientes e o número de unidades vendidas, filial a filial;
+Criar uma lista dos N produtos mais vendidos em todo o ano, 
+
+indicando o número total de clientes e o número de unidades vendidas, filial a filial;
 
 */
 
-void query_11(Filial* f, int N){
-	//Lista_N_Maiores s = iniciar_nm(N);
+void query_11(SGV s, int n, Lista_N F1, Lista_N F2, Lista_N F3){
+	Lista_Strings N, P;
 
+	RP rp = get_produtos(s->f1);
+	
+	query11(n, rp, F1, 1);
+	query11(n, rp, F2, 2);
+	query11(n, rp, F3, 3);
+	
+	for(int x = 0; x < n; x++){
+		N = iniciar_lista(5);
+		P = iniciar_lista(5);
+
+		set_n_clientes(F1, x, query_9(s, get_elem_nm(F1,x), 4, N, P));
+		
+		delete_lista(N);
+		delete_lista(P);
+		
+		N = iniciar_lista(5);
+		P = iniciar_lista(5);
+
+		set_n_clientes(F2, x, query_9(s, get_elem_nm(F2,x), 4, N, P));
+		
+		delete_lista(N);
+		delete_lista(P);
+
+		N = iniciar_lista(5);
+		P = iniciar_lista(5);
+
+		set_n_clientes(F3, x, query_9(s, get_elem_nm(F3,x), 4, N, P));
+		
+		delete_lista(N);
+		delete_lista(P);
+	}
 }
 
 ///////////////////////////////////////////////////////////

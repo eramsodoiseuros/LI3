@@ -109,7 +109,7 @@ void query_8(SGV s, int m1, int m2, int v[1] , double f[1]);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P);
+int query_9(SGV s, char* produto, int filial, Lista_Strings N, Lista_Strings P);
 
 /**
  *	Dado um código de cliente e um mês, determinar a lista de códigos de produtos que mais comprou por quantidade e não por facturação), por ordem descendente;
@@ -125,7 +125,7 @@ void query_10(SGV s, char* cliente, int mes, Lista_Ordenada P);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_11();
+void query_11(SGV s, int n, Lista_N F1, Lista_N F2, Lista_N F3);
 
 /**
  *	Dado um código de cliente determinar quais os códigos dos N produtos em que mais gastou dinheiro durante o ano;

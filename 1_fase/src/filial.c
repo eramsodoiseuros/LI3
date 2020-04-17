@@ -17,6 +17,7 @@ Filial iniciar_filial(){
 	return f;
 }
 
+
 // Função que insere um produto nos registos da filial
 void f_produto(Filial f, char* id){
 	insert_p(f->produtos, id);

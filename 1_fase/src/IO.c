@@ -157,6 +157,81 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 }
 
 // Função que
+void navegador_11(Lista_N lista, int tamanho, int filial){
+
+	int val = 1, exit = 0;
+	char* inpt = malloc(sizeof(char)*buffsize);
+	int validstr = 1, scanout = 1;
+	int pag = 1, i = 0, count = 0;
+
+	while(exit!=1){
+		
+		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+			val=1;
+			printf("Página inválida ou não existente\n");
+		}
+		else{
+
+			if(lista || pag < (tamanho/10)+1)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			printf("Existem %s%d%s resultados na filial %d\n\n",KBLU, tamanho, RST, filial);
+	             
+			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
+				if(get_elem_nm(lista,i)!=NULL){
+					printf("produto %s \t unidades: %d \t clientes: %d \n", get_elem_nm(lista,i), get_unit_nm(lista,i), get_n_clientes(lista,i));
+					count++;
+				}
+				else break;			
+			}
+			count = 0;
+		}
+
+		printf("\n");
+
+		if(((tamanho/10)+1) == 1)
+			return;
+
+		printf("%s(D para Proxima página) \n",KBLU);
+		printf("%s(A para Página Anterior) \n",KBLU);
+		printf("%s(E para sair)%s \n",KBLU,RST);
+		printf("Inserir número página: \n");
+
+		scanout = read(0,inpt,buffsize);
+		inpt = strtok(inpt," \n");
+
+		validstr = atoi(inpt);
+		printf("\n");
+		
+		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0){exit = 1;}
+		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(inpt,"a") == 0 || strcmp(inpt,"A") == 0) && pag>1) pag--;
+		else if(validstr==0) val = 0;
+		else if(validstr!=0) pag = validstr;
+    }
+
+	free(inpt);
+}
+
+// Função que
+int N_(){
+	char* inpt = malloc(sizeof(char)*buffsize);
+	int n = 0;
+	printf("%sInsira um Número : %s\n",KBLU,RST);
+
+	if(scanf("%s", inpt)){
+		n = atoi(inpt);
+	}
+
+ 	if(!n){
+ 		printf("%sInput Inválido.%s\n",KRED,RST);
+    	n = N_();
+  	}
+
+  	free(inpt);
+	return n;
+}
+
+// Função que
 char letra_(){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	char letra = '1';
@@ -539,6 +614,43 @@ void load_query10 (SGV s){
 	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
+//
+void load_query11 (SGV s){
+
+	clock_t inicio, fim;
+	double cpu_time_used;
+
+	int n;
+	Lista_N F1, F2, F3;
+
+	n = N_();
+
+	inicio = clock();
+
+	F1 = iniciar_nm(n);
+	F2 = iniciar_nm(n);
+	F3 = iniciar_nm(n);
+	
+	preenche_nm(F1);
+	preenche_nm(F2);
+	preenche_nm(F3);
+
+	query_11(s, n, F1, F2, F3);
+
+	fim = clock();
+	
+	navegador_11(F1, n, 1);
+	navegador_11(F2, n, 2);
+	navegador_11(F2, n, 3);
+
+	delete_lista_nm(F1);
+	delete_lista_nm(F2);
+	delete_lista_nm(F3);
+		
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
+}
+
 
 // Função que escolhe a query a realizar
 void escolhe_query(SGV s){
@@ -594,11 +706,11 @@ void escolhe_query(SGV s){
 			case 10:
 				load_query10(s);
 				break;
-			/*	
+	
 			case 11:
-				query_11();
+				load_query11(s);
 				break;
-			*/
+
 			/*
 			case 12:
 				query_12();

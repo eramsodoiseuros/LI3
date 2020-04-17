@@ -87,7 +87,6 @@ void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	while(fgets(linha, 6, file)){
 		if(valida_cliente(linha)){
 			insert_cliente(c,linha);
-
 			f_cliente(f, linha);
 			i1++;
 		}
@@ -97,7 +96,9 @@ void load_clientes(Clientes c, char* path, int num[2], Filial f){
 	num[0] = i1;
 	num[1] = i2;
 	fclose(file);
+
 }
+
 
 // Função que inicializa a estrutura, escreve na posição 0 e 1 do array
 Clientes iniciar_clientes(int* num, Filial f){

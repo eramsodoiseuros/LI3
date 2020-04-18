@@ -721,7 +721,7 @@ void load_query12(SGV s){
 
 	Lista_12 F1 = iniciar_lista_12(n);
 
-	query_12(s, n, F1, inpt);
+	n = query_12(s, n, F1, inpt);
 
 	fim = clock();
 	

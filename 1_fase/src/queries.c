@@ -402,9 +402,11 @@ Dado um código de cliente determinar quais os códigos dos N produtos em que ma
 
 */
 
-void query_12(SGV s, int N, Lista_12 ls, char* cliente){
+int query_12(SGV s, int N, Lista_12 ls, char* cliente){
 
 	RC rc = get_clientes(s->f1);
 
-	get_lista_F(rc, cliente, ls, N);
+	int r = get_lista_F(rc, cliente, ls, N);
+
+	return r;
 }

@@ -95,6 +95,8 @@ int size_lista(Lista_Strings s){
 
 // Função que
 char* get_elem(Lista_Strings s, int i){
+    if(i>s->in_use)
+        return NULL;
     return s->lista[i];
 }
 
@@ -184,6 +186,8 @@ int size_lista_ordenada(Lista_Ordenada s){
 
 // Função que
 char* get_elem_(Lista_Ordenada s, int i){
+    if(i>s->in_use)
+        return NULL;
     return s->lista[i];
 }
 
@@ -268,6 +272,8 @@ int size_lista_12(Lista_12 s){
 
 // Função que
 char* get_elem_12(Lista_12 s, int i){
+    if(i>s->in_use)
+        return NULL;
     return s->lista[i];
 }
 
@@ -316,6 +322,8 @@ void set_n_clientes(Lista_N s, int i, int num){
 
 // Função que
 char* get_elem_nm(Lista_N s, int i){
+    if(i>s->in_use)
+        return NULL;
     return s->lista[i];
 }
 

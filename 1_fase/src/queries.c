@@ -150,8 +150,8 @@ void query_3(SGV s, char* produto, int mes, int vendas[3], double faturado[3], i
 
 			faturado[1] += p_faturado_in(p, produto, mes, i, 'N');
 			faturado[2] += p_faturado_in(p, produto, mes, i, 'P');
-			faturado[0] += faturado[1] + faturado[2];
 		}
+		faturado[0] = faturado[1] + faturado[2];
 	}
 	else{
 		vendas[0] = p_vezes_comprado(p, produto, mes, filial);

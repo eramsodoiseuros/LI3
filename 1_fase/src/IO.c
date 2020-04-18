@@ -6,18 +6,17 @@
 // Print do menu, com a informação das queries
 void print_menu(){
 	printf("%s\n************************************************** Sistema de Gestão de Vendas ************************************************** %s\n", KCYN, RST);
-	printf("%s\n\t->%s Query 1:  Ler ficheiros (os ficheiros disponiveis para leitura são: \'Produtos.txt\', \'Clientes.txt\', \'Vendas_1M.txt\').\n", KCYN, RST);
-	printf("%s\n\t->%s Query 2:  Determinar a lista e o número de produtos começados por uma Letra à escolha (A...Z).\n" , KCYN, RST);
-	printf("%s\n\t->%s Query 3:  Dado um mês e um produto, determinar e apresentar o nº total de registos\n\t   de venda e o total facturado com esse produto nesse mês, tendo em conta a distinção N/P,\n\t   há possibilidade de escolher a apresentação dos resultados dividida por filial.\n" , KCYN, RST);
-	printf("%s\n\t->%s Query 4:  Determinar a lista ordenada de produtos que ninguém comprou, e o seu total,\n\t   há possibilidade de escolher a apresentação dos resultados dividida por filial.\n", KCYN, RST);
+	printf("%s\n\t->%s Query 2:  Determinar a lista e o nº total de produtos cujo código se inicia por uma dada letra (maiúscula).\n" , KCYN, RST);
+	printf("%s\n\t->%s Query 3:  Dado um mês e um produto, determinar e apresentar o nº total de vendas,\n\t   O total facturado com esse produto nesse mês, tendo em conta a distinção N/P,\n\t   Escolhendo a apresentação dos resultados dividida por filial.\n" , KCYN, RST);
+	printf("%s\n\t->%s Query 4:  Determinar a lista ordenada de produtos que ninguém comprou e o seu total,\n\t   Havendo a possibilidade de escolher a apresentação dos resultados dividida por filial.\n", KCYN, RST);
 	printf("%s\n\t->%s Query 5:  Determinar a lista ordenada de clientes que realizaram compras em todas as filiais.\n", KCYN, RST);
 	printf("%s\n\t->%s Query 6:  Determinar o nº de clientes registados que não realizaram compras.\n\t   Determinar o nº de produtos que ninguém comprou.\n", KCYN, RST);
 	printf("%s\n\t->%s Query 7:  Dado um cliente, criar uma tabela com o nº total de produtos comprados, mês a mês, organizado por filial.\n", KCYN, RST);
 	printf("%s\n\t->%s Query 8:  Dado um intervalo de tempo (de mês __ a mês __):\n\t   Determinar o total de vendas registadas nesse intervalo e o total facturado.\n", KCYN, RST);
-	printf("%s\n\t->%s Query 9:  Dado um produto e uma filial, determinar os clientes e o nº de clientes que o compraram,\n\t   distinguindo a compra entre N e P.\n", KCYN, RST);
-	printf("%s\n\t->%s Query 10: Dado um cliente e um mês, determinar a lista de\n\t   produtos que esse cliente mais comprou, por ordem decrescente.\n", KCYN, RST);
-	printf("%s\n\t->%s Query 11: Criar uma lista dos N produtos mais vendidos em todo o ano,\n\t   indicando o nº total de clientes e o nº total de unidades vendidas, filial a filial.\n", KCYN, RST);
-	printf("%s\n\t->%s Query 12: Dado um cliente, determinar os 3 produtos em que gastou mais dinheiro durante o ano.\n\n", KCYN, RST);
+	printf("%s\n\t->%s Query 9:  Dado um produto e uma filial, determinar os clientes e o nº de clientes que o compraram,\n\t   Distinguindo a compra entre N e P.\n", KCYN, RST);
+	printf("%s\n\t->%s Query 10: Dado um cliente e um mês, determinar a lista de\n\t   Produtos que esse cliente mais comprou, por ordem decrescente.\n", KCYN, RST);
+	printf("%s\n\t->%s Query 11: Criar uma lista dos N produtos mais vendidos em todo o ano,\n\t   Indicando o nº total de clientes e o nº total de unidades vendidas, filial a filial.\n", KCYN, RST);
+	printf("%s\n\t->%s Query 12: Dado um cliente, determinar os N produtos em que gastou mais dinheiro durante o ano.\n\n", KCYN, RST);
 	printf("%s********************************************************************************************************************************* %s\n", KCYN, RST);
 }
 
@@ -25,22 +24,18 @@ void print_menu(){
 int escolhe_file(){
 	int r=1;
 	char* inpt = malloc(sizeof(char)*buffsize);
-	printf("\n\tQue ficheiro pretende ler? Clientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], Vendas_3M [4], Vendas_5M [5]\n\t->  ");
-	
+	printf("%s\n\tQue ficheiro pretende ler? %sClientes.txt [1], Produtos.txt [2], Vendas_1M.txt [3], Vendas_3M [4], Vendas_5M [5]\n\t->  ",KBLU,RST);
+		
 	if(scanf("%s", inpt)){
 		r = atoi(inpt);
-	
-		if(r<1 || r>5){	
-			printf("\n\tO programa falhou na leitura de um número. [1...5]\n");
-			escolhe_file();
-		}
-	}
-	else {
-		printf("\n\tO programa falhou na leitura de um número. [1...5]\n");
-		escolhe_file();
 	}
 
+ 	if(r < 1 || r > 5){
+ 		printf("%sInput Inválido.%s\n",KRED,RST);
+    	r = escolhe_file();
+  	}
 
+  	free(inpt);
 	return r;
 }
 
@@ -172,7 +167,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int validstr = 1, scanout = 1;
 	int pag = 1, i = 0, count = 0;
-	int pagnum = 1;
+	int pagnum = 0;
 
 	if(tamanho%10 == 0) pagnum = tamanho/10;
 	else pagnum = (tamanho/10)+1;
@@ -191,7 +186,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
 				if(get_elem_nm(lista,i)!=NULL){
-					printf("Produto %s \t Unidades: %d \t Clientes: %d \n", get_elem_nm(lista,i), get_unit_nm(lista,i), get_n_clientes(lista,i));
+					printf("%sProduto:%s %s \t %sUnidades:%s %d \t %sClientes:%s %d \n",KBLU,RST, get_elem_nm(lista,i),KBLU,RST, get_unit_nm(lista,i),KBLU,RST, get_n_clientes(lista,i));
 					count++;
 				}
 				else break;			
@@ -249,7 +244,7 @@ void navegador_12(Lista_12 lista, int tamanho){
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
 				if(get_elem_12(lista,i) != NULL){
-					printf("Produto: %s \t Faturado: _%f_ \n", get_elem_12(lista,i), get_faturado_12(lista,i));
+					printf("%sProduto:%s %s \t %sFaturado:%s %f \n",KBLU,RST, get_elem_12(lista,i),KBLU,RST, get_faturado_12(lista,i));
 					count++;
 				}
 				else break;			
@@ -696,6 +691,7 @@ void load_query11 (SGV s){
 	Lista_N F1, F2, F3;
 
 	n = N_();
+	if(n > 10 && n%2 == 1) n++;
 
 	inicio = clock();
 
@@ -731,6 +727,8 @@ void load_query12(SGV s){
 	Clientes c = get_clientes_(s);
 	
 	int n = N_();
+	if(n > 10 && n%2 == 1) n++;
+
 	char* inpt = cliente_(c);
 
 	inicio = clock();
@@ -755,11 +753,11 @@ void escolhe_query(SGV s){
 	int tarefa;
 	char* inpt = malloc(sizeof(char)*buffsize);
 
-	printf("Escolha o numero da query que pretende executar [2...12]\n\tTerminar o programa: [1]   ");
+	printf("%sEscolha o numero da query que pretende executar%s [2...12]\n\t%sTerminar o programa:%s [1]   ",KBLU,RST,KRED,RST);
 	if(scanf("%s", inpt)){
 		tarefa = atoi(inpt);
 		if(tarefa > 12 || tarefa < 1){
-			printf("\n\n\tPara executar uma tarefa é necessário inserir um numero de [2...12]\n\n\tPara terminar o programa insira o número 1.\n\n");
+			printf("\n\n\t%sPara executar uma tarefa é necessário inserir um numero de%s [2...12]\n\n\t%sPara terminar o programa insira o número%s 1.\n\n",KBLU,RST,KRED,RST);
 			escolhe_query(s);
 		}
 
@@ -814,7 +812,7 @@ void escolhe_query(SGV s){
 		}
 	}
 	else{
-		printf("\n\tO programa falhou na leitura de um número.\n");
+		printf("\n\t%sO programa falhou na leitura de um número.%s\n",KRED,RST);
 		escolhe_query(s);
 	}
 
@@ -835,7 +833,7 @@ void load_query1(SGV s){
 		i = clock();
 		query_1(s, num, 1);
 		f = clock();
-		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos: %s%d\n\t%sClientes lidos: %s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
 		
 		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
 		printf("CPUTIME: %f\n",cpu_time_used);
@@ -848,7 +846,7 @@ void load_query1(SGV s){
 		query_1(s, num, 2);
 		f = clock();
 
-		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos: %s%d\n\t%sProdutos lidos: %s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
 
 		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
 		printf("CPUTIME: %f\n",cpu_time_used);
@@ -861,9 +859,9 @@ void load_query1(SGV s){
 		query_1(s, num, 3);
 		f = clock();
 		
-		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos: %s%d\n\t%sClientes lidos: %s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos: %s%d\n\t%sProdutos lidos: %s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sVendas_1M.txt\n\t%sVendas válidas: %s%d\n\t%sVendas lidas: %s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 
 		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
 		printf("CPUTIME: %f\n",cpu_time_used);
@@ -874,9 +872,9 @@ void load_query1(SGV s){
 		query_1(s, num, 4);
 		f = clock();
 
-		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-		printf("%s\n\tFicheiro lido: %sVendas_3M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos: %s%d\n\t%sClientes lidos: %s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos: %s%d\n\t%sProdutos lidos: %s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sVendas_3M.txt\n\t%sVendas válidas: %s%d\n\t%sVendas lidas: %s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 		
 		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
 		printf("CPUTIME: %f\n",cpu_time_used);
@@ -887,9 +885,9 @@ void load_query1(SGV s){
 		query_1(s, num, 5);
 		f = clock();
 
-		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos__%s%d\n\t%sClientes lidos__%s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
-		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos__%s%d\n\t%sProdutos lidos__%s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
-		printf("%s\n\tFicheiro lido: %sVendas_5M.txt\n\t%sVendas válidas__%s%d\n\t%sVendas lidas__%s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
+		printf("%s\n\tFicheiro lido: %sClientes.txt\n\t%sClientes válidos: %s%d\n\t%sClientes lidos: %s%d\n",KBLU,RST,KBLU,RST,num[0],KBLU,RST,num[1]);
+		printf("%s\n\tFicheiro lido: %sProdutos.txt\n\t%sProdutos válidos: %s%d\n\t%sProdutos lidos: %s%d\n",KBLU,RST,KBLU,RST,num[2],KBLU,RST,num[3]);
+		printf("%s\n\tFicheiro lido: %sVendas_5M.txt\n\t%sVendas válidas: %s%d\n\t%sVendas lidas: %s%d\n",KBLU,RST,KBLU,RST,num[4],KBLU,RST,num[5]);
 		
 		cpu_time_used = ((double) (f-i) / CLOCKS_PER_SEC);
 		printf("CPUTIME: %f\n",cpu_time_used);
@@ -899,10 +897,10 @@ void load_query1(SGV s){
 // to print or not to print
 void menu(SGV s){
 	char* r = malloc(sizeof(char*));
-	printf("Pretende dar print ao menu? Yes: [y] No: [n]\n");
+	printf("%sPretende dar print ao menu?%s Yes: [y] No: [n]\n",KBLU,RST);
 
 	if(scanf("%s", r)){
-		if(r[0] == 'y' || r[0] == 'Y'){
+		if((r[0] == 'y' || r[0] == 'Y') && atoi(r) == 0){
 			print_menu();
 			load_query1(s);
 			while(1){
@@ -910,16 +908,17 @@ void menu(SGV s){
 			}
 		}
 
-		if(r[0] == 'n' || r[0] == 'N'){
+		if((r[0] == 'n' || r[0] == 'N') && atoi(r) == 0){
 			load_query1(s);
 			while(1){
 				escolhe_query(s);
 			}
 		}
-	}
-	else {
-		printf("\n\tO programa falhou na leitura da resposta. Yes: [y/Y] No: [n/N]\n");
-		menu(s);
+		else {
+			printf("%s\n\tO programa falhou na leitura da resposta. Yes: [y/Y] No: [n/N]%s\n",KRED,RST);
+			printf("\n");
+			menu(s);
+		}
 	}
 
 	destroySGV(s);

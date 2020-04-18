@@ -51,17 +51,21 @@ void navegador(Lista_Strings lista, int tamanho){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int validstr = 1, scanout = 1;
 	int pag = 1, i = 0, count = 0;
+	int pagnum = 1;
+
+	if(tamanho%10 == 0) pagnum = tamanho/10;
+	else pagnum = (tamanho/10)+1;
 
 	while(exit!=1){
 		
-		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+		if(scanout==0 || pag>pagnum || pag<0 || val==0 || lista==NULL){
 			val=1;
 			printf("Página inválida ou não existente\n");
 		}
 		else{
 
-			if(lista || pag < (tamanho/10)+1)
-			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			if(lista || pag < pagnum)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
@@ -76,7 +80,7 @@ void navegador(Lista_Strings lista, int tamanho){
 
 		printf("\n");
 
-		if(((tamanho/10)+1) == 1)
+		if(pagnum == 1)
 			return;
 
 		printf("%s(D para Proxima página) \n",KBLU);
@@ -91,7 +95,7 @@ void navegador(Lista_Strings lista, int tamanho){
 		printf("\n");
 
 		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0){exit = 1;}
-		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<pagnum) pag++;
 		else if((strcmp(inpt,"a") == 0 || strcmp(inpt,"A") == 0) && pag>1) pag--;
 		else if(validstr==0) val = 0;
 		else if(validstr!=0) pag = validstr;
@@ -107,17 +111,22 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int validstr = 1, scanout = 1;
 	int pag = 1, i = 0, count = 0;
+	int pagnum = 1;
+
+	if(tamanho%10 == 0) pagnum = tamanho/10;
+	else pagnum = (tamanho/10)+1;
+
 
 	while(exit!=1){
 		
-		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+		if(scanout==0 || pag>pagnum || pag<0 || val==0 || lista==NULL){
 			val=1;
 			printf("Página inválida ou não existente\n");
 		}
 		else{
 
-			if(lista || pag < (tamanho/10)+1)
-			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			if(lista || pag < pagnum)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
@@ -132,7 +141,7 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 
 		printf("\n");
 
-		if(((tamanho/10)+1) == 1)
+		if(pagnum == 1)
 			return;
 
 		printf("%s(D para Proxima página) \n",KBLU);
@@ -147,7 +156,7 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 		printf("\n");
 		
 		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0){exit = 1;}
-		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<pagnum) pag++;
 		else if((strcmp(inpt,"a") == 0 || strcmp(inpt,"A") == 0) && pag>1) pag--;
 		else if(validstr==0) val = 0;
 		else if(validstr!=0) pag = validstr;
@@ -163,17 +172,21 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int validstr = 1, scanout = 1;
 	int pag = 1, i = 0, count = 0;
+	int pagnum = 1;
+
+	if(tamanho%10 == 0) pagnum = tamanho/10;
+	else pagnum = (tamanho/10)+1;
 
 	while(exit!=1){
 		
-		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+		if(scanout==0 || pag>pagnum || pag<0 || val==0 || lista==NULL){
 			val=1;
 			printf("Página inválida ou não existente\n");
 		}
 		else{
 
-			if(lista || pag < (tamanho/10)+1)
-			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			if(lista || pag < pagnum)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados na filial %d\n\n",KBLU, tamanho, RST, filial);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
@@ -188,7 +201,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 
 		printf("\n");
 
-		if(((tamanho/10)+1) == 1)
+		if(pagnum == 1)
 			return;
 
 		printf("%s(D para Proxima página) \n",KBLU);
@@ -203,7 +216,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 		printf("\n");
 		
 		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0){exit = 1;}
-		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<pagnum) pag++;
 		else if((strcmp(inpt,"a") == 0 || strcmp(inpt,"A") == 0) && pag>1) pag--;
 		else if(validstr==0) val = 0;
 		else if(validstr!=0) pag = validstr;
@@ -218,22 +231,25 @@ void navegador_12(Lista_12 lista, int tamanho){
 	char* inpt = malloc(sizeof(char)*buffsize);
 	int validstr = 1, scanout = 1;
 	int pag = 1, i = 0, count = 0;
+	int pagnum = 1;
 
+	if(tamanho%10 == 0) pagnum = tamanho/10;
+	else pagnum = (tamanho/10)+1;
 	while(exit!=1){
 		
-		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+		if(scanout==0 || pag>pagnum || pag<0 || val==0 || lista==NULL){
 			val=1;
 			printf("Página inválida ou não existente\n");
 		}
 		else{
 
-			if(lista || pag < (tamanho/10)+1)
-			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			if(lista || pag < pagnum)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
 				if(get_elem_12(lista,i) != NULL){
-					printf("produto: %s \t faturado: _%f_ \n", get_elem_12(lista,i), get_faturado_12(lista,i));
+					printf("Produto: %s \t Faturado: _%f_ \n", get_elem_12(lista,i), get_faturado_12(lista,i));
 					count++;
 				}
 				else break;			
@@ -243,7 +259,7 @@ void navegador_12(Lista_12 lista, int tamanho){
 
 		printf("\n");
 
-		if(((tamanho/10)+1) == 1)
+		if(pagnum == 1)
 			return;
 
 		printf("%s(D para Proxima página) \n",KBLU);
@@ -258,7 +274,7 @@ void navegador_12(Lista_12 lista, int tamanho){
 		printf("\n");
 		
 		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0){exit = 1;}
-		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<pagnum) pag++;
 		else if((strcmp(inpt,"a") == 0 || strcmp(inpt,"A") == 0) && pag>1) pag--;
 		else if(validstr==0) val = 0;
 		else if(validstr!=0) pag = validstr;

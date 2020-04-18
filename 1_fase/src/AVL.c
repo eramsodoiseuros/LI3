@@ -718,8 +718,8 @@ void maior_que(int a, int valor, char l1, char l2, Lista_N lista, int size){
     int r = 0;
     char* s = malloc(sizeof(char)*7);
     sprintf(s,"%c%c%d", l1, l2, valor);
-
     char* aux = malloc(sizeof(char)*7);
+
     for(int i = 0; i < size; i++)
         if(a > lista->unidades[i]){
             r = lista->unidades[i];
@@ -731,6 +731,7 @@ void maior_que(int a, int valor, char l1, char l2, Lista_N lista, int size){
         }
 
     free(aux);
+    //free(s);
 }
 
 // Função que

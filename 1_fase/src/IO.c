@@ -178,7 +178,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 	             
 			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
 				if(get_elem_nm(lista,i)!=NULL){
-					printf("produto %s \t unidades: %d \t clientes: %d \n", get_elem_nm(lista,i), get_unit_nm(lista,i), get_n_clientes(lista,i));
+					printf("Produto %s \t Unidades: %d \t Clientes: %d \n", get_elem_nm(lista,i), get_unit_nm(lista,i), get_n_clientes(lista,i));
 					count++;
 				}
 				else break;			

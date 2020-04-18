@@ -212,6 +212,61 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 	free(inpt);
 }
 
+void navegador_12(Lista_12 lista, int tamanho){
+
+	int val = 1, exit = 0;
+	char* inpt = malloc(sizeof(char)*buffsize);
+	int validstr = 1, scanout = 1;
+	int pag = 1, i = 0, count = 0;
+
+	while(exit!=1){
+		
+		if(scanout==0 || pag>(tamanho/10)+1 || pag<0 || val==0 || lista==NULL){
+			val=1;
+			printf("Página inválida ou não existente\n");
+		}
+		else{
+
+			if(lista || pag < (tamanho/10)+1)
+			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),((tamanho/10)+1), RST);
+			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
+	             
+			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
+				if(get_elem_12(lista,i) != NULL){
+					printf("produto: %s \t faturado: _%f_ \n", get_elem_12(lista,i), get_faturado_12(lista,i));
+					count++;
+				}
+				else break;			
+			}
+			count = 0;
+		}
+
+		printf("\n");
+
+		if(((tamanho/10)+1) == 1)
+			return;
+
+		printf("%s(D para Proxima página) \n",KBLU);
+		printf("%s(A para Página Anterior) \n",KBLU);
+		printf("%s(E para sair)%s \n",KBLU,RST);
+		printf("Inserir número página: \n");
+
+		scanout = read(0,inpt,buffsize);
+		inpt = strtok(inpt," \n");
+
+		validstr = atoi(inpt);
+		printf("\n");
+		
+		if(strcmp(inpt,"e") == 0 || strcmp(inpt,"E") == 0){exit = 1;}
+		else if((strcmp(inpt,"d") == 0 || strcmp(inpt,"D") == 0) && pag<((tamanho/10)+1)) pag++;
+		else if((strcmp(inpt,"a") == 0 || strcmp(inpt,"A") == 0) && pag>1) pag--;
+		else if(validstr==0) val = 0;
+		else if(validstr!=0) pag = validstr;
+    }
+
+	free(inpt);
+}
+
 // Função que
 int N_(){
 	char* inpt = malloc(sizeof(char)*buffsize);
@@ -391,9 +446,10 @@ void load_query2 (SGV s){
 void load_query3 (SGV s){
 
 	clock_t inicio, fim;
-  	double cpu_time_used;
+  	double cpu_time_used, faturado[3];
+
   	char* inpt = malloc(sizeof(char)*buffsize);
-  	int m1, filial, vendasProd[3], faturado[3];
+  	int m1, filial, vendasProd[3];
 
    	Produtos p = get_produtos_(s);
 
@@ -412,9 +468,9 @@ void load_query3 (SGV s){
 	printf("%sA totalidade de vendas desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[2] );
 	printf("%sA totalidade de vendas desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,vendasProd[0] );
 	printf("\n");
-	printf("%sO total faturado desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[1] );
-	printf("%sO total faturado desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[2] );
-	printf("%sO total faturado desse produto nesse mês e nessa/nessas filial(ais) é:%s  %d\n",KBLU,RST,faturado[0] );
+	printf("%sO total faturado desse produto com preço normal nesse mês e nessa/nessas filial(ais) é:%s  %f\n",KBLU,RST,faturado[1] );
+	printf("%sO total faturado desse produto em promoção nesse mês e nessa/nessas filial(ais) é:%s  %f\n",KBLU,RST,faturado[2] );
+	printf("%sO total faturado desse produto nesse mês e nessa/nessas filial(ais) é:%s  %f\n",KBLU,RST,faturado[0] );
 	printf("\n");
 
 	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
@@ -651,6 +707,31 @@ void load_query11 (SGV s){
 	printf("CPUTIME: %f\n",cpu_time_used);
 }
 
+//
+void load_query12(SGV s){
+	clock_t inicio, fim;
+	double cpu_time_used;
+	
+	Clientes c = get_clientes_(s);
+	
+	int n = N_();
+	char* inpt = cliente_(c);
+
+	inicio = clock();
+
+	Lista_12 F1 = iniciar_lista_12(n);
+
+	query_12(s, n, F1, inpt);
+
+	fim = clock();
+	
+	navegador_12(F1, n);
+
+	delete_lista_12(F1);
+	
+	cpu_time_used = ((double) (fim-inicio) / CLOCKS_PER_SEC);
+	printf("CPUTIME: %f\n",cpu_time_used);
+}
 
 // Função que escolhe a query a realizar
 void escolhe_query(SGV s){
@@ -711,11 +792,9 @@ void escolhe_query(SGV s){
 				load_query11(s);
 				break;
 
-			/*
 			case 12:
-				query_12();
+				load_query12(s);
 				break;
-			*/
 		}
 	}
 	else{
@@ -827,6 +906,6 @@ void menu(SGV s){
 		menu(s);
 	}
 
-	free_sgv(s);
+	destroySGV(s);
 	free(r);
 }

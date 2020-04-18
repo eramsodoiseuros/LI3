@@ -21,9 +21,23 @@
 
 typedef struct sgv* SGV;
 
-SGV iniciar_sgv ();
+SGV initSGV ();
 
-void free_sgv(SGV s);
+void destroySGV(SGV s);
+
+/*1*/	SGV loadSGVFromFiles(SGV sgv, char* filesFolderPath);
+/*2*/	Lista_Strings getProductsStartedByLetter(SGV sgv, char letter);
+/*3*/	double* getProductSalesAndProfit(SGV sgv, char* productID, int month);
+/*4*/	Lista_Strings getProductsNeverBought(SGV sgv, int branchID);
+/*5*/	Lista_Strings getClientsOfAllBranches(SGV sgv);
+/*6*/	int* getClientsAndProductsNeverBoughtCount(SGV sgv);
+/*7*/	int** getProductsBoughtByClient(SGV sgv, char* clientID);
+/*8*/ 	double* getSalesAndProfit(SGV sgv, int minMonth, int maxMonth);
+/*9*/ 	Lista_Strings* getProductBuyers(SGV sgv, char* productID, int branchID);
+/*10*/ 	Lista_Ordenada getClientFavoriteProducts(SGV sgv, char* clientID, int month);
+/*11*/ 	Lista_N* getTopSelledProducts(SGV sgv, int limit);
+/*12*/	
+
 
 Clientes get_clientes_(SGV s);
 
@@ -58,7 +72,7 @@ int query_2(SGV s, char letra, Lista_Strings ls);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_3 (SGV s, char* produto, int mes, int vendas[3], int faturado[3], int filial);
+void query_3 (SGV s, char* produto, int mes, int vendas[3], double faturado[3], int filial);
 
 /**
  *	Determinar a lista ordenada dos códigos dos produtos (e o seu número total) que ninguém comprou.
@@ -133,6 +147,6 @@ void query_11(SGV s, int n, Lista_N F1, Lista_N F2, Lista_N F3);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-// void query_12();
+void query_12(SGV s, int N, Lista_12 ls, char* cliente);
 
 #endif

@@ -13,6 +13,7 @@ struct cliente{
     int size_comprados;
     
     Lista_Ordenada P[12];
+    Lista_12 F;
 };
 
 // Função que dado uma string (valor), devolve uma posição (index, hash key)
@@ -54,6 +55,8 @@ Cliente iniciar_cliente(){
 	for(int m = 0; m < 12; m++)
 		c->P[m] = NULL;
 
+	c->F = NULL;
+
 	return c;
 }
 
@@ -75,8 +78,12 @@ void update_registo_c(Cliente c, int filial, int mes, double preco, int unidades
 	c->size_comprados++;
 
 	if(!c->P[mes-1])
-		c->P[mes-1] = iniciar_lista_ordenada(25);	
+		c->P[mes-1] = iniciar_lista_ordenada(20);	
+	
 	add_lista_ordenada(c->P[mes-1], produto, unidades, 'p');
+	if(!c->F)
+		c->F = iniciar_lista_12(20);
+	add_lista_12(c->F, produto, unidades*preco);
 }
 
 // Função que
@@ -191,4 +198,23 @@ void get_lista_P(RC rc, char* cliente, int mes, Lista_Ordenada X){
 	}
 }
 
+void get_lista_F(RC rc, char* cliente, Lista_12 X, int N){
+	int aux = 0, r = 0;
+	int nID = num_(cliente,1);
+	int index[2]; index[0] = 0, index[1] = 0;
 
+	hF_c(index,cliente);
+
+	Cliente c = search_info(rc->tabela_cliente[index[0]][index[1]], nID);
+
+	if(c->F){
+		heapSort_f(c->F);
+		if(N > (r = size_lista_12(c->F)))
+			aux = r;
+		else aux = N;
+
+		for(int i = 0; i < aux; i++){
+			add_lista_12(X, get_elem_12(c->F, i), get_faturado_12(c->F, i));
+		}
+	}
+}

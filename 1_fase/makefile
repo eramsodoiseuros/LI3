@@ -1,5 +1,5 @@
-INC = ../include/
-OBJ = ../src/
+INC = ./include/
+OBJ = ./src/
 
 
 objects = $(OBJ)main.o $(OBJ)IO.o $(OBJ)queries.o $(OBJ)catalogo_vendas.o $(OBJ)catalogo_produtos.o $(OBJ)catalogo_clientes.o $(OBJ)AVL.o $(OBJ)faturacao.o $(OBJ)filial.o $(OBJ)registos_cliente.o $(OBJ)registos_produto.o

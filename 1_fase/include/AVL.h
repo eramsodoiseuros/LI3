@@ -14,7 +14,11 @@ typedef struct lista_strings* Lista_Strings;
 
 typedef struct lista_ordenada* Lista_Ordenada;
 
+typedef struct lista_12* Lista_12;
+
 typedef struct lista_n* Lista_N;
+
+typedef struct lista_n12* Lista_N12;
 
 /**
  *	Função strdup criada para evitar warnings
@@ -65,7 +69,7 @@ int size_lista(Lista_Strings s);
 void delete_lista(Lista_Strings s);
 
 ///////////////////////////////////////////////////////////
-// LISTA ORDENADA
+// LISTA ORDENADA de inteiros
 
 /**
  *	Função que 
@@ -104,6 +108,47 @@ int size_lista_ordenada(Lista_Ordenada s);
  */
 void delete_lista_ordenada(Lista_Ordenada s);
 
+
+///////////////////////////////////////////////////////////
+// LISTA ORDENADA de doubles
+
+/**
+ *	Função que 
+ *	@param 
+ */
+Lista_12 iniciar_lista_12(int size);
+
+/**
+ *	Função que insere uma string no fim do array Strings
+ *	@param estrutura lista e a string a adicionar
+ */
+void add_lista_12(Lista_12 s, char* c, double faturado);
+
+/**
+ *	Função que devolve uma string numa dada posição da lista
+ *	@param estrutura lista e a posição pertendida
+ *	@param string pretendida
+ */
+char* get_elem_12(Lista_12 s, int i);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+double get_faturado_12(Lista_12 s, int i);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+int size_lista_12(Lista_12 s);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void delete_lista_12(Lista_12 s);
+
 //////////////////////////////////////////////////
 // LISTA DE N MAIORES
 
@@ -113,7 +158,16 @@ void delete_lista_ordenada(Lista_Ordenada s);
  */
 Lista_N iniciar_nm(int size);
 
+/**
+ *	Função que 
+ *	@param 
+ */
 void preenche_nm(Lista_N);
+
+/**
+ *	Função que 
+ *	@param 
+ */
 void set_n_clientes(Lista_N s, int i, int num);
 
 /**
@@ -148,6 +202,12 @@ void delete_lista_nm(Lista_N s);
  *	@param 
  */
 void heapSort(Lista_Ordenada s);
+
+/**
+ *	Função que 
+ *	@param 
+ */
+void heapSort_f(Lista_12 s);
 
 ///////////////////////////////////////////////////////////
 // AVL

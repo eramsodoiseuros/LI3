@@ -27,6 +27,14 @@ struct lista_ordenada{
     int* unidades;
 };
 
+struct lista_12{
+    int in_use;
+    int size;
+    int free_space;
+    char** lista;
+    double* faturado;
+};
+
 struct lista_n{
     int N;
     int in_use;
@@ -102,7 +110,7 @@ void delete_lista(Lista_Strings s){
 
 
 //////////////////////////////////////////////////
-// STRINGS ORDENADAS
+// STRINGS ORDENADAS de inteiros
 
 // Função que inicia uma Lista Ordenada
 Lista_Ordenada iniciar_lista_ordenada(int size){
@@ -191,6 +199,90 @@ void delete_lista_ordenada(Lista_Ordenada s){
         free(s->lista[i]);
     }
     free(s->unidades);
+}
+
+
+//////////////////////////////////////////////////
+// STRINGS ORDENADAS de doubles
+
+// Função que inicia uma Lista Ordenada
+Lista_12 iniciar_lista_12(int size){
+    Lista_12 s = (Lista_12) malloc(sizeof(struct lista_12));
+    
+    s->in_use = 0;
+    s->size = size;
+    s->free_space = size;
+    s->lista = (char**) malloc(sizeof(char*) * size);
+    s->faturado = (double*) malloc(sizeof(double) * size);
+
+    return s;
+}
+
+// Função que verifica se a Lista está cheia, aloca memória se estiver
+void is_full_12(Lista_12 s){
+
+    if(s->in_use >= s->free_space){
+        s->free_space += s->size;
+        s->lista = realloc(s->lista, sizeof(char*) * s->free_space);
+        s->faturado = realloc(s->faturado, sizeof(double) * s->free_space);
+    }
+}
+
+// Função que
+int existe_in_12(Lista_12 s, char* c){
+    int r = -1;
+
+    for(int aux = 0; aux < s->in_use; aux++)
+        if(c[0] == s->lista[aux][0])
+            if(c[1] == s->lista[aux][1])
+                if(num_(c, 2) == num_(s->lista[aux], 2))
+                    r = aux;
+
+    return r;
+}
+
+// Função que insere uma string no fim do array Strings (alocando memória se necessário)
+void add_lista_12(Lista_12 s, char* c, double faturado){
+    int r = 0, aux = 0;
+    is_full_12(s);
+    if(s->in_use == 0){
+        s->lista[0] = sdup(c);
+        s->faturado[0] = faturado;
+        s->in_use++;
+    }
+    else if( (r = existe_in_12(s, c))  == -1 ){
+        aux = s->in_use++;
+        s->lista[aux] = sdup(c);
+        s->faturado[aux] = faturado;
+    }
+    else{
+        s->lista[r] = sdup(c);
+        s->faturado[r] += faturado;
+    }
+}
+
+// Função que
+int size_lista_12(Lista_12 s){
+    return s->in_use;
+}
+
+// Função que
+char* get_elem_12(Lista_12 s, int i){
+    return s->lista[i];
+}
+
+// Função que
+double get_faturado_12(Lista_12 s, int i){
+    return s->faturado[i];
+}
+
+// Função que
+void delete_lista_12(Lista_12 s){
+    
+    for (int i = 0; i < s->in_use; ++i){
+        free(s->lista[i]);
+    }
+    free(s->faturado);
 }
 
 
@@ -291,6 +383,56 @@ void heapSort(Lista_Ordenada s){
   
         // call max heapify on the reduced heap 
         heapify(s, i, 0);
+    }
+}
+
+void swap_f(Lista_12 s, int a, int b){
+    char* aux = sdup(s->lista[a]);
+    int aux2 = s->faturado[a];
+
+    s->lista[a] = sdup(s->lista[b]);
+    s->faturado[a] = s->faturado[b];
+
+    s->lista[b] = aux;
+    s->faturado[b] = aux2;
+}
+
+//
+void heapify_f(Lista_12 s, int n, int i){
+    int smallest = i; // Initialize smallest as root 
+    int l = 2*i + 1; // left = 2*i + 1 
+    int r = 2*i + 2; // right = 2*i + 2 
+  
+    // If left child is smaller than root 
+    if (l < n && s->faturado[l] < s->faturado[smallest])
+        smallest = l;
+  
+    // If right child is smaller than smallest so far 
+    if (r < n && s->faturado[r] < s->faturado[smallest])
+        smallest = r;
+  
+    // If smallest is not root 
+    if (smallest != i){
+        swap_f(s, i, smallest);
+  
+        // Recursively heapify the affected sub-tree 
+        heapify_f(s, n, smallest);
+    }
+}
+  
+// main function to do heap sort 
+void heapSort_f(Lista_12 s){
+    // Build heap (rearrange array) 
+    for (int i = s->in_use / 2 - 1; i >= 0; i--)
+        heapify_f(s, s->in_use, i);
+  
+    // One by one extract an element from heap 
+    for (int i = s->in_use - 1; i > 0; i--){
+        // Move current root to end 
+        swap_f(s, 0, i);
+  
+        // call max heapify on the reduced heap 
+        heapify_f(s, i, 0);
     }
 }
 

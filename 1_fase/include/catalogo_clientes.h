@@ -10,7 +10,7 @@
 #include "AVL.h"
 #include "filial.h"
 
-#define PATH_C "../Clientes.txt"
+#define PATH_C "./files/Clientes.txt"
 
 typedef struct clientes* Clientes;
 

@@ -62,6 +62,14 @@ Cliente iniciar_cliente(){
 
 // Função que liberta o espaço alocado para a estrutura
 void free_cliente(Cliente c){
+	free(c->comprou_in);
+    free(c->vezes_comprou);
+
+    for(int i = 0; i < 12; i++){
+    	delete_lista_ordenada(c->P[i]);
+    }
+
+    delete_lista_12(c->F);
 	free(c);
 }
 
@@ -198,7 +206,7 @@ void get_lista_P(RC rc, char* cliente, int mes, Lista_Ordenada X){
 	}
 }
 
-void get_lista_F(RC rc, char* cliente, Lista_12 X, int N){
+int get_lista_F(RC rc, char* cliente, Lista_12 X, int N){
 	int aux = 0, r = 0;
 	int nID = num_(cliente,1);
 	int index[2]; index[0] = 0, index[1] = 0;
@@ -217,4 +225,6 @@ void get_lista_F(RC rc, char* cliente, Lista_12 X, int N){
 			add_lista_12(X, get_elem_12(c->F, i), get_faturado_12(c->F, i));
 		}
 	}
+
+	return aux;
 }

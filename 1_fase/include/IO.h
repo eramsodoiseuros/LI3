@@ -21,7 +21,7 @@
 
 
 #define Pagsize 10
-#define buffsize 200
+#define buffsize 10
 
 
 /**

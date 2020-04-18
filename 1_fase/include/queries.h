@@ -16,7 +16,7 @@
 #include "catalogo_clientes.h"
 #include "catalogo_produtos.h"
 
-#define buffsize 200
+#define buffsize 10
 
 
 typedef struct sgv* SGV;
@@ -147,6 +147,6 @@ void query_11(SGV s, int n, Lista_N F1, Lista_N F2, Lista_N F3);
  *	@param O QUE RECEBE
  *	@param O QUE RETORNA
 */
-void query_12(SGV s, int N, Lista_12 ls, char* cliente);
+int query_12(SGV s, int N, Lista_12 ls, char* cliente);
 
 #endif

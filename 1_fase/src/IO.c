@@ -29,7 +29,6 @@ int escolhe_file(){
 	if(scanf("%s", inpt)){
 		r = atoi(inpt);
 	}
-
  	if(r < 1 || r > 5){
  		printf("%sInput Inválido.%s\n",KRED,RST);
     	r = escolhe_file();
@@ -124,8 +123,8 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
-			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
-				if(get_elem_(lista,i)!=NULL){
+			for(i = (pag*10) - Pagsize; count < Pagsize && count < tamanho; i++){
+				if(get_elem_(lista,i) != NULL){
 					printf("%s \t %d \n", get_elem_(lista,i), get_unit(lista,i));
 					count++;
 				}
@@ -184,7 +183,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados na filial %d\n\n",KBLU, tamanho, RST, filial);
 	             
-			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
+			for(i = (pag*10) - Pagsize; count < Pagsize && count < tamanho; i++){
 				if(get_elem_nm(lista,i)!=NULL){
 					printf("%sProduto:%s %s \t %sUnidades:%s %d \t %sClientes:%s %d \n",KBLU,RST, get_elem_nm(lista,i),KBLU,RST, get_unit_nm(lista,i),KBLU,RST, get_n_clientes(lista,i));
 					count++;
@@ -242,7 +241,7 @@ void navegador_12(Lista_12 lista, int tamanho){
 			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
-			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
+			for(i = (pag*10) - Pagsize; count < Pagsize && count < tamanho; i++){
 				if(get_elem_12(lista,i) != NULL){
 					printf("%sProduto:%s %s \t %sFaturado:%s %f \n",KBLU,RST, get_elem_12(lista,i),KBLU,RST, get_faturado_12(lista,i));
 					count++;
@@ -735,7 +734,7 @@ void load_query12(SGV s){
 
 	Lista_12 F1 = iniciar_lista_12(n);
 
-	query_12(s, n, F1, inpt);
+	n = query_12(s, n, F1, inpt);
 
 	fim = clock();
 	

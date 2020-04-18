@@ -82,6 +82,19 @@ Produto iniciar_produto(int pos){
 
 // Função que liberta o espaço alocado para a estrutura
 void free_produto(Produto p){
+	free(p->vendido_in);
+	free(p->vezes_comprado);
+	free(p->vezes_comprado);
+    free(p->unidades_vendidas);
+    free(p->faturado_in);
+    free(p->vezes_N);
+    free(p->vezes_P);
+
+    for(int i = 0; i < 4; i++){
+    	delete_lista(p->P[i]);
+    	delete_lista(p->N[i]);
+    }
+    
 	free(p);
 }
 

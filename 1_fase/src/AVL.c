@@ -102,9 +102,9 @@ char* get_elem(Lista_Strings s, int i){
 void delete_lista(Lista_Strings s){
 
     for (int i = 0; i < s->in_use; ++i){
-        free(s->lista[i]);
+        free((char*) s->lista[i]);
     }
-
+    free((char**) s->lista);
     free(s);
 }
 
@@ -196,9 +196,11 @@ int get_unit(Lista_Ordenada s, int i){
 void delete_lista_ordenada(Lista_Ordenada s){
     
     for (int i = 0; i < s->in_use; ++i){
-        free(s->lista[i]);
+        free((char*) s->lista[i]);
     }
+    free((char**) s->lista);
     free(s->unidades);
+    free(s);
 }
 
 
@@ -268,8 +270,6 @@ int size_lista_12(Lista_12 s){
 
 // Função que
 char* get_elem_12(Lista_12 s, int i){
-	//if(i>s->in_use)
-     //   return NULL;
     return s->lista[i];
 }
 
@@ -281,10 +281,12 @@ double get_faturado_12(Lista_12 s, int i){
 // Função que
 void delete_lista_12(Lista_12 s){
     
-    for (int i = 0; i < s->in_use; ++i){
-        free(s->lista[i]);
+    for (int i = 0; i < s->in_use; i++){
+        free((char*) s->lista[i]);
     }
+    free((char**) s->lista);
     free(s->faturado);
+    free(s);
 }
 
 
@@ -318,8 +320,6 @@ void set_n_clientes(Lista_N s, int i, int num){
 
 // Função que
 char* get_elem_nm(Lista_N s, int i){
-	//if(i>s->in_use)
-        //return NULL;
     return s->lista[i];
 }
 
@@ -334,6 +334,12 @@ int get_n_clientes(Lista_N s, int i){
 
 // Função que
 void delete_lista_nm(Lista_N s){
+    for (int i = 0; i < s->N; ++i){
+        free((char*) s->lista[i]);
+    }
+    
+    free(s->unidades);
+    free(s->n_clientes);
     free(s);
 }
 
@@ -347,8 +353,10 @@ void swap(Lista_Ordenada s, int a, int b){
     s->lista[a] = sdup(s->lista[b]);
     s->unidades[a] = s->unidades[b];
 
-    s->lista[b] = aux;
+    s->lista[b] = sdup(aux);
     s->unidades[b] = aux2;
+
+    free((char*) aux);
 }
 
 //
@@ -397,8 +405,10 @@ void swap_f(Lista_12 s, int a, int b){
     s->lista[a] = sdup(s->lista[b]);
     s->faturado[a] = s->faturado[b];
 
-    s->lista[b] = aux;
+    s->lista[b] = sdup(aux);
     s->faturado[b] = aux2;
+
+    free((char*) aux);
 }
 
 //
@@ -504,7 +514,7 @@ void free_AVL(AVL a, char tipo){
     free_AVL(a->dir, tipo);
 
     if(tipo == 'b'){
-        free(a->info);
+        free((char*) a->info);
         free(a);
     }
 
@@ -664,31 +674,37 @@ int search_n(AVL a, char tipo){
 // Função que
 void search_c(AVL a, Lista_Strings lista, char l1){
 
+    char* s = malloc(sizeof(char)*6);
+    
     if(a == NULL);
     else{
         if(comprou_tudo(a->info)){
-            char* s = malloc(sizeof(char)*6);
             sprintf(s,"%c%d", l1, a->valor);
             add_lista(lista, s); 
         }
         search_c(a->esq, lista, l1);
         search_c(a->dir, lista, l1);
     }
+
+    free((char*) s);
 }
 
 // Função que
 void search_p(AVL a, Lista_Strings lista, char l1, char l2, int x){
 
+    char* s = malloc(sizeof(char)*7);
+    
     if(a == NULL);
     else{
         if(vendeu_in(a->info, x)){
-            char* s = malloc(sizeof(char)*7);
             sprintf(s,"%c%c%d", l1, l2, a->valor);
             add_lista(lista, s);
         }
         search_p(a->esq, lista, l1, l2, x);
         search_p(a->dir, lista, l1, l2, x);
     }
+
+    free((char*) s);
 }
 
 // Função que
@@ -714,19 +730,22 @@ void maior_que(int a, int valor, char l1, char l2, Lista_N lista, int size){
     int r = 0;
     char* s = malloc(sizeof(char)*7);
     sprintf(s,"%c%c%d", l1, l2, valor);
-
     char* aux = malloc(sizeof(char)*7);
+
     for(int i = 0; i < size; i++)
         if(a > lista->unidades[i]){
             r = lista->unidades[i];
             aux = sdup(lista->lista[i]);
+
             lista->unidades[i] = a;
             lista->lista[i] = sdup(s);
+            
             a = r;
             s = sdup(aux);
         }
 
-    free(aux);
+    free((char*) aux);
+    free((char*) s);
 }
 
 // Função que

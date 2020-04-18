@@ -107,6 +107,6 @@ void get_lista_P(RC rc, char* cliente, int mes, Lista_Ordenada X);
  *	Função que 
  *	@param 
  */
-void get_lista_F(RC rc, char* cliente, Lista_12 X, int N);
+int get_lista_F(RC rc, char* cliente, Lista_12 X, int N);
 
 #endif

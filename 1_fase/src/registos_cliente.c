@@ -62,6 +62,14 @@ Cliente iniciar_cliente(){
 
 // Função que liberta o espaço alocado para a estrutura
 void free_cliente(Cliente c){
+	free(c->comprou_in);
+    free(c->vezes_comprou);
+
+    for(int i = 0; i < 12; i++){
+    	delete_lista_ordenada(c->P[i]);
+    }
+
+    delete_lista_12(c->F);
 	free(c);
 }
 

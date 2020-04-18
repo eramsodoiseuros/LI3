@@ -40,7 +40,7 @@ int escolhe_file(){
 		escolhe_file();
 	}
 
-
+	
 	return r;
 }
 
@@ -129,8 +129,8 @@ void navegador_(Lista_Ordenada lista, int tamanho){
 			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
-			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
-				if(get_elem_(lista,i)!=NULL){
+			for(i = (pag*10) - Pagsize; count < Pagsize && count < tamanho; i++){
+				if(get_elem_(lista,i) != NULL){
 					printf("%s \t %d \n", get_elem_(lista,i), get_unit(lista,i));
 					count++;
 				}
@@ -189,7 +189,7 @@ void navegador_11(Lista_N lista, int tamanho, int filial){
 			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados na filial %d\n\n",KBLU, tamanho, RST, filial);
 	             
-			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
+			for(i = (pag*10) - Pagsize; count < Pagsize && count < tamanho; i++){
 				if(get_elem_nm(lista,i)!=NULL){
 					printf("Produto %s \t Unidades: %d \t Clientes: %d \n", get_elem_nm(lista,i), get_unit_nm(lista,i), get_n_clientes(lista,i));
 					count++;
@@ -247,9 +247,9 @@ void navegador_12(Lista_12 lista, int tamanho){
 			printf("%s************ Página %d de %d ************%s\n",KBLU,(pag),pagnum, RST);
 			printf("Existem %s%d%s resultados\n\n",KBLU, tamanho, RST);
 	             
-			for(i=(pag*10)-Pagsize; count<Pagsize && count<tamanho; i++){
+			for(i = (pag*10) - Pagsize; count < Pagsize && count < tamanho; i++){
 				if(get_elem_12(lista,i) != NULL){
-					printf("Produto: %s \t Faturado: _%f_ \n", get_elem_12(lista,i), get_faturado_12(lista,i));
+					printf("Produto: %s \t Faturado: %f \n", get_elem_12(lista,i), get_faturado_12(lista,i));
 					count++;
 				}
 				else break;			

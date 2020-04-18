@@ -16,7 +16,7 @@
 #include "catalogo_clientes.h"
 #include "catalogo_produtos.h"
 
-#define buffsize 200
+#define buffsize 10
 
 
 typedef struct sgv* SGV;

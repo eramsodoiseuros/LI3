@@ -25,6 +25,7 @@ int toktok(char * linha, char** tokens){
         tok = strtok(NULL," ");
     }
 
+    free((char*) tok);
     return i;
 }
 
@@ -44,6 +45,7 @@ int validaVenda(char* linha, Produtos p, Clientes c){
 							if( search_C(c, tokens[4]) ) // clientes
 								if( search_P(p, tokens[0]) ) // produtos
 									r = 1;
+
 	return r;
 }
 
@@ -82,7 +84,7 @@ void load_vendas(char* path, Produtos p, Clientes c, Filial f1, Faturacao f2, in
 
 	num[0] = i1;
 	num[1] = i2;
-	free(original);
+	free((char*) original);
 	fclose(file);
 }
 

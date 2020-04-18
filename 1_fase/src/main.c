@@ -2,7 +2,7 @@
 
 int main(){
 	
-	SGV s = iniciar_sgv();
+	SGV s = initSGV();
 	menu(s);
 	return 0;
 }
